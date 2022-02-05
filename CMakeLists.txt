@@ -27,11 +27,6 @@ set(PROJECT_SOURCES
     ${GALAXIE_ROOT}/src/main.cpp
     ${GALAXIE_ROOT}/src/gfx-engine.cpp
     ${GALAXIE_ROOT}/src/gfx-engine.h
-    ${GALAXIE_ROOT}/src/stb_image.h
-    ${GALAXIE_ROOT}/src/SDL2_gfxPrimitives.c
-    ${GALAXIE_ROOT}/src/SDL2_gfxPrimitives.h
-    ${GALAXIE_ROOT}/src/SDL2_rotozoom.c
-    ${GALAXIE_ROOT}/src/SDL2_rotozoom.h
 
     # ----------------  IMGUI  ----------------
     ${IMGUI_DIR}/imgui.cpp
@@ -40,6 +35,12 @@ set(PROJECT_SOURCES
     ${IMGUI_DIR}/imgui_widgets.cpp
     ${IMGUI_DIR}/backends/imgui_impl_sdl.cpp
     ${IMGUI_DIR}/backends/imgui_impl_sdlrenderer.cpp
+
+    # ----------------  MOTUS GAME  ----------------
+    ${GALAXIE_ROOT}/src/motus.h
+    ${GALAXIE_ROOT}/src/motus.cpp
+    ${GALAXIE_ROOT}/src/motus-gui.h
+    ${GALAXIE_ROOT}/src/motus-gui.cpp
 )
 
 set(GALAXIE_INCLUDES
