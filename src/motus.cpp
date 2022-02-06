@@ -65,6 +65,7 @@ void Motus::Initialize()
     }
 
     mTries.clear();
+    mValidated.clear();
     for (int i = 0; i < GetNbLines(); i++)
     {
         mTries.push_back(triedWord);
@@ -73,6 +74,8 @@ void Motus::Initialize()
 
     mCurrentTryIndex = 0;
     mCurrentLetterCounter = 0;
+    mWin = false;
+    mIsEnd = false;
 }
 
 std::string Motus::TestWord(const std::string &word) const
@@ -195,15 +198,31 @@ bool Motus::IsSubmitValid(std::string &message) const
     return valid;
 }
 
-bool Motus::Submit(std::string &message)
+void Motus::Submit(std::string &message)
 {
     if (mCurrentTryIndex < GetNbLines())
     {
         if (IsSubmitValid(message))
         {
             mValidated[mCurrentTryIndex] = true;
+
+            std::string word = GetTry(mCurrentTryIndex);
+            std::string codage = TestWord(word);
+
+            int counter = 0;
+            for (int i = 0; i < codage.size(); i++)
+            {
+                if (codage[i] == '2')
+                {
+                    counter++;
+                }
+            }
+
+            mWin = counter == GetNbLetters();
+
             mCurrentTryIndex++;
             mCurrentLetterCounter = 0;
+            mIsEnd = mCurrentTryIndex == GetNbLines();
         }
     }
 }

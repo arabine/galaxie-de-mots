@@ -24,22 +24,27 @@ public:
      * @return le statut de chaque lettre
      */
     std::string TestWord(const std::string &word) const;
-
     std::string GetTry(int32_t i) const;
-
     bool IsTryValidated(int32_t i) const;
+
+    std::string GetWord() const { return mCurrentWord; }
 
     uint32_t GetNbLines() const;
     uint32_t GetNbLetters() const;
 
+    bool IsEnd() const { return mIsEnd; }
+    bool IsWin() const { return mWin; }
+
     void AppendLetter(char c);
     void RemoveLast();
-    bool Submit(std::string &message);
+    void Submit(std::string &message);
 
 private:
     std::string mCurrentWord;
     uint32_t mCurrentTryIndex;
     uint32_t mCurrentLetterCounter;
+    bool mWin;
+    bool mIsEnd;
 
     std::vector<std::string> mTries;
     std::vector<bool> mValidated;

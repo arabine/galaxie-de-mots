@@ -34,7 +34,7 @@ with open('Lexique383.tsv', newline='') as csvfile:
             #   - uniquement les nom
             #   - au singulier
             #   - si l'occurence est supérieur à 1
-            if (row[3] == "NOM") and (row[5] == "s") and (float(row[7]) > 1):
+            if (row[3] == "NOM") and (row[5] == "s"): # and (float(row[7]) > 1):
                 word = unidecode(row[0], "utf-8")
                 # row[14] : nombre de lettres
                 # row[7]: fréquence d'apparition

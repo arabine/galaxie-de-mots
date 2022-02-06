@@ -9,6 +9,9 @@ MotusGui::MotusGui(uint32_t w, uint32_t h)
     , mHeight(h)
 {
     mMotus.Initialize();
+
+    mTextWin = "Youpiii tu as gagné. Une autre partie ?";
+    mTextLost = "Hooo mince alors tu as perdu :(\nLe mot était : ";
 }
 
 bool MotusGui::Process()
@@ -17,7 +20,7 @@ bool MotusGui::Process()
     DrawWords();
     DrawKeyboard();
 
-    if (mMessage.size())
+    if (mMessage.size() || mMotus.IsEnd())
     {
         DrawInfoWindow();
     }
@@ -73,12 +76,33 @@ void MotusGui::DrawInfoWindow()
     ImGui::SetNextWindowBgAlpha(0.0f); // Transparent background
     ImGui::SetNextWindowPos(ImVec2((mWidth - 400) / 2, 50), ImGuiCond_Always);
     //        ImGui::SetWindowFontScale(2.0);
-    ImGui::SetNextWindowSize(ImVec2(400, 40));
+    ImGui::SetNextWindowSize(ImVec2(400, 80));
 
     ImGui::GetStyle().FrameBorderSize = 2;
     if (ImGui::Begin("Info", NULL, window_flags))
     {
-        ImGui::Text("%s", mMessage.c_str());
+
+        if (mMotus.IsEnd())
+        {
+
+            if (mMotus.IsWin())
+            {
+                ImGui::Text("%s", mTextWin.c_str());
+            }
+            else
+            {
+                ImGui::Text("%s%s", mTextLost.c_str(), mMotus.GetWord().c_str());
+            }
+
+            if (ImGui::Button("Rejouer ?"))
+            {
+                mMotus.Initialize();
+            }
+        }
+        else
+        {
+            ImGui::Text("%s", mMessage.c_str());
+        }
     }
     ImGui::End();
 }
