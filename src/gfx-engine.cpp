@@ -42,7 +42,7 @@ bool GfxEngine::Initialize()
         | SDL_WINDOW_ALLOW_HIGHDPI
         );
     mWindow = SDL_CreateWindow(
-        "TarotClub",
+        "Galaxie de mots",
         SDL_WINDOWPOS_CENTERED,
         SDL_WINDOWPOS_CENTERED,
         mWidth,
