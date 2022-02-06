@@ -1,6 +1,8 @@
 #include "motus-gui.h"
 #include "gfx-engine.h"
 #include "IconsFontAwesome5.h"
+#include <chrono>
+
 
 MotusGui::MotusGui(uint32_t w, uint32_t h)
     : mWidth(w)
@@ -14,6 +16,11 @@ bool MotusGui::Process()
     bool quit = DrawMenuBar();
     DrawWords();
     DrawKeyboard();
+
+    if (mMessage.size())
+    {
+        DrawInfoWindow();
+    }
 
     return quit;
 }
@@ -36,6 +43,44 @@ bool MotusGui::DrawMenuBar()
     }
 
     return quit;
+}
+
+void MotusGui::DrawInfoWindow()
+{
+    static bool started = false;
+
+    if (!started)
+    {
+        started = true;
+        mTimer.tick();
+    }
+    else
+    {
+        mTimer.tock();
+        if (mTimer.duration().count() >= 2000) {
+            started = false;
+            mMessage.clear();
+        }
+    }
+
+    ImGuiWindowFlags window_flags = ImGuiWindowFlags_NoDecoration |
+            ImGuiWindowFlags_AlwaysAutoResize |
+            ImGuiWindowFlags_NoSavedSettings |
+            ImGuiWindowFlags_NoFocusOnAppearing |
+            ImGuiWindowFlags_NoNav |
+            ImGuiWindowFlags_NoMove;
+
+    ImGui::SetNextWindowBgAlpha(0.0f); // Transparent background
+    ImGui::SetNextWindowPos(ImVec2((mWidth - 400) / 2, 50), ImGuiCond_Always);
+    //        ImGui::SetWindowFontScale(2.0);
+    ImGui::SetNextWindowSize(ImVec2(400, 40));
+
+    ImGui::GetStyle().FrameBorderSize = 2;
+    if (ImGui::Begin("Info", NULL, window_flags))
+    {
+        ImGui::Text("%s", mMessage.c_str());
+    }
+    ImGui::End();
 }
 
 void MotusGui::DrawWords()
@@ -154,7 +199,7 @@ void MotusGui::DrawKeyboard()
                 ImGui::SetNextItemWidth(200);
                 if (ImGui::Button(ICON_FA_CHECK_CIRCLE, ImVec2(85, 40)))
                 {
-                    mMotus.Submit();
+                    mMotus.Submit(mMessage);
                 }
                 ImGui::SameLine(0.0f, 5.0);
             }

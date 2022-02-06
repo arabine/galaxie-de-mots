@@ -48,6 +48,7 @@ set(GALAXIE_INCLUDES
     ${IMGUI_DIR}/backends
     ${GALAXIE_ROOT}/libs/nanosvg/src
     ${GALAXIE_ROOT}/src
+    ${GALAXIE_ROOT}/assets/db
 )
 
 #=========================================================================================================================

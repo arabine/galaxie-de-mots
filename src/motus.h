@@ -3,6 +3,7 @@
 
 #include <string>
 #include <vector>
+#include <random>
 
 class Motus
 {
@@ -33,7 +34,7 @@ public:
 
     void AppendLetter(char c);
     void RemoveLast();
-    void Submit();
+    bool Submit(std::string &message);
 
 private:
     std::string mCurrentWord;
@@ -42,7 +43,8 @@ private:
 
     std::vector<std::string> mTries;
     std::vector<bool> mValidated;
-    bool IsSubmitValid() const;
+    bool IsSubmitValid(std::string &message) const;
+    std::string GetNewWordToGuess();
 };
 
 #endif // MOTUS_H

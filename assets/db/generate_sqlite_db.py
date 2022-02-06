@@ -13,20 +13,18 @@ import os
 import sys
 import json
 import sys
-import os
 import collections
 import locale
 import datetime
 from os.path import basename
 import sqlite3
 import csv
+from unidecode import unidecode
 
-lexique = {}
+f = open("lexique_5_letters.inc", "w")
+f.write("static const Lexique lexique_5_letters[] = {\n\n")
 
-db = sqlite3.connect('lexique.db')
-db.execute('''DROP TABLE IF EXISTS lexique''')
-db.execute('''CREATE TABLE IF NOT EXISTS lexique (mot TEXT, frequence REAL, lettres INTEGER)''')
-
+nb_mots = 0
 
 with open('Lexique383.tsv', newline='') as csvfile:
     spamreader = csv.reader(csvfile, delimiter='\t', quotechar='|')
@@ -37,14 +35,16 @@ with open('Lexique383.tsv', newline='') as csvfile:
             #   - au singulier
             #   - si l'occurence est supérieur à 1
             if (row[3] == "NOM") and (row[5] == "s") and (float(row[7]) > 1):
-                obj = {} # On construit l'objet de notre dictionnaire
-                obj["lettres"] = row[14]
-                obj["frequence"] = row[7]
-                lexique[row[0]] = obj
-                db.execute("INSERT INTO lexique VALUES(?, ?, ?)", (row[0], row[7], row[14]))
-    db.commit()
+                word = unidecode(row[0], "utf-8")
+                # row[14] : nombre de lettres
+                # row[7]: fréquence d'apparition
+                # row[0] : le mot, avec accent
+                if (row[14] == "5"):
+                    f.write('{ "' + word.upper() + '", ' + row[7] + " },\n")
+                    nb_mots = nb_mots + 1
 
-
-print("Nombre de mots: " + str(len(lexique)))
+f.write("};\n\n")
+f.close()
+print("Nombre de mots: " + str(nb_mots))
 
 
