@@ -1,0 +1,59 @@
+apply plugin: 'com.android.application'
+
+android {
+    compileSdkVersion 30
+
+    signingConfigs {
+        demokey {
+            storeFile file('demokey.jks')
+            storePassword "demokey"
+            keyAlias 'demokey'
+            keyPassword 'demokey'
+        }
+    }
+    defaultConfig {
+        applicationId "eu.d8s.galaxie"
+        minSdkVersion 18
+        targetSdkVersion 30
+        versionCode 3
+        versionName "2.0.16"
+        externalNativeBuild {
+            cmake {
+                arguments "-DANDROID_NATIVE_API_LEVEL=30", "-DANDROID_STL=c++_shared", "-DANDROID=true", "-DANDROID_TOOLCHAIN=clang"
+                cppFlags "-std=c++11 -frtti -fexceptions"
+                abiFilters "arm64-v8a"
+            }
+        }
+    }
+    buildTypes {
+        debug {
+            minifyEnabled false
+            signingConfig signingConfigs.demokey
+        }
+        release {
+            minifyEnabled true
+            signingConfig signingConfigs.demokey
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+    applicationVariants.all { variant ->
+        variant.outputs.all {
+            def fileName = project.name + '-' + variant.name + '-V' +
+                    defaultConfig.versionCode + "-" + buildTime() + ".apk"
+            outputFileName = fileName
+        }
+    }
+    externalNativeBuild {
+        cmake {
+            path '../src/CMakeLists.txt'
+        }
+    }
+}
+
+static def buildTime() {
+    return new Date().format("yyyyMMdd", TimeZone.getDefault())
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+}

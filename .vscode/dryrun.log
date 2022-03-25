@@ -1,0 +1,6 @@
+make --dry-run --always-make --keep-going --print-directory
+make: Entering directory '/home/anthony/git/personnel/galaxie-de-mots'
+make: Leaving directory '/home/anthony/git/personnel/galaxie-de-mots'
+ 
+make: *** No targets specified and no makefile found.  Stop.
+ 

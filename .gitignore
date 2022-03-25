@@ -2,3 +2,5 @@
 CMakeLists.txt.user
 
 assets/db/lexique.db
+
+.gradle/
