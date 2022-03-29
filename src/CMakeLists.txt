@@ -1,5 +1,5 @@
 # ===========================================================================
-# SDL2 CMAKE
+# CMAKE PRINCIPAL APPELÉ PAR GRADLE
 # ===========================================================================
 
 cmake_minimum_required(VERSION 3.4)
@@ -8,22 +8,19 @@ set(CMAKE_CXX_STANDARD 14)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_VERBOSE_MAKEFILE ON)
 
-project(main  C CXX ASM)
+project(main C CXX)
 
 add_subdirectory(../libs/lib_sdl2 SDL2)
-
-option(BUILD_SHARED_LIBS "Build using shared libraries" ON)
 
 set(MAIN_SRCS
     main.c
 )
 
+option(BUILD_SHARED_LIBS "Build using shared libraries" ON)
 
 add_library(main ${MAIN_SRCS})
 
-target_include_directories(main PUBLIC ../libs/lib_sdl2/SDL/include ../libs/lib_sdl2_image/SDL2_image)
-
-#target_compile_definitions(main PUBLIC GL_GLEXT_PROTOTYPES)
+target_include_directories(main PUBLIC ../libs/lib_sdl2/SDL/include)
 
 target_link_libraries(main PUBLIC dl GLESv1_CM GLESv2 OpenSLES log android SDL2)
 
