@@ -2,6 +2,8 @@ apply plugin: 'com.android.application'
 
 android {
     compileSdkVersion 30
+    buildToolsVersion "30.0.3"
+    ndkVersion "21.4.7075529"
 
     signingConfigs {
         demokey {
@@ -15,13 +17,13 @@ android {
         applicationId "eu.d8s.galaxie"
         minSdkVersion 18
         targetSdkVersion 30
-        versionCode 3
-        versionName "2.0.16"
+        versionCode 1
+        versionName "1.0.0"
         externalNativeBuild {
             cmake {
                 arguments "-DANDROID_NATIVE_API_LEVEL=30", "-DANDROID_STL=c++_shared", "-DANDROID=true", "-DANDROID_TOOLCHAIN=clang"
                 cppFlags "-std=c++11 -frtti -fexceptions"
-                abiFilters "arm64-v8a"
+                abiFilters "arm64-v8a", "x86_64", "x86"
             }
         }
     }
