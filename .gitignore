@@ -4,3 +4,7 @@ CMakeLists.txt.user
 assets/db/lexique.db
 
 .gradle/
+
+local.properties
+
+.idea/

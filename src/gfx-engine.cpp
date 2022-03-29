@@ -26,6 +26,7 @@
 ImFont* GfxEngine::mNormalFont = nullptr;
 ImFont* GfxEngine::mBigFont = nullptr;
 
+
 bool GfxEngine::Initialize()
 {
     // initiate SDL
@@ -58,7 +59,10 @@ bool GfxEngine::Initialize()
     ImGuiIO& io = ImGui::GetIO();
 
 //    io.ConfigFlags |= ImGuiConfigFlags_DockingEnable;
-    mNormalFont = io.Fonts->AddFontFromFileTTF( "assets/fonts/roboto.ttf", 20);
+
+    size_t font_data_size = 0;
+    void* font_data = SDL_LoadFile("fonts/roboto.ttf", &font_data_size);
+    mNormalFont = io.Fonts->AddFontFromMemoryTTF(font_data, static_cast<int>(font_data_size), 20.0f);
 
     // Merge font with normal font
     ImFontConfig config;
@@ -66,10 +70,13 @@ bool GfxEngine::Initialize()
 //    config.GlyphMinAdvanceX = 20.0f; // Use if you want to make the icon monospaced
 //    config.GlyphOffset.y += 1.0;
     static const ImWchar icon_ranges[] = { ICON_MIN_FA, ICON_MAX_FA, 0 };
-    io.Fonts->AddFontFromFileTTF("assets/fonts/fa-solid-900.ttf", 16.0f, &config, icon_ranges);
 
+    font_data = SDL_LoadFile("fonts/fa-solid-900.ttf", &font_data_size);
+    io.Fonts->AddFontFromMemoryTTF(font_data, static_cast<int>(font_data_size), 16.0f, &config, icon_ranges);
 
-    mBigFont = io.Fonts->AddFontFromFileTTF( "assets/fonts/roboto.ttf", 50);
+    font_data = SDL_LoadFile("fonts/roboto.ttf", &font_data_size);
+    mBigFont = io.Fonts->AddFontFromMemoryTTF(font_data, static_cast<int>(font_data_size), 50);
+
     io.Fonts->Build();
 
     io.IniFilename = nullptr; // disable .ini save/load windows sizes and locations
@@ -115,7 +122,7 @@ uint32_t GfxEngine::StartFrame()
             {
             case SDL_WINDOWEVENT_CLOSE:
                 return 10000;
-                break;
+                // break;
             case SDL_WINDOWEVENT_RESIZED:
                 mWidth = event.window.data1;
                 mHeight = event.window.data2;

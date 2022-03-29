@@ -2,7 +2,7 @@
 #define GFX_ENGINE_H
 
 // SDL
-#include <SDL2/SDL.h>
+#include <SDL.h>
 
 // Dear ImGui
 #include "imgui_impl_sdl.h"
