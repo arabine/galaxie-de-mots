@@ -23,7 +23,7 @@ android {
             cmake {
                 arguments "-DANDROID_NATIVE_API_LEVEL=30", "-DANDROID_STL=c++_shared", "-DANDROID=true", "-DANDROID_TOOLCHAIN=clang"
                 cppFlags "-std=c++11 -frtti -fexceptions"
-                abiFilters "arm64-v8a", "x86_64", "x86"
+                abiFilters "arm64-v8a" //, "x86_64", "x86"
             }
         }
     }
@@ -47,7 +47,8 @@ android {
     }
     externalNativeBuild {
         cmake {
-            path '../src/CMakeLists.txt'
+            version "3.18.0+"
+            path 'CMakeLists.txt'
         }
     }
 }

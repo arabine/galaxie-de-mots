@@ -1,9 +1,8 @@
 # ==================================================================================================
 # GLOBAL VARIABLES AND PACKAGES DISCOVERY
 # ==================================================================================================
-cmake_minimum_required(VERSION 3.5)
-
 cmake_minimum_required(VERSION 3.14)
+
 set(PROJECT_NAME galaxie-app)
 project(${PROJECT_NAME} LANGUAGES CXX C)
 
@@ -19,22 +18,10 @@ find_package(OpenGL REQUIRED)
 #=========================================================================================================================
 # SOURCE CODES
 #=========================================================================================================================
-
-set(IMGUI_DIR ${GALAXIE_ROOT}/libs/imgui)
-
-
 set(PROJECT_SOURCES
     ${GALAXIE_ROOT}/src/main.cpp
     ${GALAXIE_ROOT}/src/gfx-engine.cpp
     ${GALAXIE_ROOT}/src/gfx-engine.h
-
-    # ----------------  IMGUI  ----------------
-    ${IMGUI_DIR}/imgui.cpp
-    ${IMGUI_DIR}/imgui_draw.cpp
-    ${IMGUI_DIR}/imgui_tables.cpp
-    ${IMGUI_DIR}/imgui_widgets.cpp
-    ${IMGUI_DIR}/backends/imgui_impl_sdl.cpp
-    ${IMGUI_DIR}/backends/imgui_impl_sdlrenderer.cpp
 
     # ----------------  MOTUS GAME  ----------------
     ${GALAXIE_ROOT}/src/motus.h
@@ -44,9 +31,6 @@ set(PROJECT_SOURCES
 )
 
 set(GALAXIE_INCLUDES
-    ${IMGUI_DIR}
-    ${IMGUI_DIR}/backends
-    ${GALAXIE_ROOT}/libs/nanosvg/src
     ${GALAXIE_ROOT}/src
     ${GALAXIE_ROOT}/assets/db
 )
@@ -61,18 +45,25 @@ add_link_options(-static-libgcc -static-libstdc++)
 #=========================================================================================================================
 # SDL2
 #=========================================================================================================================
+include(ExternalProject)
+
+ExternalProject_Add(sdl2_project
+    GIT_REPOSITORY https://github.com/libsdl-org/SDL.git
+    GIT_TAG b424665e0899769b200231ba943353a5fee1b6b6 #release-2.0.20
+    PREFIX ${CMAKE_BINARY_DIR}/external
+    INSTALL_COMMAND ""
+)
+
 set(SDL2_HEADERS
-    /opt/SDL2/include
-    /opt/SDL2/include/SDL2
+    ${CMAKE_BINARY_DIR}/external/src/sdl2_project/include
 )
 
-set(SDL2_LIBS_DIR
-    /opt/SDL2/lib
-)
+#=========================================================================================================================
+# IMGUI
+#=========================================================================================================================
+include(libs/lib_imgui/imgui.cmake)
+list(APPEND PROJECT_SOURCES ${IMGUI_SRCS})
 
-set(SDL2_LIBS
-    SDL2
-)
 
 # ==================================================================================================
 # TARGET AND LINK STUFF
@@ -84,22 +75,11 @@ set(CMAKE_INSTALL_RPATH "\$ORIGIN/lib")
 set(CMAKE_BUILD_WITH_INSTALL_RPATH ON)
 
 add_executable(${PROJECT_NAME} ${PROJECT_SOURCES})
+add_dependencies(${PROJECT_NAME} sdl2_project)
 
-add_library(libsdl2 STATIC IMPORTED)
-set_target_properties(libsdl2 PROPERTIES IMPORTED_LOCATION /opt/SDL2/lib/libSDL2-2.0.so.0)
+target_link_libraries(${PROJECT_NAME} OpenGL::GL pthread ssl crypto dl SDL2)
 
-target_link_libraries(${PROJECT_NAME} OpenGL::GL libsdl2 pthread ssl crypto dl)
-
-
-
-
-
-#target_link_options(${PROJECT_NAME} PUBLIC "-l:libSDL2-2.0.so.0")
-
-#set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -l:libSDL2-2.0.so.0")
-
-target_link_directories(${PROJECT_NAME} PUBLIC ${SDL2_LIBS_DIR})
-target_include_directories(${PROJECT_NAME} PUBLIC ${SDL2_HEADERS} ${GALAXIE_INCLUDES})
+target_include_directories(${PROJECT_NAME} PUBLIC ${SDL2_HEADERS} ${GALAXIE_INCLUDES} ${IMGUI_HEADERS})
 target_compile_definitions(${PROJECT_NAME} PUBLIC "$<$<CONFIG:DEBUG>:GALAXIE_DEBUG>")
 
 # ==================================================================================================
