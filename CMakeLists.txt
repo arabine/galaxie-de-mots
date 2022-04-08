@@ -11,7 +11,8 @@ set(CMAKE_VERBOSE_MAKEFILE ON)
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-set(GALAXIE_ROOT ${CMAKE_CURRENT_SOURCE_DIR})
+set(ROOT_DIR ${CMAKE_CURRENT_SOURCE_DIR})
+
 
 find_package(OpenGL REQUIRED)
 
@@ -19,20 +20,40 @@ find_package(OpenGL REQUIRED)
 # SOURCE CODES
 #=========================================================================================================================
 set(PROJECT_SOURCES
-    ${GALAXIE_ROOT}/src/main.cpp
-    ${GALAXIE_ROOT}/src/gfx-engine.cpp
-    ${GALAXIE_ROOT}/src/gfx-engine.h
+    ${ROOT_DIR}/src/main.cpp
+
+    # ----------------  GFX ENGINE  ----------------
+    ${ROOT_DIR}/src/gfx-engine/stb_image.h
+    ${ROOT_DIR}/src/gfx-engine/SDL2_gfxPrimitives.c
+    ${ROOT_DIR}/src/gfx-engine/SDL2_gfxPrimitives.h
+    ${ROOT_DIR}/src/gfx-engine/SDL2_rotozoom.c
+    ${ROOT_DIR}/src/gfx-engine/SDL2_rotozoom.h
+    ${ROOT_DIR}/src/gfx-engine/gfx-engine.cpp
+    ${ROOT_DIR}/src/gfx-engine/gfx-engine.h
+    ${ROOT_DIR}/src/gfx-engine/entity.h
+    ${ROOT_DIR}/src/gfx-engine/entity.cpp
+    ${ROOT_DIR}/src/gfx-engine/image.h
+    ${ROOT_DIR}/src/gfx-engine/image.cpp
 
     # ----------------  MOTUS GAME  ----------------
-    ${GALAXIE_ROOT}/src/motus.h
-    ${GALAXIE_ROOT}/src/motus.cpp
-    ${GALAXIE_ROOT}/src/motus-gui.h
-    ${GALAXIE_ROOT}/src/motus-gui.cpp
+    ${ROOT_DIR}/src/activities/motus/motus.h
+    ${ROOT_DIR}/src/activities/motus/motus.cpp
+    ${ROOT_DIR}/src/activities/motus/motus-gui.h
+    ${ROOT_DIR}/src/activities/motus/motus-gui.cpp
+
+    # ----------------  COMMON  ----------------
+    ${ROOT_DIR}/src/letter.h
+    ${ROOT_DIR}/src/letter.cpp
+    ${ROOT_DIR}/src/letter-tile.h
+    ${ROOT_DIR}/src/letter-tile.cpp
 )
 
 set(GALAXIE_INCLUDES
-    ${GALAXIE_ROOT}/src
-    ${GALAXIE_ROOT}/assets/db
+    ${ROOT_DIR}/src
+    ${ROOT_DIR}/assets/db
+    ${ROOT_DIR}/src/gfx-engine
+    ${ROOT_DIR}/libs/nanosvg/src
+    ${ROOT_DIR}/src/activities/motus
 )
 
 #=========================================================================================================================

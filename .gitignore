@@ -8,3 +8,9 @@ assets/db/lexique.db
 local.properties
 
 .idea/
+
+build/
+
+.vscode/dryrun.log
+
+.vscode/targets.log

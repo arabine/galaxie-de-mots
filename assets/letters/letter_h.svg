@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="27.023176mm"
+   height="27.023176mm"
+   viewBox="0 0 27.023176 27.023176"
+   version="1.1"
+   id="svg6673"
+   inkscape:version="1.1.1 (3bf5ae0d25, 2021-09-20)"
+   sodipodi:docname="letter_h.svg"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview6675"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:document-units="mm"
+     showgrid="false"
+     fit-margin-top="0"
+     fit-margin-left="0"
+     fit-margin-right="0"
+     fit-margin-bottom="0"
+     inkscape:zoom="0.77771465"
+     inkscape:cx="-1404.114"
+     inkscape:cy="815.85194"
+     inkscape:window-width="3840"
+     inkscape:window-height="2136"
+     inkscape:window-x="0"
+     inkscape:window-y="0"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="layer1" />
+  <defs
+     id="defs6670" />
+  <g
+     inkscape:label="Calque 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     transform="translate(-476.72552,67.26416)">
+    <g
+       id="g2266"
+       transform="translate(453.8323,-114.92466)">
+      <rect
+         style="opacity:0.998;fill:#75507b;stroke:none;stroke-width:1;stroke-linecap:round;stroke-linejoin:bevel;paint-order:fill markers stroke"
+         id="rect2490"
+         width="27.023176"
+         height="27.023176"
+         x="22.893225"
+         y="47.6605"
+         rx="1.2688782"
+         ry="1.2688782" />
+      <g
+         aria-label="H"
+         transform="matrix(0.59669639,0,0,0.59669639,32.121884,4.1750172)"
+         id="g2488"
+         style="font-size:40px;line-height:1.25;white-space:pre;shape-inside:url(#rect4210-26);stroke-width:0.443413">
+        <path
+           d="M 14.355469,109.73981 V 96.595275 H 0.01953125 V 109.73981 H -3.75 V 81.302306 H 0.01953125 V 93.528869 H 14.355469 V 81.302306 h 3.75 v 28.437504 z"
+           style="font-family:Roboto;-inkscape-font-specification:Roboto"
+           id="path174821" />
+      </g>
+      <g
+         aria-label="4"
+         transform="scale(0.99299137,1.0070581)"
+         id="g2483"
+         style="font-size:6.39338px;line-height:1.25;stroke-width:0.264583">
+        <path
+           d="m 44.517737,70.074502 2.035393,-3.149863 h 0.614988 v 3.015627 h 0.633719 v 0.474509 h -0.633719 v 1.055158 h -0.577527 v -1.055158 h -2.072854 z m 0.655571,-0.134236 h 1.417283 v -2.232063 l -0.0718,0.127992 z"
+           style="font-family:Roboto;-inkscape-font-specification:Roboto"
+           id="path265410" />
+      </g>
+    </g>
+  </g>
+</svg>

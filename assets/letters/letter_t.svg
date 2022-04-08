@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="27.023176mm"
+   height="27.023176mm"
+   viewBox="0 0 27.023176 27.023176"
+   version="1.1"
+   id="svg9817"
+   inkscape:version="1.1.1 (3bf5ae0d25, 2021-09-20)"
+   sodipodi:docname="letter_t.svg"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview9819"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:document-units="mm"
+     showgrid="false"
+     inkscape:zoom="0.77771465"
+     inkscape:cx="-82.292394"
+     inkscape:cy="296.3812"
+     inkscape:window-width="3840"
+     inkscape:window-height="2136"
+     inkscape:window-x="0"
+     inkscape:window-y="0"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="layer1" />
+  <defs
+     id="defs9814" />
+  <g
+     inkscape:label="Calque 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     transform="translate(-126.99356,-70.179134)">
+    <g
+       id="g9731"
+       transform="translate(103.04845,-45.417523)">
+      <rect
+         style="opacity:0.998;fill:#75507b;stroke:none;stroke-width:1;stroke-linecap:round;stroke-linejoin:bevel;paint-order:fill markers stroke"
+         id="background"
+         width="27.023176"
+         height="27.023176"
+         x="23.945114"
+         y="115.59666"
+         rx="1.2688782"
+         ry="1.2688782" />
+      <g
+         aria-label="T"
+         transform="matrix(0.59669639,0,0,0.59669639,34.525663,72.111174)"
+         id="letter"
+         style="font-size:40px;line-height:1.25;white-space:pre;shape-inside:url(#rect4210-33);stroke-width:0.443413">
+        <path
+           d="M -6.0742187,84.388244 V 81.302306 H 15.898438 v 3.085938 H 6.7578125 V 109.73981 H 3.046875 V 84.388244 Z"
+           style="font-family:Roboto;-inkscape-font-specification:Roboto"
+           id="path175073" />
+      </g>
+      <path
+         d="m 48.191245,135.57066 v 4.60253 h -0.573479 v -3.87631 l -1.156258,0.42756 v -0.52502 l 1.639841,-0.62876 z"
+         style="font-size:6.39338px;line-height:1.25;font-family:Roboto;-inkscape-font-specification:Roboto;stroke-width:0.264583"
+         id="points" />
+    </g>
+  </g>
+</svg>

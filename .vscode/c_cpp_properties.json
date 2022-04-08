@@ -1,0 +1,23 @@
+{
+    "env": {
+        "myDefaultIncludePath": ["${workspaceFolder}/src", 
+            "${workspaceFolder}/app/.cxx/cmake/debug/arm64-v8a/_deps/sdl2_project-src/include",
+            "${workspaceFolder}build/external/src/sdl2_project/include"
+
+        ]
+      },
+    "configurations": [
+        {
+            "name": "Linux",
+            "includePath": [
+                "${workspaceFolder}/**"
+            ],
+            "defines": ["ANDROID"],
+            "compilerPath": "/usr/bin/clang",
+            "cStandard": "c17",
+            "cppStandard": "c++14",
+            "intelliSenseMode": "linux-clang-x64"
+        }
+    ],
+    "version": 4
+}

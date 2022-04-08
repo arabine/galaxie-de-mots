@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="27.023176mm"
+   height="27.023176mm"
+   viewBox="0 0 27.023176 27.023176"
+   version="1.1"
+   id="svg5026"
+   inkscape:version="1.1.1 (3bf5ae0d25, 2021-09-20)"
+   sodipodi:docname="letter_b.svg"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview5028"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:document-units="mm"
+     showgrid="false"
+     fit-margin-top="0"
+     fit-margin-left="0"
+     fit-margin-right="0"
+     fit-margin-bottom="0"
+     inkscape:zoom="0.77771465"
+     inkscape:cx="-39.860378"
+     inkscape:cy="360.67213"
+     inkscape:window-width="3840"
+     inkscape:window-height="2136"
+     inkscape:window-x="0"
+     inkscape:window-y="0"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="layer1" />
+  <defs
+     id="defs5023" />
+  <g
+     inkscape:label="Calque 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     transform="translate(-115.76676,-53.168824)">
+    <g
+       id="letter_b"
+       transform="translate(92.833939,38.05993)">
+      <rect
+         style="opacity:0.998;fill:#75507b;stroke:none;stroke-width:1;stroke-linecap:round;stroke-linejoin:bevel;paint-order:fill markers stroke"
+         id="rect1081"
+         width="27.023176"
+         height="27.023176"
+         x="22.932823"
+         y="15.108894"
+         rx="1.2688782"
+         ry="1.2688782" />
+      <g
+         aria-label="B"
+         transform="matrix(0.59669639,0,0,0.59669639,32.907354,-28.376589)"
+         id="g1085"
+         style="font-size:40px;line-height:1.25;white-space:pre;shape-inside:url(#rect4210-1);stroke-width:0.443413">
+        <path
+           d="m 15.605469,101.53668 q 0,3.98438 -2.578125,6.09375 -2.558594,2.10938 -6.8164065,2.10938 H -3.75 V 81.302306 h 9.3164062 q 4.3750001,0 6.8164068,1.816407 2.460937,1.796875 2.460937,5.761718 0,1.972657 -1.132812,3.515625 -1.113282,1.523438 -3.066407,2.363282 2.402344,0.664062 3.671875,2.519531 1.289063,1.855469 1.289063,4.257811 z M 0.01953125,84.388244 v 9.023437 H 5.6835937 q 2.4218751,0 3.9062501,-1.210937 1.4843752,-1.210938 1.4843752,-3.359375 0,-4.355469 -5.2734378,-4.453125 z M 11.855469,101.57574 q 0,-2.382809 -1.308594,-3.749996 Q 9.2578125,96.439025 6.3867187,96.439025 H 0.01953125 V 106.6734 H 6.2109375 q 2.6757813,0 4.1601565,-1.36719 1.484375,-1.38672 1.484375,-3.73047 z"
+           style="font-family:Roboto;-inkscape-font-specification:Roboto"
+           id="path174695" />
+      </g>
+      <g
+         aria-label="3"
+         transform="scale(0.99299137,1.0070581)"
+         id="g1083"
+         style="font-size:6.39338px;line-height:1.25;stroke-width:0.264583">
+        <path
+           d="m 46.087478,37.626227 v -0.474508 h 0.424561 q 0.446412,-0.0031 0.664936,-0.224767 0.218524,-0.221646 0.218524,-0.552553 0,-0.799173 -0.792929,-0.799173 -0.368369,0 -0.596258,0.21228 -0.227889,0.209159 -0.227889,0.56504 h -0.577527 q 0,-0.521335 0.383978,-0.886582 0.387099,-0.365247 1.017696,-0.365247 0.614988,0 0.992722,0.327786 0.380856,0.324664 0.380856,0.958383 0,0.252863 -0.171698,0.540066 -0.168575,0.287202 -0.543187,0.446412 0.452656,0.146723 0.61811,0.452657 0.165454,0.305933 0.165454,0.614988 0,0.63684 -0.412074,0.983357 -0.412073,0.346516 -1.027061,0.346516 -0.593136,0 -1.017697,-0.327786 -0.42456,-0.330907 -0.42456,-0.93653 h 0.577527 q 0,0.359003 0.231011,0.574405 0.234132,0.215402 0.633719,0.215402 0.396464,0 0.627475,-0.209158 0.231011,-0.209159 0.231011,-0.633719 0,-0.42456 -0.262229,-0.624354 -0.262228,-0.202915 -0.702397,-0.202915 z"
+           style="font-family:Roboto;-inkscape-font-specification:Roboto"
+           id="path265363" />
+      </g>
+    </g>
+  </g>
+</svg>

@@ -1,52 +1,16 @@
-#include "motus-gui.h"
-#include "gfx-engine.h"
-#include "IconsFontAwesome5.h"
-#include <chrono>
 
 
-MotusGui::MotusGui(uint32_t w, uint32_t h)
-    : mWidth(w)
-    , mHeight(h)
+class MotusKeyboard : public Entity
 {
-    mMotus.Initialize();
+public:
+    MotusKeyboard(GfxSystem &s, Motus &motus);
 
-    mTextWin = "Youpiii tu as gagné. Une autre partie ?";
-    mTextLost = "Hooo mince alors tu as perdu :(\nLe mot était : ";
-}
+private:
+    Motus &mMotus;
+    std::string mMessage;
+};
 
-bool MotusGui::Process()
-{
-    bool quit = DrawMenuBar();
-    DrawWords();
-    DrawKeyboard();
 
-    if (mMessage.size() || mMotus.IsEnd())
-    {
-        DrawInfoWindow();
-    }
-
-    return quit;
-}
-
-bool MotusGui::DrawMenuBar()
-{
-    bool quit = false;
-    if(ImGui::BeginMainMenuBar())
-    {
-        if (ImGui::BeginMenu("Fichier"))
-        {
-            if(ImGui::MenuItem("Quit"))
-            {
-                quit = true;
-            }
-            ImGui::EndMenu();
-        }
-
-        ImGui::EndMainMenuBar();
-    }
-
-    return quit;
-}
 
 void MotusGui::DrawInfoWindow()
 {
@@ -62,7 +26,7 @@ void MotusGui::DrawInfoWindow()
         mTimer.tock();
         if (mTimer.duration().count() >= 2000) {
             started = false;
-            mMessage.clear();
+      //      mMessage.clear();
         }
     }
 
@@ -101,7 +65,7 @@ void MotusGui::DrawInfoWindow()
         }
         else
         {
-            ImGui::Text("%s", mMessage.c_str());
+          //  ImGui::Text("%s", mMessage.c_str());
         }
     }
     ImGui::End();
@@ -181,72 +145,72 @@ void MotusGui::DrawWords()
     ImGui::End();
 }
 
-void MotusGui::DrawKeyboard()
+MotusKeyboard::MotusKeyboard(GfxSystem &s, Motus &motus)
+    : Entity(s)
+    , mMotus(motus)
+{
+    int width = 455;
+    int height = 40 * 3 + 5 * 4;
+
+    ShowFrame(true);
+
+    int offsetY = s.GetWindowHeight() - height - 50;
+
+    SetPos((s.GetWindowWidth() - width) / 2, offsetY);
+    SetSize(width, height);
+}
+
+void MotusKeyboard::Draw()
 {
     static const char keyboard[] = { 'A', 'Z', 'E', 'R', 'T', 'Y','U', 'I', 'O', 'P', '\n',
                                      'Q', 'S', 'D', 'F', 'G', 'H', 'J', 'K', 'L', 'M', '\n',
                                      '?', 'W', 'X', 'C', 'V', 'B', 'N', '<',
                                    };
-
-    ImGuiWindowFlags window_flags = ImGuiWindowFlags_NoDecoration |
-            ImGuiWindowFlags_AlwaysAutoResize |
-            ImGuiWindowFlags_NoSavedSettings |
-            ImGuiWindowFlags_NoFocusOnAppearing |
-            ImGuiWindowFlags_NoNav | ImGuiWindowFlags_NoBackground |
-            ImGuiWindowFlags_NoMove;
-
-    //        ImGui::SetNextWindowBgAlpha(0.0f); // Transparent background
-    ImGui::SetNextWindowPos(ImVec2((mWidth - 460) / 2, 600), ImGuiCond_Always);
-
-    int offset = mHeight - 600;
-
-    ImGui::SetNextWindowSize(ImVec2(460, offset));
-
     ImGui::GetStyle().FrameBorderSize = 0;
 
-    if (ImGui::Begin("Keyboard", NULL, window_flags))
+    ImGui::PushStyleColor(ImGuiCol_Button, IM_COL32(99, 99, 99, 255));
+    ImGui::PushStyleColor(ImGuiCol_Text, IM_COL32_WHITE);
+
+    for (int i = 0; i < sizeof(keyboard); i++)
     {
-        ImGui::PushStyleColor(ImGuiCol_Button, IM_COL32(99, 99, 99, 255));
-        ImGui::PushStyleColor(ImGuiCol_Text, IM_COL32_WHITE);
-
-        for (int i = 0; i < sizeof(keyboard); i++)
+        std::string text;
+        text.push_back(keyboard[i]);
+        text.push_back(0);
+        if (keyboard[i] == '\n')
         {
-            std::string text;
-            text.push_back(keyboard[i]);
-            text.push_back(0);
-            if (keyboard[i] == '\n')
-            {
-                ImGui::NewLine();
-            }
-            else if (keyboard[i] == '?')
-            {
-                ImGui::SetNextItemWidth(200);
-                if (ImGui::Button(ICON_FA_CHECK_CIRCLE, ImVec2(85, 40)))
-                {
-                    mMotus.Submit(mMessage);
-                }
-                ImGui::SameLine(0.0f, 5.0);
-            }
-            else if (keyboard[i] == '<')
-            {
-                if (ImGui::Button(ICON_FA_BACKSPACE, ImVec2(85, 40)))
-                {
-                    mMotus.RemoveLast();
-                }
-                ImGui::SameLine(0.0f, 5.0);
-            }
-            else
-            {
-                if (ImGui::Button(text.c_str(), ImVec2(40, 40)))
-                {
-                    mMotus.AppendLetter(text.at(0));
-                }
-                ImGui::SameLine(0.0f, 5.0);
-            }
+            ImGui::NewLine();
+//            ImGui::Dummy(ImVec2(0.0f, Y(5)));
         }
-
-        ImGui::PopStyleColor();
-        ImGui::PopStyleColor();
+        else if (keyboard[i] == '?')
+        {
+            ImGui::SetNextItemWidth(X(200));
+            if (ImGui::Button(ICON_FA_CHECK_CIRCLE, Vect(85, 40)))
+            {
+                mMotus.Submit(mMessage);
+            }
+            ImGui::SameLine(0.0f, X(5.0));
+        }
+        else if (keyboard[i] == '<')
+        {
+            if (ImGui::Button(ICON_FA_BACKSPACE, Vect(85, 40)))
+            {
+                mMotus.RemoveLast();
+            }
+            ImGui::SameLine(0.0f, X(5.0));
+        }
+        else
+        {
+            if (ImGui::Button(text.c_str(), Vect(40, 40)))
+            {
+                mMotus.AppendLetter(text.at(0));
+            }
+            ImGui::SameLine(0.0f, X(5.0));
+        }
     }
-    ImGui::End();
+
+    ImGui::PopStyleColor();
+    ImGui::PopStyleColor();
+
 }
+
+
