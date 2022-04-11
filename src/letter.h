@@ -9,12 +9,10 @@ public:
     Letter(GfxSystem &s, char letter);
     virtual void OnCreate(SDL_Renderer *renderer) override;
 
-    virtual void Draw(SDL_Renderer *renderer) override;
-
+    void SetBackgroundColor(SDL_Renderer *renderer, const std::string &backgroundColor, const std::string &foregroundColor, bool showPoints);
 private:
     char mLetter;
     std::string mLetterSvg;
-    SDL_Texture *mTexture = nullptr;
 };
 
 #endif // LETTER_H

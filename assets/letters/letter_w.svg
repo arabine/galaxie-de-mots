@@ -1,64 +1,51 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<!-- Created with Inkscape (http://www.inkscape.org/) -->
-
 <svg
-   width="27.023176mm"
-   height="27.023176mm"
-   viewBox="0 0 27.023176 27.023176"
+   width="100"
+   height="100"
    version="1.1"
-   id="svg10861"
-   inkscape:version="1.1.1 (3bf5ae0d25, 2021-09-20)"
-   sodipodi:docname="letter_w.svg"
-   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
-   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   id="svg12"
    xmlns="http://www.w3.org/2000/svg"
    xmlns:svg="http://www.w3.org/2000/svg">
-  <sodipodi:namedview
-     id="namedview10863"
-     pagecolor="#ffffff"
-     bordercolor="#666666"
-     borderopacity="1.0"
-     inkscape:pageshadow="2"
-     inkscape:pageopacity="0.0"
-     inkscape:pagecheckerboard="0"
-     inkscape:document-units="mm"
-     showgrid="false"
-     inkscape:zoom="3.1108586"
-     inkscape:cx="80.363666"
-     inkscape:cy="99.490218"
-     inkscape:window-width="1920"
-     inkscape:window-height="1126"
-     inkscape:window-x="3840"
-     inkscape:window-y="50"
-     inkscape:window-maximized="1"
-     inkscape:current-layer="layer1" />
   <defs
-     id="defs10858" />
+     id="defs16" />
+  <rect
+     x="0"
+     y="0"
+     width="100"
+     height="100"
+     ry="5"
+     rx="5"
+     stroke-width="0px"
+     fill="{{BACKGROUND}}"
+     id="rect2" />
   <g
-     inkscape:label="Calque 1"
-     inkscape:groupmode="layer"
-     id="layer1"
-     transform="translate(-152.84924,-62.014183)">
+     fill="{{LETTER_COLOR}}"
+     id="g6">
     <g
-       id="g11342">
-      <rect
-         style="opacity:0.998;fill:#75507b;stroke:none;stroke-width:1;stroke-linecap:round;stroke-linejoin:bevel;paint-order:fill markers stroke"
-         id="background"
-         width="27.023176"
-         height="27.023176"
-         x="152.84924"
-         y="62.014183"
-         rx="1.2688782"
-         ry="1.2688782" />
+       aria-label="W"
+       id="text4"
+       style="font-size:70px;dominant-baseline:central;text-anchor:middle">
       <path
-         d="m 176.33684,67.041494 -4.10229,16.968556 h -2.03949 l -3.49627,-12.365136 -0.26804,-1.293619 -0.26805,1.293619 -3.62447,12.365136 h -2.03949 L 156.3848,67.041494 h 2.23761 l 2.68048,11.607609 0.33797,2.249265 0.46617,-2.016177 3.36807,-11.840697 h 1.87633 l 3.27484,11.840697 0.47782,2.062797 0.36128,-2.307538 2.6222,-11.595956 z"
-         style="font-size:40px;line-height:1.25;font-family:Roboto;-inkscape-font-specification:Roboto;white-space:pre;stroke-width:0.264583"
-         id="letter" />
+         d="M 68.61084,69.302809 H 60.817871 L 52.478027,38.711988 q -0.820312,-2.871093 -2.392578,-10.288085 -0.888672,3.964843 -1.503906,6.630859 -0.615234,2.666016 -9.331055,34.248047 H 31.45752 L 17.272949,21.143629 h 6.801758 l 8.647461,30.59082 q 1.538086,5.742188 2.836914,11.826172 0.820313,-3.759765 1.879883,-8.203125 1.09375,-4.443359 9.501953,-34.213867 h 6.254883 l 8.374023,29.975586 q 1.914063,7.348633 3.007813,12.441406 l 0.307617,-1.196289 q 0.922851,-3.930664 1.503906,-6.391601 0.581055,-2.495118 9.604492,-34.829102 h 6.801758 z"
+         style="font-size:70px;dominant-baseline:central;text-anchor:middle"
+         id="path18" />
+    </g>
+  </g>
+  <g
+     fill="{{POINTS_COLOR}}"
+     id="g10">
+    <g
+       aria-label="10"
+       id="text8"
+       style="font-size:25px">
       <path
-         id="points"
-         style="font-size:6.39338px;line-height:1.25;font-family:Roboto;-inkscape-font-specification:Roboto;stroke-width:0.999999"
-         d="m 670.83594,309.68555 c -1.63246,0 -2.93774,0.54746 -3.91406,1.64062 -0.97636,1.08523 -1.46485,3.0412 -1.46485,5.86914 v 2.91211 c 0.0313,2.71703 0.53539,4.62168 1.51172,5.71485 0.98414,1.09314 2.28158,1.64062 3.89063,1.64062 1.65586,0 2.96309,-0.56269 3.92382,-1.6875 0.96852,-1.12484 1.45313,-3.10553 1.45313,-5.94141 v -2.9121 c -0.0312,-2.70909 -0.53149,-4.589 -1.5,-5.64258 -0.96854,-1.06147 -2.26794,-1.59375 -3.90039,-1.59375 z m -12.00977,0.14453 -6.19726,2.375 v 1.98437 l 4.36914,-1.61523 v 14.65039 h 2.16797 v -17.39453 z m 12.00977,1.65039 c 1.05446,0 1.85557,0.4049 2.40234,1.21289 0.54672,0.80796 0.81836,2.18609 0.81836,4.13476 v 3.45704 c -0.008,1.89319 -0.27942,3.26373 -0.81836,4.11132 -0.53115,0.83969 -1.32447,1.25977 -2.3789,1.25977 -1.03103,0 -1.82826,-0.42769 -2.39063,-1.2832 -0.55458,-0.85551 -0.83203,-2.25077 -0.83203,-4.1836 v -3.52734 c 0.0156,-1.8853 0.29698,-3.22166 0.84375,-4.00586 0.55456,-0.78423 1.34008,-1.17578 2.35547,-1.17578 z"
-         transform="scale(0.26458333)" />
+         d="m 61.904301,90 v -1.867676 h 4.382324 V 74.899902 l -3.881836,2.770996 v -2.075195 l 4.064941,-2.79541 h 2.026368 v 15.332031 h 4.187011 V 90 Z"
+         style="font-size:25px"
+         id="path21" />
+      <path
+         d="m 86.831059,81.394043 q 0,4.309082 -1.525879,6.57959 -1.513672,2.270508 -4.479981,2.270508 -2.966308,0 -4.455566,-2.258301 -1.489258,-2.258301 -1.489258,-6.591797 0,-4.431152 1.44043,-6.640625 1.452636,-2.209473 4.577636,-2.209473 3.039551,0 4.479981,2.233887 1.452637,2.233887 1.452637,6.616211 z m -2.233887,0 q 0,-3.723145 -0.866699,-5.395508 -0.854493,-1.672363 -2.832032,-1.672363 -2.026367,0 -2.91748,1.647949 -0.878906,1.647949 -0.878906,5.419922 0,3.662109 0.891113,5.358887 0.90332,1.696777 2.856445,1.696777 1.940918,0 2.844238,-1.733398 0.903321,-1.733399 0.903321,-5.322266 z"
+         style="font-size:25px"
+         id="path23" />
     </g>
   </g>
 </svg>

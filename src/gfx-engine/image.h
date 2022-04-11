@@ -10,12 +10,10 @@ class Image : public Entity
 public:
     Image(GfxSystem &system, const std::string &path);
 
-    ~Image();
+    virtual ~Image();
 
     virtual void OnCreate(SDL_Renderer *renderer) override;
-    virtual void Draw(SDL_Renderer *renderer) override;
 
-    void DrawEx(SDL_Renderer *renderer, int x, int y);
     void SetHighlight(bool enable) { mHighlight = enable; }
     bool IsHighlighted() const { return mHighlight; }
     size_t font_data_size = 0;
@@ -27,7 +25,6 @@ public:
 
 private:
     std::string mPath;
-    SDL_Texture *mTexture = nullptr;
 
     bool mHighlight = false;
 };

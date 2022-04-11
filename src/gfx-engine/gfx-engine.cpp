@@ -45,7 +45,7 @@ bool GfxEngine::Initialize(const std::string &title)
         mWidth,
         mHeight,
         window_flags
-        );
+    );
     // limit to which minimum size user can resize the window
     SDL_SetWindowMinimumSize(mWindow, mMinimumWidth, mMinimumHeight);
 

@@ -3,6 +3,8 @@
 
 #include "motus.h"
 #include "gfx-engine.h"
+#include "motus-keyboard.h"
+
 #include <chrono>
 
 template <class DT = std::chrono::milliseconds,
@@ -40,6 +42,8 @@ private:
     std::string mTextLost;
 
     Timer<std::chrono::milliseconds, std::chrono::steady_clock> mTimer;
+
+    std::shared_ptr<MotusKeyboard> mKeyboard;
 
     bool DrawMenuBar();
     void DrawWords();

@@ -64,6 +64,8 @@ class Entity
 public:
     Entity(GfxSystem &s);
 
+    virtual ~Entity();
+
     virtual void OnCreate(SDL_Renderer *renderer) { (void) renderer; }
 
     // Manage user interaction (mouse, keyboard...)
@@ -76,7 +78,7 @@ public:
     virtual void Update(double deltaTime) { (void) deltaTime; }
 
     // Draw to screen
-    virtual void Draw(SDL_Renderer *renderer) { (void) renderer; }
+    void Draw(SDL_Renderer *renderer, int x_offset = 0, int y_offset = 0);
 
     bool IsVisible() const { return mVisible; }
     void SetVisible(bool visible) { mVisible = visible; }
@@ -134,6 +136,18 @@ public:
         mId = id;
     }
 
+    void SetTexture(SDL_Texture *texture)
+    {
+        mTexture = texture;
+        int w = 0;
+        int h = 0;
+        // get the width and height of the texture
+        if (SDL_QueryTexture(mTexture, NULL, NULL, &w, &h) == 0)
+        {
+            SetSize(w, h);
+        }
+    }
+
     void SetZ(uint32_t z) {
         mZ = z;
     }
@@ -145,13 +159,14 @@ public:
 private:
     GfxSystem &mSystem; // keep it first please
 
+    SDL_Texture *mTexture = nullptr;
+
     uint32_t mSceneIdOnwer = 0;
     uint32_t mId = 0;
     uint32_t mZ = 0; // pseudo Z value (order of drawing)
 
     bool mVisible = true;
     SDL_Rect mRect;
- //   Vector2f mPos;
     float mAngle = 0;
     Vector2f mScale = Vector2f(1, 1);
 };

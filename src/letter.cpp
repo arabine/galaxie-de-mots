@@ -1,26 +1,23 @@
 #include "letter.h"
 #include "gfx-engine.h"
 
-/*
-
-#include <iostream>
 #include <algorithm>
 #include <string>
 
-int main()
+static std::string replaceStringAll(std::string str, const std::string& old, const std::string& new_s)
 {
-    std::string s = "C**";
-    const char x = '*';
-    const char y = '+';
-
-    std::replace(s.begin(), s.end(), x, y);
-    std::cout << s;
-
-    return 0;
+    if(!old.empty())
+    {
+        size_t pos = str.find(old);
+        while ((pos = str.find(old, pos)) != std::string::npos) {
+             str = str.replace(pos, old.length(), new_s);
+             pos += new_s.length();
+        }
+    }
+    return str;
 }
 
 
-*/
 
 Letter::Letter(GfxSystem &s, char letter)
     : Entity(s)
@@ -29,20 +26,49 @@ Letter::Letter(GfxSystem &s, char letter)
 
 }
 
+/*
+
+                if (validated && (word.size() > j) && (codage.size() > j))
+                {
+                      if (codage[j] == '0')
+                    {
+                        ImGui::PushStyleColor(ImGuiCol_Button, IM_COL32(58, 58, 60, 255)); // gris
+                    }
+                    else if (codage[j] == '1')
+                    {
+                        ImGui::PushStyleColor(ImGuiCol_Button, IM_COL32(211, 149, 42, 255)); // orange
+                    }
+                    else
+                    {
+                        ImGui::PushStyleColor(ImGuiCol_Button, IM_COL32(62, 170, 66, 255)); // vert
+                    }
+                }
+                else
+                {
+                    ImGui::PushStyleColor(ImGuiCol_Button, IM_COL32(0, 0, 0, 255));
+                }
+
+
+  */
+
+
+void Letter::SetBackgroundColor(SDL_Renderer *renderer, const std::string &backgroundColor, const std::string &foregroundColor, bool showPoints)
+{
+    std::string letterSvg = replaceStringAll(mLetterSvg, "{{BACKGROUND}}", backgroundColor);
+    letterSvg = replaceStringAll(letterSvg, "{{LETTER_COLOR}}", foregroundColor);
+    letterSvg = replaceStringAll(letterSvg, "{{POINTS_COLOR}}", showPoints ? foregroundColor : backgroundColor);
+
+    SetTexture(Image::RenderSVG(renderer, letterSvg.data(), 0.4));
+}
+
 void Letter::OnCreate(SDL_Renderer *renderer)
 {
-    if (GfxEngine::LoadFile("letters/letter_a.svg", mLetterSvg))
+    std::string fileName = "letters/letter_";
+    fileName.push_back(mLetter);
+    fileName += ".svg";
+    if (GfxEngine::LoadFile(fileName.c_str(), mLetterSvg))
     {
-       // std::string newCarColor = replaceStringAll(mDeuxCvSVG, "{{COLOR}}", "#a17321");
-
-        mTexture = Image::RenderSVG(renderer, mLetterSvg.data());
-        int w = 0;
-        int h = 0;
-        // get the width and height of the texture
-        if (SDL_QueryTexture(mTexture, NULL, NULL, &w, &h) == 0)
-        {
-            SetSize(w, h);
-        }
+        SetBackgroundColor(renderer, "#D3952A", "white", false);
     }
     else
     {
@@ -50,9 +76,3 @@ void Letter::OnCreate(SDL_Renderer *renderer)
     }
 }
 
-void Letter::Draw(SDL_Renderer *renderer)
-{
-    SDL_SetTextureBlendMode(mTexture, SDL_BLENDMODE_BLEND);
-    SDL_SetTextureColorMod(mTexture, 255, 255, 255);
-    SDL_RenderCopyEx(renderer, mTexture, NULL, &GetRect(), GetAngle(), NULL, SDL_FLIP_NONE);
-} 

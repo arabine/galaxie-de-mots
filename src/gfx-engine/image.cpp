@@ -10,66 +10,15 @@ Image::Image(GfxSystem &system, const std::string &path)
 
 Image::~Image()
 {
-    if (mTexture != nullptr)
-    {
-        SDL_DestroyTexture(mTexture);
-        mTexture = nullptr;
-    }
+
 }
 
 void Image::OnCreate(SDL_Renderer *renderer)
 {
     Entity::OnCreate(renderer);
-
-    std::cout << "Loading: " << mPath << std::endl;
-
-
-    mTexture = LoadImage(renderer, mPath.c_str());
-
-    if (mTexture == nullptr)
-    {
-        LOG_ERROR("[IMAGE] Problem loading texture: " + mPath);
-    }
-
-    int w = 0;
-    int h = 0;
-    // get the width and height of the texture
-    if (SDL_QueryTexture(mTexture, NULL, NULL, &w, &h) == 0)
-    {
-        SetSize(w, h);
-    }
+    SetTexture(LoadImage(renderer, mPath.c_str()));
 }
 
-void Image::Draw(SDL_Renderer *renderer)
-{
-    if (!IsVisible())
-    {
-        return;
-    }
-
-    SDL_Rect rect = GetRect();
-    rect.w *= GetScale().x;
-    rect.h *= GetScale().y;
-
-    SDL_SetTextureBlendMode(mTexture, SDL_BLENDMODE_BLEND);
-    SDL_SetTextureColorMod(mTexture, 255, 255, 255);
-    SDL_RenderCopyEx(renderer, mTexture, NULL, &rect, GetAngle(), NULL, SDL_FLIP_NONE);
-}
-
-void Image::DrawEx(SDL_Renderer *renderer, int x, int y)
-{
-    if (!IsVisible())
-    {
-        return;
-    }
-
-    SDL_Rect r = GetRect();
-    r.w *= GetScale().x;
-    r.h *= GetScale().y;
-    r.x = x;
-    r.y = y;
-    SDL_RenderCopyEx(renderer, mTexture, NULL, &r, GetAngle(), NULL, SDL_FLIP_NONE);
-}
 
 #define STB_IMAGE_IMPLEMENTATION
 #include "stb_image.h"

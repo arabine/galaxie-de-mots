@@ -40,12 +40,12 @@ set(PROJECT_SOURCES
     ${ROOT_DIR}/src/activities/motus/motus.cpp
     ${ROOT_DIR}/src/activities/motus/motus-gui.h
     ${ROOT_DIR}/src/activities/motus/motus-gui.cpp
+    ${ROOT_DIR}/src/activities/motus/motus-keyboard.h
+    ${ROOT_DIR}/src/activities/motus/motus-keyboard.cpp
 
     # ----------------  COMMON  ----------------
     ${ROOT_DIR}/src/letter.h
     ${ROOT_DIR}/src/letter.cpp
-    ${ROOT_DIR}/src/letter-tile.h
-    ${ROOT_DIR}/src/letter-tile.cpp
 )
 
 set(GALAXIE_INCLUDES
