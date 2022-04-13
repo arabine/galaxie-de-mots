@@ -42,7 +42,7 @@ void Letter::OnCreate(SDL_Renderer *renderer)
 
 void Letter::OnClick()
 {
-    if (mCallback)
+    if (mCallback && mIsActive)
     {
         mCallback();
     }

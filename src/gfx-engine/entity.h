@@ -33,9 +33,10 @@ struct Vector2
         , y(0)
     {}
 
-    Vector2(int p_x, int p_y)
+    Vector2(int p_x, int p_y, bool e)
         : x(p_x)
         , y(p_y)
+        , enable(e)
     {}
 
     void print()
@@ -44,6 +45,7 @@ struct Vector2
     }
 
     int x, y;
+    bool enable{false};
 };
 
 
@@ -66,16 +68,13 @@ public:
 
     virtual ~Entity();
 
-    virtual void OnCreate(SDL_Renderer *renderer) { (void) renderer; }
+    virtual void OnCreate(SDL_Renderer *renderer);
 
     // Manage user interaction (mouse, keyboard...)
-    virtual void ProcessEvent(const SDL_Event &event, const Vector2 &origin)
-    {
-        (void) event;
-    }
+    virtual void ProcessEvent(const SDL_Event &event, const Vector2 &origin);
 
     // Update state
-    virtual void Update(double deltaTime) { (void) deltaTime; }
+    virtual void Update(double deltaTime);
 
     // Draw to screen
     void Draw(SDL_Renderer *renderer, int x_offset = 0, int y_offset = 0);
@@ -136,24 +135,11 @@ public:
         mId = id;
     }
 
-    void SetTexture(SDL_Texture *texture)
-    {
-        // Before anything, delete old texture
-        if (mTexture != nullptr)
-        {
-            SDL_DestroyTexture(mTexture);
-            mTexture = nullptr;
-        }
-
-        mTexture = texture;
-        int w = 0;
-        int h = 0;
-        // get the width and height of the texture
-        if (SDL_QueryTexture(mTexture, NULL, NULL, &w, &h) == 0)
-        {
-            SetSize(w, h);
-        }
+    uint32_t GetId() const {
+        return mId;
     }
+
+    void SetTexture(SDL_Texture *texture);
 
     void SetZ(uint32_t z) {
         mZ = z;
@@ -174,7 +160,8 @@ private:
     uint32_t mId = 0;
     uint32_t mZ = 0; // pseudo Z value (order of drawing)
 
-    bool mVisible = true;
+    bool mVisible{true};
+    bool mCreated{false};
     SDL_Rect mRect;
     float mAngle = 0;
     Vector2f mScale = Vector2f(1, 1);

@@ -148,7 +148,7 @@ MotusGrid::MotusGrid(GfxSystem &s, Motus &motus)
     mEmptyTile->SetVisible(true);
     AddEntity(mEmptyTile);
 
-    std::vector<Vector2> clones;
+    mLetterPos = 0;
 
     int x = 0;
     int y = 0;
@@ -156,25 +156,46 @@ MotusGrid::MotusGrid(GfxSystem &s, Motus &motus)
     {
         for (int j = 0; j < mMotus.GetNbLetters(); j++)
         {
-            clones.push_back(Vector2(x, y));
+            mClones.push_back(Vector2(x, y, true));
             x += 90;
         }
         y += 90;
         x = 0;
     }
-    mEmptyTile->SetClones(clones);
+    mEmptyTile->SetClones(mClones);
 }
 
 void MotusGrid::DeleteLast()
 {
-    //
+    if (mLetterPos > 0)
+    {
+        mLetterPos--;
+        mClones[mLetterPos].enable = true;
+        mEmptyTile->SetClones(mClones);
+        uint32_t idToDelete = mGrid.back()->GetId();
+        mGrid.pop_back();
+        DeleteEntity(idToDelete);
+    }
 }
 
 void MotusGrid::AppendLetter(char c)
 {
+    if (mLetterPos < mClones.size())
+    {
+        // Disable empty tile
+        mClones[mLetterPos].enable = false;
+        mEmptyTile->SetClones(mClones);
 
+        // On va maintenant créer une tile de lettre
+        auto t = std::make_shared<Letter>(GetSystem(), std::string("letters/letter_") + c + std::string(".svg"), TILE_SIZE, [] {});
+        t->SetActive(false);
+        t->SetVisible(true);
+        t->SetPos(mClones[mLetterPos].x, mClones[mLetterPos].y); // on place la tile à la même place que la tile vide
+        AddEntity(t);
+        mGrid.push_back(t);
 
-
+        mLetterPos++;
+    }
 }
 
 void MotusGrid::ShowMessage(const std::string &message)

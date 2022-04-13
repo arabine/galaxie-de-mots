@@ -93,6 +93,7 @@ MotusKeyboard::MotusKeyboard(GfxSystem &s, Motus &motus)
                 mMotus.AppendLetter(key);
             });
             l->SetVisible(true);
+            l->SetActive(true);
             l->SetPos(x, y);
             AddEntity(l);
 

@@ -102,13 +102,16 @@ public:
         return id;
     }
 
+    void DeleteEntity(uint32_t id) {
+        mEntities.remove_if([id](const std::shared_ptr<Entity> &e){ return e->GetId() == id; });
+    }
+
     // Sort according to Z value of each entity
     void Sort() {
-        std::sort(mEntities.begin(), mEntities.end(), [](const std::shared_ptr<Entity> &a, const std::shared_ptr<Entity> &b) {
+        mEntities.sort([](const std::shared_ptr<Entity> &a, const std::shared_ptr<Entity> &b) {
             return a->GetZ() < b->GetZ();
         });
     }
-
 
     void SetOrigin(int x, int y)
     {
@@ -122,7 +125,7 @@ private:
     GfxSystem &mSystem;
     uint32_t mEntityIds = 0;
     Vector2 mOrigin;
-    std::vector<std::shared_ptr<Entity>> mEntities;
+    std::list<std::shared_ptr<Entity>> mEntities;
 };
 
 

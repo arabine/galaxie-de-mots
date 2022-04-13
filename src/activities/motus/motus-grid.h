@@ -27,6 +27,8 @@ private:
     Timer<std::chrono::milliseconds, std::chrono::steady_clock> mTimer;
 
     std::shared_ptr<Letter> mEmptyTile;
+    std::vector<Vector2> mClones;
+    int mLetterPos;
 
     std::vector<std::shared_ptr<Letter>> mGrid;
 };

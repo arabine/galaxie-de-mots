@@ -18,8 +18,26 @@ Entity::~Entity()
     }
 }
 
+void Entity::OnCreate(SDL_Renderer *renderer)
+{
+    (void) renderer;
+    mCreated = true;
+}
+
+void Entity::ProcessEvent(const SDL_Event &event, const Vector2 &origin)
+{
+    (void) event;
+}
+
+void Entity::Update(double deltaTime) { (void) deltaTime; }
+
 void Entity::Draw(SDL_Renderer *renderer, int x_offset, int y_offset)
 {
+    if (!mCreated)
+    {
+        OnCreate(renderer);
+    }
+
     if (IsVisible() && (mTexture != nullptr))
     {
         if (mClones.size() == 0)
@@ -35,15 +53,37 @@ void Entity::Draw(SDL_Renderer *renderer, int x_offset, int y_offset)
         {
             for (const auto & v : mClones)
             {
-                SDL_Rect r = GetRect();
-                r.w *= GetScale().x;
-                r.h *= GetScale().y;
-                r.x = v.x + x_offset;
-                r.y = v.y + y_offset;
-                Render(renderer, r);
+                if (v.enable)
+                {
+                    SDL_Rect r = GetRect();
+                    r.w *= GetScale().x;
+                    r.h *= GetScale().y;
+                    r.x = v.x + x_offset;
+                    r.y = v.y + y_offset;
+                    Render(renderer, r);
+                }
             }
         }
 
+    }
+}
+
+void Entity::SetTexture(SDL_Texture *texture)
+{
+    // Before anything, delete old texture
+    if (mTexture != nullptr)
+    {
+        SDL_DestroyTexture(mTexture);
+        mTexture = nullptr;
+    }
+
+    mTexture = texture;
+    int w = 0;
+    int h = 0;
+    // get the width and height of the texture
+    if (SDL_QueryTexture(mTexture, NULL, NULL, &w, &h) == 0)
+    {
+        SetSize(w, h);
     }
 }
 
