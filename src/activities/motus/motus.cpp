@@ -41,7 +41,8 @@ class UniformRandomInt
 
 
 
-Motus::Motus()
+Motus::Motus(IEvent &event)
+    : mEvent(event)
 {
     mCurrentWord = "TIERS";
 }
@@ -150,6 +151,8 @@ void Motus::AppendLetter(char c)
     {
         mTries.at(mCurrentTryIndex)[mCurrentLetterCounter] = c;
         mCurrentLetterCounter++;
+
+        mEvent.AppendLetter(c);
     }
 }
 
@@ -159,10 +162,12 @@ void Motus::RemoveLast()
     {
         mTries.at(mCurrentTryIndex)[mCurrentLetterCounter - 1] = ' ';
         mCurrentLetterCounter--;
+
+        mEvent.RemoveLast();
     }
 }
 
-bool Motus::IsSubmitValid(std::string &message) const
+bool Motus::IsSubmitValid() const
 {
     bool valid = true;
     // Le mot de doit pas contenir d'espace
@@ -171,7 +176,7 @@ bool Motus::IsSubmitValid(std::string &message) const
         if (mTries.at(mCurrentTryIndex)[i] == ' ')
         {
             valid = false;
-            message = "Veuillez entrer un mot de 5 lettres";
+            mEvent.Message("Veuillez entrer un mot de 5 lettres");
             break;
         }
     }
@@ -191,18 +196,18 @@ bool Motus::IsSubmitValid(std::string &message) const
         if (!found)
         {
             valid = false;
-            message = "Le mot n'existe pas dans le dictionnaire";
+            mEvent.Message("Le mot n'existe pas dans le dictionnaire");
         }
     }
 
     return valid;
 }
 
-void Motus::Submit(std::string &message)
+void Motus::Submit()
 {
     if (mCurrentTryIndex < GetNbLines())
     {
-        if (IsSubmitValid(message))
+        if (IsSubmitValid())
         {
             mValidated[mCurrentTryIndex] = true;
 

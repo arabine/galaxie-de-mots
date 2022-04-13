@@ -3,7 +3,7 @@
 
 #include <iostream>
 #include <string>
-
+#include <vector>
 #include "SDL.h"
 
 class GfxSystem;
@@ -69,7 +69,7 @@ public:
     virtual void OnCreate(SDL_Renderer *renderer) { (void) renderer; }
 
     // Manage user interaction (mouse, keyboard...)
-    virtual void ProcessEvent(const SDL_Event &event)
+    virtual void ProcessEvent(const SDL_Event &event, const Vector2 &origin)
     {
         (void) event;
     }
@@ -138,6 +138,13 @@ public:
 
     void SetTexture(SDL_Texture *texture)
     {
+        // Before anything, delete old texture
+        if (mTexture != nullptr)
+        {
+            SDL_DestroyTexture(mTexture);
+            mTexture = nullptr;
+        }
+
         mTexture = texture;
         int w = 0;
         int h = 0;
@@ -156,6 +163,8 @@ public:
 
     GfxSystem &GetSystem() { return mSystem; }
 
+    void SetClones(const std::vector<Vector2> &clones);
+
 private:
     GfxSystem &mSystem; // keep it first please
 
@@ -169,6 +178,10 @@ private:
     SDL_Rect mRect;
     float mAngle = 0;
     Vector2f mScale = Vector2f(1, 1);
+
+    std::vector<Vector2> mClones;
+
+    void Render(SDL_Renderer *renderer, const SDL_Rect &pos);
 };
 
 #endif // ENTITY_H

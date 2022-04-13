@@ -2,62 +2,50 @@
 #include "motus-keyboard.h"
 
 #include "letter.h"
+#include "button.h"
 
-//  mMotus.Submit(mMessage);
-class Enter : public Entity
+static const double DEFAULT_SCALE = 0.4;
+
+class Enter : public Button
 {
 public:
     Enter(GfxSystem &s, Motus &motus)
-        : Entity(s)
+        : Button(s, "letters/enter.svg")
         , mMotus(motus)
     {
 
     }
-    virtual void OnCreate(SDL_Renderer *renderer) override
+
+    virtual void OnClick()
     {
-        std::string fileName = "letters/enter.svg";
-        if (GfxEngine::LoadFile(fileName.c_str(), mSvg))
-        {
-            SetTexture(Image::RenderSVG(renderer, mSvg.data(), 0.4));
-        }
-        else
-        {
-            LOG_ERROR("[ENTER] Cannot load image");
-        }
+        LOG_DEBUG("Enter clicked");
+        mMotus.Submit();
     }
 
 private:
     Motus &mMotus;
-    std::string mSvg;
 };
 
-// mMotus.RemoveLast();
-class Backspace : public Entity
+
+class Backspace : public Button
 {
 public:
     Backspace(GfxSystem &s, Motus &motus)
-        : Entity(s)
+        : Button(s, "letters/backspace.svg")
         , mMotus(motus)
     {
 
     }
-    virtual void OnCreate(SDL_Renderer *renderer) override
-    {
-        std::string fileName = "letters/backspace.svg";
-        if (GfxEngine::LoadFile(fileName.c_str(), mSvg))
-        {
-            SetTexture(Image::RenderSVG(renderer, mSvg.data(), 0.4));
-        }
-        else
-        {
-            LOG_ERROR("[ENTER] Cannot load image");
-        }
-    }
 
+    virtual void OnClick()
+    {
+        LOG_DEBUG("Backspace clicked");
+        mMotus.RemoveLast();
+    }
 private:
     Motus &mMotus;
-    std::string mSvg;
 };
+
 
 MotusKeyboard::MotusKeyboard(GfxSystem &s, Motus &motus)
     : Group(s)
@@ -86,8 +74,7 @@ MotusKeyboard::MotusKeyboard(GfxSystem &s, Motus &motus)
             l->SetPos(x, y);
             AddEntity(l);
 
-            x += 2* offset;
-
+            x += 2 * offset;
         }
         else if (keyboard[i] == '<')
         {
@@ -100,7 +87,11 @@ MotusKeyboard::MotusKeyboard(GfxSystem &s, Motus &motus)
         }
         else
         {
-            auto l = std::make_shared<Letter>(GetSystem(), keyboard[i]);
+            char key = keyboard[i];
+            auto l = std::make_shared<Letter>(GetSystem(), std::string("letters/letter_") + key + std::string(".svg"), DEFAULT_SCALE, [key, this] {
+                LOG_DEBUG(std::string("Letter ") + key + std::string(" CLICKED"));
+                mMotus.AppendLetter(key);
+            });
             l->SetVisible(true);
             l->SetPos(x, y);
             AddEntity(l);
@@ -111,8 +102,6 @@ MotusKeyboard::MotusKeyboard(GfxSystem &s, Motus &motus)
         }
     }
 
-    SetOrigin(50, 200);
+    SetOrigin(50, GetSystem().GetWindowSize().h - 200);
 }
-
-
 

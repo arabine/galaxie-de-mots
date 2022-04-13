@@ -12,7 +12,6 @@ public:
 
 private:
     Motus &mMotus;
-    std::string mMessage;
 
     std::list<std::shared_ptr<Letter>> mLetters;
 };

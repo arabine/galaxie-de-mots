@@ -74,7 +74,7 @@ public:
     {
         for (auto & e : mEntities)
         {
-            e->ProcessEvent(event);
+            e->ProcessEvent(event, mOrigin);
         }
     };
 
@@ -168,6 +168,14 @@ public:
     // Can be called many times in a typical game cycle.
     virtual void OnDeactivate() {};
 
+    // The below functions can be overridden as necessary in our scenes.
+    virtual void ProcessEvent(const SDL_Event &event)
+    {
+        for (auto & g : mGroups)
+        {
+            g->ProcessEvent(event);
+        }
+    };
 
     virtual void Draw(SDL_Renderer *renderer)
     {
@@ -245,11 +253,11 @@ public:
     // Platform independant file loading
     static bool LoadFile(const char *filename, std::string &fileData);
 private:
-    uint32_t mWidth = 1152;
-    uint32_t mHeight = 648;
+    uint32_t mWidth = 648;
+    uint32_t mHeight = 960;
 
-    const uint32_t mMinimumWidth = 1152;
-    const uint32_t mMinimumHeight = 648;
+    const uint32_t mMinimumWidth = 648;
+    const uint32_t mMinimumHeight = 960;
 
     Uint64 currentTick = 0;
     Uint64 lastTick = 0;

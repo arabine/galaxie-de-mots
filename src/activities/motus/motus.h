@@ -4,11 +4,21 @@
 #include <string>
 #include <vector>
 #include <random>
+#include <functional>
 
 class Motus
 {
 public:
-    Motus();
+    class IEvent
+    {
+     public:
+        virtual ~IEvent() {}
+        virtual void AppendLetter(char c) = 0;
+        virtual void RemoveLast() = 0;
+        virtual void Message(const std::string &message) = 0;
+    };
+
+    Motus(IEvent &event);
 
     void Initialize();
 
@@ -37,9 +47,10 @@ public:
 
     void AppendLetter(char c);
     void RemoveLast();
-    void Submit(std::string &message);
+    void Submit();
 
 private:
+    IEvent &mEvent;
     std::string mCurrentWord;
     uint32_t mCurrentTryIndex;
     uint32_t mCurrentLetterCounter;
@@ -48,7 +59,7 @@ private:
 
     std::vector<std::string> mTries;
     std::vector<bool> mValidated;
-    bool IsSubmitValid(std::string &message) const;
+    bool IsSubmitValid() const;
     std::string GetNewWordToGuess();
 };
 
