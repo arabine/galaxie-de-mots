@@ -12,11 +12,10 @@ class MotusGrid : public Group
 public:
     MotusGrid(GfxSystem &s, Motus &motus);
 
-    virtual void Draw(SDL_Renderer *renderer);
-
     void DeleteLast();
     void AppendLetter(char c);
     void ShowMessage(const std::string &message);
+    void Validate(const std::string &codage);
 
 private:
     Motus &mMotus;

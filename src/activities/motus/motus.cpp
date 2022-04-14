@@ -82,27 +82,36 @@ void Motus::Initialize()
 std::string Motus::TestWord(const std::string &word) const
 {
     std::string code;
+    code.reserve(word.size());
+    code.assign(word.size(), '0');
 
-    int idx = 0;
-    for (auto &c : word)
+    std::string wordToGuess = mCurrentWord; // copie en local car on va la modifier
+
+    // Une première boucle est nécessaire pour tester les lettres bonnes et bien placées
+    for (int i = 0; i < word.size(); i++)
     {
-        if (mCurrentWord.find(c) != std::string::npos )
+        if (mCurrentWord[i] == word[i])
         {
-            // la lettre existe
-            if (mCurrentWord[idx] == c)
+            // la lettre existe et bien placée
+            code[i] = '2';
+            // On retire la lettre du mot à deviner
+            // Comme ça les mal placées seront bien déterminées en cas de même lettre multiple dans le mot
+            wordToGuess[i] = ' ';
+        }
+    }
+
+    // La deuxième boucle indique les lettres mal placées
+    for (int i = 0; i < word.size(); i++)
+    {
+        if (code[i] != '2')
+        {
+            if (wordToGuess.find(word[i]) != std::string::npos )
             {
-                code.push_back('2');
-            }
-            else
-            {
-                code.push_back('1');
+                // La lettre existe quelque part ailleurs dans le mot
+                code[i] = '1';
+                wordToGuess[i] = ' ';
             }
         }
-        else
-        {
-            code.push_back('0');
-        }
-        idx++;
     }
 
     return code;
@@ -147,9 +156,9 @@ uint32_t Motus::GetNbLetters() const
 
 void Motus::AppendLetter(char c)
 {
-    if ((mCurrentLetterCounter < GetNbLetters()) && (mCurrentTryIndex < GetNbLines()))
+    if ((mCurrentLetterCounter < GetNbLetters()) && (mCurrentTryIndex < GetNbLines()) && !mWin)
     {
-        mTries.at(mCurrentTryIndex)[mCurrentLetterCounter] = c;
+        mTries.at(mCurrentTryIndex)[mCurrentLetterCounter] = toupper(c);
         mCurrentLetterCounter++;
 
         mEvent.AppendLetter(c);
@@ -170,10 +179,12 @@ void Motus::RemoveLast()
 bool Motus::IsSubmitValid() const
 {
     bool valid = true;
+    std::string w = mTries.at(mCurrentTryIndex);
+
     // Le mot de doit pas contenir d'espace
-    for (int i = 0; i < mTries.at(mCurrentTryIndex).size(); i++)
+    for (int i = 0; i < w.size(); i++)
     {
-        if (mTries.at(mCurrentTryIndex)[i] == ' ')
+        if (w[i] == ' ')
         {
             valid = false;
             mEvent.Message("Veuillez entrer un mot de 5 lettres");
@@ -187,7 +198,7 @@ bool Motus::IsSubmitValid() const
         bool found = false;
         for (int i = 0; i < nbWords5Letters; i++)
         {
-            if (lexique_5_letters[i].word == mTries.at(mCurrentTryIndex))
+            if (lexique_5_letters[i].word == w)
             {
                 found = true;
                 break;
@@ -196,7 +207,7 @@ bool Motus::IsSubmitValid() const
         if (!found)
         {
             valid = false;
-            mEvent.Message("Le mot n'existe pas dans le dictionnaire");
+            mEvent.Message("Le mot " + w + " n'existe pas dans le dictionnaire");
         }
     }
 
@@ -224,7 +235,9 @@ void Motus::Submit()
             }
 
             mWin = counter == GetNbLetters();
+            mEvent.Validate(codage);
 
+            // Prepare next line (or end of game)
             mCurrentTryIndex++;
             mCurrentLetterCounter = 0;
             mIsEnd = mCurrentTryIndex == GetNbLines();

@@ -10,6 +10,8 @@ MotusGui::MotusGui(GfxSystem &s)
 {
     mMotus.Initialize();
 
+    LOG_DEBUG("Word to guess: " + mMotus.GetWord());
+
     mTextWin = "Youpiii tu as gagné. Une autre partie ?";
     mTextLost = "Hooo mince alors tu as perdu :(\nLe mot était : ";
 
@@ -33,5 +35,10 @@ void MotusGui::RemoveLast()
 void MotusGui::Message(const std::string &message)
 {
     mGrid->ShowMessage(message);
+}
+
+void MotusGui::Validate(const std::string &codage)
+{
+    mGrid->Validate(codage);
 }
 

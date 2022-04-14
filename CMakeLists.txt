@@ -48,7 +48,6 @@ set(PROJECT_SOURCES
     # ----------------  COMMON  ----------------
     ${ROOT_DIR}/src/letter.h
     ${ROOT_DIR}/src/letter.cpp
-    ${ROOT_DIR}/src/button.h
     ${ROOT_DIR}/src/common.h
     ${ROOT_DIR}/src/common.cpp
 )

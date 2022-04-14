@@ -1,16 +1,29 @@
 #ifndef IMAGE_H
 #define IMAGE_H
 
-#include "entity.h"
-
+#include "gfx-engine.h"
 
 class Image : public Entity
 {
 
 public:
-    Image(GfxSystem &system, const std::string &path);
+    Image(GfxSystem &system, const std::string &path, bool isSvg);
 
     virtual ~Image();
+
+    virtual void OnClick() {}
+    virtual std::string UpdateSvg(const std::string &svg) { return svg; } // FIXME: avoid string duplication in memory
+
+    bool HasClicked(const SDL_Point &pos, const Vector2 &origin) const;
+
+    std::string_view FileName() const
+    {
+        return std::string_view(mFileName);
+    }
+
+    void SetSvgScale(float scale) { mSvgScale = scale; }
+
+    virtual void ProcessEvent(const SDL_Event &event, const Vector2 &origin) override;
 
     virtual void OnCreate(SDL_Renderer *renderer) override;
 
@@ -24,9 +37,11 @@ public:
     static SDL_Texture *LoadImage(SDL_Renderer *renderer, const char *filename);
 
 private:
-    std::string mPath;
-
-    bool mHighlight = false;
+    std::string mFileName;
+    std::string mSvg;
+    bool mHighlight{false};
+    bool mIsSvg{false};
+    float mSvgScale{1.0};
 };
 
 

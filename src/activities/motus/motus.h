@@ -15,6 +15,7 @@ public:
         virtual ~IEvent() {}
         virtual void AppendLetter(char c) = 0;
         virtual void RemoveLast() = 0;
+        virtual void Validate(const std::string &codage) = 0;
         virtual void Message(const std::string &message) = 0;
     };
 

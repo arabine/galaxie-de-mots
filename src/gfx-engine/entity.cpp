@@ -1,4 +1,5 @@
 #include "entity.h"
+#include "xlog.h"
 
 Entity::Entity(GfxSystem &s)
     : mSystem(s)
@@ -15,6 +16,7 @@ Entity::~Entity()
     {
         SDL_DestroyTexture(mTexture);
         mTexture = nullptr;
+        LOG_DEBUG("Destroyed entity and texture");
     }
 }
 

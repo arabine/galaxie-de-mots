@@ -2,18 +2,17 @@
 #include "motus-keyboard.h"
 
 #include "letter.h"
-#include "button.h"
 
 static const double DEFAULT_SCALE = 0.4;
 
-class Enter : public Button
+class Enter : public Image
 {
 public:
     Enter(GfxSystem &s, Motus &motus)
-        : Button(s, "letters/enter.svg")
+        : Image(s, "letters/enter.svg", true)
         , mMotus(motus)
     {
-
+        SetSvgScale(DEFAULT_SCALE);
     }
 
     virtual void OnClick()
@@ -27,14 +26,14 @@ private:
 };
 
 
-class Backspace : public Button
+class Backspace : public Image
 {
 public:
     Backspace(GfxSystem &s, Motus &motus)
-        : Button(s, "letters/backspace.svg")
+        : Image(s, "letters/backspace.svg", true)
         , mMotus(motus)
     {
-
+        SetSvgScale(DEFAULT_SCALE);
     }
 
     virtual void OnClick()

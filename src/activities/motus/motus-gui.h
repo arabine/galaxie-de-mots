@@ -14,7 +14,7 @@ public:
     virtual void AppendLetter(char c) override;
     virtual void RemoveLast() override;
     virtual void Message(const std::string &message) override;
-
+    virtual void Validate(const std::string &codage) override;
 private:
     Motus mMotus;
 

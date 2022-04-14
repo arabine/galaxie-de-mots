@@ -149,6 +149,8 @@ public:
 
     GfxSystem &GetSystem() { return mSystem; }
 
+    void Rebuild() { mCreated = false; }
+
     void SetClones(const std::vector<Vector2> &clones);
 
 private:

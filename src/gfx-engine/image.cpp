@@ -2,9 +2,10 @@
 #include "xlog.h"
 #include "gfx-engine.h"
 
-Image::Image(GfxSystem &system, const std::string &path)
+Image::Image(GfxSystem &system, const std::string &path, bool isSvg)
     : Entity(system)
-    , mPath(path)
+    , mFileName(path)
+    , mIsSvg(isSvg)
 {
 }
 
@@ -13,10 +14,50 @@ Image::~Image()
 
 }
 
+bool Image::HasClicked(const SDL_Point &pos, const Vector2 &origin) const
+{
+    SDL_Rect rect = GetRect();
+    rect.x += origin.x;
+    rect.y += origin.y;
+    return SDL_PointInRect(&pos, &rect);
+}
+
+void Image::ProcessEvent(const SDL_Event &event, const Vector2 &origin)
+{
+    SDL_Point mousePos;
+
+    if (event.type == SDL_MOUSEBUTTONUP)
+    {
+        mousePos.x = event.button.x;
+        mousePos.y = event.button.y;
+
+        if (HasClicked(mousePos, origin))
+        {
+            OnClick();
+        }
+    }
+}
+
 void Image::OnCreate(SDL_Renderer *renderer)
 {
     Entity::OnCreate(renderer);
-    SetTexture(LoadImage(renderer, mPath.c_str()));
+
+    if (mIsSvg)
+    {
+        if (GfxEngine::LoadFile(mFileName.c_str(), mSvg))
+        {
+            std::string svg = UpdateSvg(mSvg);
+            SetTexture(Image::RenderSVG(renderer, svg.data(), mSvgScale));
+        }
+        else
+        {
+            LOG_ERROR("[IMAGE] Cannot load SVG file");
+        }
+    }
+    else
+    {
+        SetTexture(LoadImage(renderer, mFileName.c_str()));
+    }
 }
 
 
@@ -89,8 +130,6 @@ SDL_Texture *Image::RenderSVG(SDL_Renderer *renderer, const std::string &svgData
 
     return SDL_CreateTextureFromSurface(renderer, surface);
 }
-
-
 
 SDL_Texture *Image::LoadImage(SDL_Renderer *renderer, const char* filename)
 {
