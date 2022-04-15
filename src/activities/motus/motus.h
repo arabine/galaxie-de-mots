@@ -17,6 +17,7 @@ public:
         virtual void RemoveLast() = 0;
         virtual void Validate(const std::string &codage) = 0;
         virtual void Message(const std::string &message) = 0;
+        virtual void InitializeGame() = 0;
     };
 
     Motus(IEvent &event);
@@ -57,6 +58,9 @@ private:
     uint32_t mCurrentLetterCounter;
     bool mWin;
     bool mIsEnd;
+
+    std::string mTextWin{"Youpiii tu as gagné. Une autre partie ?"};
+    std::string mTextLost{"Hooo mince alors tu as perdu :(\nLe mot était : "};
 
     std::vector<std::string> mTries;
     std::vector<bool> mValidated;

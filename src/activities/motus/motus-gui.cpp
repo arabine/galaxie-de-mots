@@ -8,18 +8,16 @@ MotusGui::MotusGui(GfxSystem &s)
     : Scene(s)
     , mMotus(*this)
 {
-    mMotus.Initialize();
-
-    LOG_DEBUG("Word to guess: " + mMotus.GetWord());
-
-    mTextWin = "Youpiii tu as gagné. Une autre partie ?";
-    mTextLost = "Hooo mince alors tu as perdu :(\nLe mot était : ";
-
     mKeyboard = std::make_shared<MotusKeyboard>(GetSystem(), mMotus);
     AddGroup(mKeyboard);
 
     mGrid = std::make_shared<MotusGrid>(GetSystem(), mMotus);
     AddGroup(mGrid);
+}
+
+void MotusGui::Initialize()
+{
+    mMotus.Initialize();
 }
 
 void MotusGui::AppendLetter(char c)
@@ -40,5 +38,11 @@ void MotusGui::Message(const std::string &message)
 void MotusGui::Validate(const std::string &codage)
 {
     mGrid->Validate(codage);
+}
+
+void MotusGui::InitializeGame()
+{
+    LOG_DEBUG("Word to guess: " + mMotus.GetWord());
+    mGrid->Initialize();
 }
 

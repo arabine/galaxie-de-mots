@@ -17,7 +17,7 @@ public:
 
     virtual void OnClick()
     {
-        LOG_DEBUG("Enter clicked");
+//        LOG_DEBUG("Enter clicked");
         mMotus.Submit();
     }
 
@@ -38,7 +38,7 @@ public:
 
     virtual void OnClick()
     {
-        LOG_DEBUG("Backspace clicked");
+//        LOG_DEBUG("Backspace clicked");
         mMotus.RemoveLast();
     }
 private:
@@ -88,7 +88,7 @@ MotusKeyboard::MotusKeyboard(GfxSystem &s, Motus &motus)
         {
             char key = keyboard[i];
             auto l = std::make_shared<Letter>(GetSystem(), std::string("letters/letter_") + key + std::string(".svg"), DEFAULT_SCALE, [key, this] {
-                LOG_DEBUG(std::string("Letter ") + key + std::string(" CLICKED"));
+           //     LOG_DEBUG(std::string("Letter ") + key + std::string(" CLICKED"));
                 mMotus.AppendLetter(key);
             });
             l->SetVisible(true);

@@ -77,6 +77,8 @@ void Motus::Initialize()
     mCurrentLetterCounter = 0;
     mWin = false;
     mIsEnd = false;
+
+    mEvent.InitializeGame();
 }
 
 std::string Motus::TestWord(const std::string &word) const
@@ -234,13 +236,35 @@ void Motus::Submit()
                 }
             }
 
-            mWin = counter == GetNbLetters();
             mEvent.Validate(codage);
 
             // Prepare next line (or end of game)
             mCurrentTryIndex++;
             mCurrentLetterCounter = 0;
-            mIsEnd = mCurrentTryIndex == GetNbLines();
+
+            // Condition de victoire ou d'échec
+            if (counter == GetNbLetters())
+            {
+                mIsEnd = true;
+                mWin = true;
+            }
+            else if (mCurrentTryIndex == GetNbLines())
+            {
+                mIsEnd = true;
+                mWin = false;
+            }
+
+            if (mIsEnd)
+            {
+                if (mWin)
+                {
+                    mEvent.Message(mTextWin);
+                }
+                else
+                {
+                    mEvent.Message(mTextLost + mCurrentWord);
+                }
+            }
         }
     }
 }

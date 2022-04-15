@@ -1,21 +1,25 @@
  
 #include "motus-grid.h"
-/*
-void MotusGui::DrawInfoWindow()
+
+void MotusGrid::DrawInfoWindow()
 {
     static bool started = false;
 
-    if (!started)
+    // On ne cache pas la fenêtre automatiquement lorsque le jeu est terminé
+    if (!mMotus.IsEnd())
     {
-        started = true;
-        mTimer.tick();
-    }
-    else
-    {
-        mTimer.tock();
-        if (mTimer.duration().count() >= 2000) {
-            started = false;
-      //      mMessage.clear();
+        if (!started)
+        {
+            started = true;
+            mTimer.tick();
+        }
+        else
+        {
+            mTimer.tock();
+            if (mTimer.duration().count() >= 2000) {
+                started = false;
+                mMessage.clear();
+            }
         }
     }
 
@@ -26,54 +30,40 @@ void MotusGui::DrawInfoWindow()
             ImGuiWindowFlags_NoNav |
             ImGuiWindowFlags_NoMove;
 
-    ImGui::SetNextWindowBgAlpha(0.0f); // Transparent background
-    ImGui::SetNextWindowPos(ImVec2((mWidth - 400) / 2, 50), ImGuiCond_Always);
+    ImGui::SetNextWindowBgAlpha(1.0f); // Transparent background
+    ImGui::SetNextWindowPos(ImVec2(50, 50), ImGuiCond_Always);
     //        ImGui::SetWindowFontScale(2.0);
     ImGui::SetNextWindowSize(ImVec2(400, 80));
 
     ImGui::GetStyle().FrameBorderSize = 2;
     if (ImGui::Begin("Info", NULL, window_flags))
     {
-
+        ImGui::Text("%s", mMessage.c_str());
         if (mMotus.IsEnd())
         {
-
-            if (mMotus.IsWin())
-            {
-                ImGui::Text("%s", mTextWin.c_str());
-            }
-            else
-            {
-                ImGui::Text("%s%s", mTextLost.c_str(), mMotus.GetWord().c_str());
-            }
-
             if (ImGui::Button("Rejouer ?"))
             {
+                started = false;
+                mMessage.clear();
                 mMotus.Initialize();
             }
-        }
-        else
-        {
-          //  ImGui::Text("%s", mMessage.c_str());
         }
     }
     ImGui::End();
 }
-*/
+
 static const double TILE_SIZE = 0.8;
 
 MotusGrid::MotusGrid(GfxSystem &s, Motus &motus)
     : Group(s)
     , mMotus(motus)
 {
-    SetOrigin(50, 100);
+    SetOrigin(100, 200);
 
     mEmptyTile = std::make_shared<Letter>(GetSystem(), "letters/empty_tile.svg", TILE_SIZE, [] {});
     mEmptyTile->SetActive(false);
     mEmptyTile->SetVisible(true);
     AddEntity(mEmptyTile);
-
-    mLetterPos = 0;
 
     int x = 0;
     int y = 0;
@@ -87,7 +77,34 @@ MotusGrid::MotusGrid(GfxSystem &s, Motus &motus)
         y += 90;
         x = 0;
     }
+
+    Initialize();
+}
+
+void MotusGrid::Draw(SDL_Renderer *renderer)
+{
+    Group::Draw(renderer);
+
+    if (mMessage.size())
+    {
+        DrawInfoWindow();
+    }
+}
+
+void MotusGrid::Initialize()
+{
+    for (int i = 0; i < mClones.size(); i++)
+    {
+        mClones[i].enable = true;
+    }
     mEmptyTile->SetClones(mClones);
+
+    for (const auto &c : mGrid)
+    {
+        DeleteEntity(c->GetId());
+    }
+    mGrid.clear();
+    mLetterPos = 0;
 }
 
 void MotusGrid::DeleteLast()
@@ -124,7 +141,7 @@ void MotusGrid::AppendLetter(char c)
 
 void MotusGrid::ShowMessage(const std::string &message)
 {
-    LOG_DEBUG(message);
+    mMessage = message;
 }
 
 void MotusGrid::Validate(const std::string &codage)

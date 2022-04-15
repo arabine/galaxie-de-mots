@@ -12,6 +12,9 @@ class MotusGrid : public Group
 public:
     MotusGrid(GfxSystem &s, Motus &motus);
 
+    virtual void Draw(SDL_Renderer *renderer) override;
+
+    void Initialize();
     void DeleteLast();
     void AppendLetter(char c);
     void ShowMessage(const std::string &message);
@@ -30,6 +33,7 @@ private:
     int mLetterPos;
 
     std::vector<std::shared_ptr<Letter>> mGrid;
+    void DrawInfoWindow();
 };
 
 #endif // MOTUS_GRID_H

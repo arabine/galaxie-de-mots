@@ -24,11 +24,12 @@ extern "C" int main(int argc, char *argv[])
         std::cout << "[INIT] Success" << std::endl;
 
         bool loop = true;
-        MotusGui motus(mGfx);
-
-        mGfx.AddScene(std::make_shared<MotusGui>(mGfx), SCENE_MOTUS);
+        auto motusScene = std::make_shared<MotusGui>(mGfx);
+        mGfx.AddScene(motusScene, SCENE_MOTUS);
         mGfx.SwitchSceneTo(SCENE_MOTUS); // First scene
         mGfx.Warmup();
+
+        motusScene->Initialize();
 
         while (loop)
         {

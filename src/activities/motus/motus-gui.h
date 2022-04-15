@@ -11,15 +11,17 @@ class MotusGui : public Scene, public Motus::IEvent
 public:
     MotusGui(GfxSystem &s);
 
+    void Initialize();
+
+private:
+    Motus mMotus;
+
+    // From Motus::IEvent
     virtual void AppendLetter(char c) override;
     virtual void RemoveLast() override;
     virtual void Message(const std::string &message) override;
     virtual void Validate(const std::string &codage) override;
-private:
-    Motus mMotus;
-
-    std::string mTextWin;
-    std::string mTextLost;
+    virtual void InitializeGame() override;
 
     std::shared_ptr<MotusKeyboard> mKeyboard;
     std::shared_ptr<MotusGrid> mGrid;
