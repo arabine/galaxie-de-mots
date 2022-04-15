@@ -41,7 +41,7 @@ class UniformRandomInt
 
 
 
-Motus::Motus(IEvent &event)
+Motus::Motus(IGameEvent &event)
     : mEvent(event)
 {
     mCurrentWord = "TIERS";
@@ -78,7 +78,7 @@ void Motus::Initialize()
     mWin = false;
     mIsEnd = false;
 
-    mEvent.InitializeGame();
+    mEvent.NewGame();
 }
 
 std::string Motus::TestWord(const std::string &word) const

@@ -1,6 +1,5 @@
 
-#include "motus-keyboard.h"
-
+#include "keyboard.h"
 #include "letter.h"
 
 static const double DEFAULT_SCALE = 0.4;
@@ -8,9 +7,9 @@ static const double DEFAULT_SCALE = 0.4;
 class Enter : public Image
 {
 public:
-    Enter(GfxSystem &s, Motus &motus)
+    Enter(GfxSystem &s, Keyboard::IKeyEvent &keyEvent)
         : Image(s, "letters/enter.svg", true)
-        , mMotus(motus)
+        , mKeyEvent(keyEvent)
     {
         SetSvgScale(DEFAULT_SCALE);
     }
@@ -18,20 +17,19 @@ public:
     virtual void OnClick()
     {
 //        LOG_DEBUG("Enter clicked");
-        mMotus.Submit();
+        mKeyEvent.EnterPressed();
     }
 
 private:
-    Motus &mMotus;
+    Keyboard::IKeyEvent &mKeyEvent;
 };
-
 
 class Backspace : public Image
 {
 public:
-    Backspace(GfxSystem &s, Motus &motus)
+    Backspace(GfxSystem &s, Keyboard::IKeyEvent &keyEvent)
         : Image(s, "letters/backspace.svg", true)
-        , mMotus(motus)
+        , mKeyEvent(keyEvent)
     {
         SetSvgScale(DEFAULT_SCALE);
     }
@@ -39,16 +37,16 @@ public:
     virtual void OnClick()
     {
 //        LOG_DEBUG("Backspace clicked");
-        mMotus.RemoveLast();
+        mKeyEvent.BackspacePressed();
     }
 private:
-    Motus &mMotus;
+    Keyboard::IKeyEvent &mKeyEvent;
 };
 
 
-MotusKeyboard::MotusKeyboard(GfxSystem &s, Motus &motus)
+Keyboard::Keyboard(GfxSystem &s, IKeyEvent &keyEvent)
     : Group(s)
-    , mMotus(motus)
+    , mKeyEvent(keyEvent)
 {
     static const char keyboard[] = { 'a', 'z', 'e', 'r', 't', 'y','u', 'i', 'o', 'p', '\n',
                                      'q', 's', 'd', 'f', 'g', 'h', 'j', 'k', 'l', 'm', '\n',
@@ -68,7 +66,7 @@ MotusKeyboard::MotusKeyboard(GfxSystem &s, Motus &motus)
         }
         else if (keyboard[i] == '?')
         {
-            auto l = std::make_shared<Enter>(GetSystem(), mMotus);
+            auto l = std::make_shared<Enter>(GetSystem(), mKeyEvent);
             l->SetVisible(true);
             l->SetPos(x, y);
             AddEntity(l);
@@ -77,7 +75,7 @@ MotusKeyboard::MotusKeyboard(GfxSystem &s, Motus &motus)
         }
         else if (keyboard[i] == '<')
         {
-            auto l = std::make_shared<Backspace>(GetSystem(), mMotus);
+            auto l = std::make_shared<Backspace>(GetSystem(), mKeyEvent);
             l->SetVisible(true);
             l->SetPos(x, y);
             AddEntity(l);
@@ -89,7 +87,7 @@ MotusKeyboard::MotusKeyboard(GfxSystem &s, Motus &motus)
             char key = keyboard[i];
             auto l = std::make_shared<Letter>(GetSystem(), std::string("letters/letter_") + key + std::string(".svg"), DEFAULT_SCALE, [key, this] {
            //     LOG_DEBUG(std::string("Letter ") + key + std::string(" CLICKED"));
-                mMotus.AppendLetter(key);
+                mKeyEvent.KeyPressed(key);
             });
             l->SetVisible(true);
             l->SetActive(true);

@@ -3,28 +3,42 @@
 
 #include "motus.h"
 #include "gfx-engine.h"
-#include "motus-keyboard.h"
+#include "keyboard.h"
 #include "motus-grid.h"
 
-class MotusGui : public Scene, public Motus::IEvent
+class MotusGui : public Scene, public Motus::IGameEvent, public Keyboard::IKeyEvent
 {
 public:
     MotusGui(GfxSystem &s);
 
     void Initialize();
 
+    virtual void Draw(SDL_Renderer *renderer) override;
+
 private:
     Motus mMotus;
+    std::shared_ptr<Keyboard> mKeyboard;
+    std::shared_ptr<MotusGrid> mGrid;
+
+    std::string mMessage;
+
+    Timer<std::chrono::milliseconds, std::chrono::steady_clock> mTimer;
 
     // From Motus::IEvent
     virtual void AppendLetter(char c) override;
     virtual void RemoveLast() override;
     virtual void Message(const std::string &message) override;
     virtual void Validate(const std::string &codage) override;
-    virtual void InitializeGame() override;
+    virtual void NewGame() override;
 
-    std::shared_ptr<MotusKeyboard> mKeyboard;
-    std::shared_ptr<MotusGrid> mGrid;
+    // From Keyboard::IKeyEvent
+    virtual void KeyPressed(char c) override;
+    virtual void EnterPressed() override;
+    virtual void BackspacePressed() override;
+
+    // -------------------  PRIVATE
+    void DrawInfoWindow();
+
 };
 
 

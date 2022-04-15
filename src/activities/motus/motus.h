@@ -9,18 +9,18 @@
 class Motus
 {
 public:
-    class IEvent
+    class IGameEvent
     {
      public:
-        virtual ~IEvent() {}
+        virtual ~IGameEvent() {}
         virtual void AppendLetter(char c) = 0;
         virtual void RemoveLast() = 0;
         virtual void Validate(const std::string &codage) = 0;
         virtual void Message(const std::string &message) = 0;
-        virtual void InitializeGame() = 0;
+        virtual void NewGame() = 0;
     };
 
-    Motus(IEvent &event);
+    Motus(IGameEvent &event);
 
     void Initialize();
 
@@ -52,7 +52,7 @@ public:
     void Submit();
 
 private:
-    IEvent &mEvent;
+    IGameEvent &mEvent;
     std::string mCurrentWord;
     uint32_t mCurrentTryIndex;
     uint32_t mCurrentLetterCounter;

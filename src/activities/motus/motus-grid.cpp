@@ -1,56 +1,7 @@
  
 #include "motus-grid.h"
 
-void MotusGrid::DrawInfoWindow()
-{
-    static bool started = false;
 
-    // On ne cache pas la fenêtre automatiquement lorsque le jeu est terminé
-    if (!mMotus.IsEnd())
-    {
-        if (!started)
-        {
-            started = true;
-            mTimer.tick();
-        }
-        else
-        {
-            mTimer.tock();
-            if (mTimer.duration().count() >= 2000) {
-                started = false;
-                mMessage.clear();
-            }
-        }
-    }
-
-    ImGuiWindowFlags window_flags = ImGuiWindowFlags_NoDecoration |
-            ImGuiWindowFlags_AlwaysAutoResize |
-            ImGuiWindowFlags_NoSavedSettings |
-            ImGuiWindowFlags_NoFocusOnAppearing |
-            ImGuiWindowFlags_NoNav |
-            ImGuiWindowFlags_NoMove;
-
-    ImGui::SetNextWindowBgAlpha(1.0f); // Transparent background
-    ImGui::SetNextWindowPos(ImVec2(50, 50), ImGuiCond_Always);
-    //        ImGui::SetWindowFontScale(2.0);
-    ImGui::SetNextWindowSize(ImVec2(400, 80));
-
-    ImGui::GetStyle().FrameBorderSize = 2;
-    if (ImGui::Begin("Info", NULL, window_flags))
-    {
-        ImGui::Text("%s", mMessage.c_str());
-        if (mMotus.IsEnd())
-        {
-            if (ImGui::Button("Rejouer ?"))
-            {
-                started = false;
-                mMessage.clear();
-                mMotus.Initialize();
-            }
-        }
-    }
-    ImGui::End();
-}
 
 static const double TILE_SIZE = 0.8;
 
@@ -79,16 +30,6 @@ MotusGrid::MotusGrid(GfxSystem &s, Motus &motus)
     }
 
     Initialize();
-}
-
-void MotusGrid::Draw(SDL_Renderer *renderer)
-{
-    Group::Draw(renderer);
-
-    if (mMessage.size())
-    {
-        DrawInfoWindow();
-    }
 }
 
 void MotusGrid::Initialize()
@@ -137,11 +78,6 @@ void MotusGrid::AppendLetter(char c)
 
         mLetterPos++;
     }
-}
-
-void MotusGrid::ShowMessage(const std::string &message)
-{
-    mMessage = message;
 }
 
 void MotusGrid::Validate(const std::string &codage)
