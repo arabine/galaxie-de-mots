@@ -14,6 +14,11 @@ public:
 
     void SetActive(bool active);
     void SetEmpty();
+    void SetLetter(char c);
+    char GetLetter() const { return mChar; }
+
+    void SetCode(char c);
+    char GetCode() const { return mCode; }
 
     void SetBackgroundColor(const std::string &color);
     void SetForegroundColor(const std::string &color);
@@ -28,6 +33,8 @@ private:
     bool mIsActive = false;
     float mScale;
     std::string mLetterSvg;
+    char mChar;
+    char mCode;
 
     // Style
     std::string mBackgroundColor{"#585860"};

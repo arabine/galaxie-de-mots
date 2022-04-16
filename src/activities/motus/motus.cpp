@@ -146,6 +146,18 @@ bool Motus::IsTryValidated(int32_t i) const
     }
 }
 
+std::string Motus::GetLastWord() const
+{
+    std::string lastWord;
+
+    if (mCurrentTryIndex < mTries.size())
+    {
+        lastWord = mTries.at(mCurrentTryIndex);
+    }
+
+    return lastWord;
+}
+
 uint32_t Motus::GetNbLines() const
 {
     return 6;
@@ -218,7 +230,7 @@ bool Motus::IsSubmitValid() const
 
 void Motus::Submit()
 {
-    if (mCurrentTryIndex < GetNbLines())
+    if ((mCurrentTryIndex < GetNbLines()) && !mIsEnd)
     {
         if (IsSubmitValid())
         {

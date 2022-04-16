@@ -4,6 +4,8 @@
 #include "gfx-engine.h"
 #include "letter.h"
 
+#include <map>
+
 class Keyboard : public Group
 {
 public:
@@ -19,11 +21,15 @@ public:
 
     Keyboard(GfxSystem &s, IKeyEvent &keyEvent);
 
+    virtual void ProcessEvent(const SDL_Event &event) override;
+
     void SetUsedLetters(const std::string &word, std::string codage);
 
+    void Initialize();
 private:
     IKeyEvent &mKeyEvent;
 
+    std::map<char, char> mCodage;
     std::list<std::shared_ptr<Letter>> mLetters;
 };
 

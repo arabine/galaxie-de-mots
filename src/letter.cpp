@@ -36,6 +36,16 @@ void Letter::SetActive(bool active)
     mIsActive = active;
 }
 
+void Letter::SetLetter(char c)
+{
+    mChar = c;
+}
+
+void Letter::SetCode(char c)
+{
+    mCode = c;
+}
+
 void Letter::SetBackgroundColor(const std::string &color)
 {
     mBackgroundColor = color;

@@ -57,14 +57,24 @@ void MotusGui::Validate(const std::string &codage)
     {
         mGrid->Validate(codage);
     }
+
+    if (mKeyboard)
+    {
+        mKeyboard->SetUsedLetters(mMotus.GetLastWord(), codage);
+    }
 }
 
 void MotusGui::NewGame()
 {
-    LOG_DEBUG("Word to guess: " + mMotus.GetWord());
+    LOG_DEBUG("Word to guess: " + mMotus.GetWordToGuess());
     if (mGrid)
     {
         mGrid->Initialize();
+    }
+
+    if (mKeyboard)
+    {
+        mKeyboard->Initialize();
     }
 }
 
@@ -126,6 +136,11 @@ void MotusGui::DrawInfoWindow()
         ImGui::Text("%s", mMessage.c_str());
         if (mMotus.IsEnd())
         {
+            if (!ImGui::IsAnyItemActive())
+            {
+                ImGui::SetKeyboardFocusHere();
+            }
+
             if (ImGui::Button("Rejouer ?"))
             {
                 started = false;

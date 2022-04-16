@@ -15,7 +15,7 @@ public:
         virtual ~IGameEvent() {}
         virtual void AppendLetter(char c) = 0;
         virtual void RemoveLast() = 0;
-        virtual void Validate(const std::string &codage) = 0;
+        virtual void Validate(const std::string &codage) = 0; // signal envoyé avant de passer à la ligne suivante
         virtual void Message(const std::string &message) = 0;
         virtual void NewGame() = 0;
     };
@@ -39,7 +39,8 @@ public:
     std::string GetTry(int32_t i) const;
     bool IsTryValidated(int32_t i) const;
 
-    std::string GetWord() const { return mCurrentWord; }
+    std::string GetWordToGuess() const { return mCurrentWord; }
+    std::string GetLastWord() const;
 
     uint32_t GetNbLines() const;
     uint32_t GetNbLetters() const;
