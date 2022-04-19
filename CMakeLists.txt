@@ -43,6 +43,14 @@ set(PROJECT_SOURCES
     ${ROOT_DIR}/src/activities/motus/motus-grid.h
     ${ROOT_DIR}/src/activities/motus/motus-grid.cpp
 
+    # ----------------  TOPPING GAME  ----------------
+    ${ROOT_DIR}/src/activities/topping/topping-scene.h
+    ${ROOT_DIR}/src/activities/topping/topping-scene.cpp
+
+    # ----------------  HOME SCENE  ----------------
+    ${ROOT_DIR}/src/home-scene.h
+    ${ROOT_DIR}/src/home-scene.cpp
+
     # ----------------  COMMON  ----------------
     ${ROOT_DIR}/src/letter.h
     ${ROOT_DIR}/src/letter.cpp

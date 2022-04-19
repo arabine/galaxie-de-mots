@@ -57,5 +57,3 @@ for c in ascii_lowercase:
     letter = letter.replace("{{POINTS}}", str(points[c]))
     run(["inkscape", "-l", "-p", "-T", "-o",  "letter_" + c + ".svg"], stdout=PIPE, input=letter, encoding='ascii')
 
-
-# POUR LA TOUCHE ENTRÉE : inkscape enter_template.svg -l -T -o enter.svg

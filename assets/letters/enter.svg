@@ -4,51 +4,67 @@
    height="100"
    version="1.1"
    id="svg12"
+   sodipodi:docname="enter.svg"
+   inkscape:version="1.1.1 (3bf5ae0d25, 2021-09-20)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns="http://www.w3.org/2000/svg"
    xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview13"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     showgrid="false"
+     fit-margin-top="0"
+     fit-margin-left="0"
+     fit-margin-right="0"
+     fit-margin-bottom="0"
+     inkscape:zoom="5.3511111"
+     inkscape:cx="123.24543"
+     inkscape:cy="49.989618"
+     inkscape:window-width="2493"
+     inkscape:window-height="1332"
+     inkscape:window-x="1345"
+     inkscape:window-y="289"
+     inkscape:window-maximized="0"
+     inkscape:current-layer="svg12" />
   <defs
-     id="defs9" />
-  <rect
-     x="0"
-     y="0"
-     width="225"
-     height="100"
-     ry="5"
-     rx="5"
-     stroke-width="0px"
-     fill="#585860"
-     id="rect2" />
+     id="defs9">
+    <marker
+       style="overflow:visible"
+       id="TriangleOutL"
+       refX="0"
+       refY="0"
+       orient="auto"
+       inkscape:stockid="TriangleOutL"
+       inkscape:isstock="true">
+      <path
+         transform="scale(0.8)"
+         style="fill:context-stroke;fill-rule:evenodd;stroke:context-stroke;stroke-width:1pt"
+         d="M 5.77,0 -2.88,5 V -5 Z"
+         id="path1332" />
+    </marker>
+  </defs>
   <g
-     fill="#ffffff"
-     id="g6">
-    <g
-       aria-label="ENTRÉE"
-       id="text3"
-       style="font-size:40px;font-family:'Open Sans';dominant-baseline:central;text-anchor:middle">
-      <path
-         d="M 60.46875,60.441962 H 44.550781 V 31.887275 H 60.46875 v 2.949218 H 47.871094 v 9.199219 H 59.707031 V 46.9654 H 47.871094 V 57.473212 H 60.46875 Z"
-         style="font-size:40px;font-family:'Open Sans';dominant-baseline:central;text-anchor:middle"
-         id="path11" />
-      <path
-         d="M 89.101562,60.441962 H 85.3125 L 69.707031,36.477118 h -0.15625 q 0.3125,4.21875 0.3125,7.734375 V 60.441962 H 66.796875 V 31.887275 h 3.75 l 15.566406,23.867187 h 0.15625 q -0.03906,-0.527344 -0.175781,-3.378906 -0.136719,-2.871094 -0.09766,-4.101563 V 31.887275 h 3.105468 z"
-         style="font-size:40px;font-family:'Open Sans';dominant-baseline:central;text-anchor:middle"
-         id="path13" />
-      <path
-         d="m 105.74219,60.441962 h -3.32031 V 34.836493 h -9.042974 v -2.949218 h 21.406254 v 2.949218 h -9.04297 z"
-         style="font-size:40px;font-family:'Open Sans';dominant-baseline:central;text-anchor:middle"
-         id="path15" />
-      <path
-         d="m 122.40234,48.566962 v 11.875 h -3.32031 V 31.887275 h 7.83203 q 5.25391,0 7.75391,2.011718 2.51953,2.011719 2.51953,6.054688 0,5.664062 -5.74219,7.65625 l 7.75391,12.832031 h -3.92578 l -6.91407,-11.875 z m 0,-2.851562 h 4.55079 q 3.51562,0 5.15624,-1.386719 1.64063,-1.40625 1.64063,-4.199219 0,-2.832031 -1.67969,-4.082031 -1.66015,-1.25 -5.35156,-1.25 h -4.31641 z"
-         style="font-size:40px;font-family:'Open Sans';dominant-baseline:central;text-anchor:middle"
-         id="path17" />
-      <path
-         d="M 159.72656,60.441962 H 143.80859 V 31.887275 h 15.91797 v 2.949218 h -12.59765 v 9.199219 h 11.83593 V 46.9654 h -11.83593 v 10.507812 h 12.59765 z m -10.9375,-31.328125 q 0.9375,-1.210937 2.01172,-2.929687 1.09375,-1.71875 1.71875,-2.988282 h 3.94531 v 0.410157 q -0.85937,1.269531 -2.55859,3.125 -1.69922,1.855468 -2.94922,2.871093 h -2.16797 z"
-         style="font-size:40px;font-family:'Open Sans';dominant-baseline:central;text-anchor:middle"
-         id="path19" />
-      <path
-         d="M 181.97266,60.441962 H 166.05469 V 31.887275 h 15.91797 v 2.949218 H 169.375 v 9.199219 h 11.83594 V 46.9654 H 169.375 v 10.507812 h 12.59766 z"
-         style="font-size:40px;font-family:'Open Sans';dominant-baseline:central;text-anchor:middle"
-         id="path21" />
-    </g>
+     id="g1464"
+     transform="translate(10.805329)">
+    <rect
+       x="-10.805329"
+       y="0"
+       width="225"
+       height="100"
+       ry="5"
+       rx="5"
+       stroke-width="0px"
+       fill="#585860"
+       id="rect2" />
+    <path
+       style="fill:none;stroke:#ffffff;stroke-width:5.00001;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;marker-end:url(#TriangleOutL)"
+       d="M 152.51957,20.111154 V 57.767262 H 76.778421"
+       id="path943" />
   </g>
 </svg>

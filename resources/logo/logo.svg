@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="27.516663mm"
+   height="27.516663mm"
+   viewBox="0 0 27.516663 27.516663"
+   version="1.1"
+   id="svg5"
+   inkscape:version="1.1.1 (3bf5ae0d25, 2021-09-20)"
+   sodipodi:docname="logo.svg"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview7"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:document-units="mm"
+     showgrid="false"
+     inkscape:zoom="3.1108586"
+     inkscape:cx="98.686581"
+     inkscape:cy="87.274941"
+     inkscape:window-width="3840"
+     inkscape:window-height="2136"
+     inkscape:window-x="0"
+     inkscape:window-y="0"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="layer1"
+     fit-margin-top="0"
+     fit-margin-left="0"
+     fit-margin-right="0"
+     fit-margin-bottom="0" />
+  <defs
+     id="defs2" />
+  <g
+     inkscape:label="Calque 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     transform="translate(-51.561255,-129.81214)">
+    <g
+       id="logo">
+      <rect
+         x="52.09042"
+         y="130.34131"
+         width="26.458332"
+         height="26.458332"
+         ry="1.3229166"
+         rx="1.3229166"
+         stroke-width="1.05833px"
+         stroke="#ff0000"
+         fill-opacity="1"
+         fill="#ffa500"
+         id="rect2"
+         style="fill:#d3952a;fill-opacity:1;stroke:#ce5c00" />
+      <g
+         fill="#ffffff"
+         id="g6"
+         transform="matrix(0.26458333,0,0,0.26458333,52.090421,130.34131)">
+        <g
+           aria-label="G"
+           id="text4"
+           style="font-size:70px;dominant-baseline:central;text-anchor:middle">
+          <path
+             d="m 26.296387,45.001051 q 0,-11.723633 6.289062,-18.149414 6.289063,-6.425781 17.670899,-6.425781 7.998047,0 12.988281,2.700195 4.990234,2.700195 7.69043,8.647461 l -6.220704,1.845703 q -2.050781,-4.101562 -5.673828,-5.981445 -3.588867,-1.879883 -8.955078,-1.879883 -8.339844,0 -12.749023,5.058594 -4.40918,5.024414 -4.40918,14.18457 0,9.125977 4.682617,14.423828 4.682617,5.263672 12.954102,5.263672 4.716797,0 8.78418,-1.435547 4.101562,-1.435547 6.630859,-3.896484 V 50.674879 H 51.589355 v -5.46875 h 20.405274 v 16.611328 q -3.828125,3.896485 -9.399414,6.049805 -5.53711,2.119141 -12.03125,2.119141 -7.553711,0 -13.022461,-3.007813 -5.46875,-3.007812 -8.374024,-8.647461 -2.871093,-5.673828 -2.871093,-13.330078 z"
+             style="font-size:70px;dominant-baseline:central;text-anchor:middle"
+             id="path18" />
+        </g>
+      </g>
+      <g
+         x="60%"
+         y="90%"
+         fill="#ffffff"
+         fill-opacity="1"
+         id="g10"
+         transform="matrix(0.26458333,0,0,0.26458333,72.665815,154.90783)">
+        <g
+           aria-label="2"
+           id="text8"
+           style="font-size:25px">
+          <path
+             d="m 1.2573242,0 v -1.550293 q 0.6225586,-1.4282226 1.5136719,-2.5146484 0.9033203,-1.0986328 1.8920898,-1.9775391 0.9887696,-0.8911132 1.953125,-1.6479492 0.9765625,-0.7568359 1.7578125,-1.5136719 0.78125,-0.7568359 1.2573243,-1.5869144 0.4882813,-0.830078 0.4882813,-1.879882 0,-1.416016 -0.8300782,-2.197266 -0.8300781,-0.78125 -2.3071289,-0.78125 -1.4038086,0 -2.319336,0.769043 -0.9033203,0.756836 -1.0620117,2.13623 L 1.3549805,-12.95166 q 0.2441406,-2.062988 1.7456054,-3.283692 1.5136719,-1.220703 3.881836,-1.220703 2.6000976,0 3.9916991,1.23291 1.403809,1.220704 1.403809,3.479004 0,1.000977 -0.463867,1.989746 -0.451661,0.98877 -1.354981,1.9775395 -0.9033203,0.9887696 -3.4545898,3.0639649 -1.4038086,1.1474609 -2.2338867,2.0751953 -0.8300782,0.9155273 -1.1962891,1.7700195 H 12.646484 V 0 Z"
+             style="font-size:25px"
+             id="path21" />
+        </g>
+      </g>
+    </g>
+  </g>
+</svg>
