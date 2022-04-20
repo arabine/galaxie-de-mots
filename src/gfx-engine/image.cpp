@@ -14,6 +14,25 @@ Image::~Image()
 
 }
 
+void Image::SetActive(bool active)
+{
+    mIsActive = active;
+}
+
+
+void Image::HandleOnClick(std::function<void(void)> callback)
+{
+    mCallback = callback;
+}
+
+void Image::OnClick()
+{
+    if (mCallback && mIsActive)
+    {
+        mCallback();
+    }
+}
+
 bool Image::HasClicked(const SDL_Point &pos, const Vector2 &origin) const
 {
     SDL_Rect rect = GetRect();

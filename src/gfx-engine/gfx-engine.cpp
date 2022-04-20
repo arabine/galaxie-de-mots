@@ -172,6 +172,7 @@ uint32_t GfxEngine::Process(const Message &msg)
 {
     uint32_t nextScene = 0;
 
+    SDL_SetRenderDrawColor(mRenderer, mBackgroundColor.r, mBackgroundColor.g, mBackgroundColor.b, mBackgroundColor.a);
     SDL_RenderClear(mRenderer);
 
     SDL_Event event;

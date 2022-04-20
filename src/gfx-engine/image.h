@@ -11,7 +11,7 @@ public:
 
     virtual ~Image();
 
-    virtual void OnClick() {}
+    virtual void OnClick();
     virtual std::string UpdateSvg(const std::string &svg) { return svg; } // FIXME: avoid string duplication in memory
 
     bool HasClicked(const SDL_Point &pos, const Vector2 &origin) const;
@@ -36,12 +36,16 @@ public:
     static SDL_Texture *RenderSVG(SDL_Renderer *renderer, const std::string &svgData, float scale = 1.0);
     static SDL_Texture *LoadImage(SDL_Renderer *renderer, const char *filename);
 
+    void SetActive(bool active);
+    void HandleOnClick(std::function<void ()> callback);
 private:
     std::string mFileName;
     std::string mSvg;
     bool mHighlight{false};
     bool mIsSvg{false};
     float mSvgScale{1.0};
+    std::function<void(void)> mCallback;
+    bool mIsActive = false;
 };
 
 

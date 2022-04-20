@@ -66,9 +66,6 @@ public:
     // is not removed from the game, this will never be called).
     virtual void OnDestroy() {}
 
-    // Called whenever a transition out of a scene occurs.
-    // Can be called many times in a typical game cycle.
-    virtual void OnDeactivate() {};
     // The below functions can be overridden as necessary in our scenes.
     virtual void ProcessEvent(const SDL_Event &event)
     {
@@ -174,6 +171,8 @@ public:
     // The below functions can be overridden as necessary in our scenes.
     virtual void ProcessEvent(const SDL_Event &event)
     {
+        Group::ProcessEvent(event);
+
         for (auto & g : mGroups)
         {
             g->ProcessEvent(event);
@@ -250,6 +249,10 @@ public:
     void PushBigFont() { ImGui::PushFont(mBigFont); }
     void PopBigFont() { ImGui::PopFont(); }
 
+    void SetBackgroundColor(const SDL_Color &color) {
+        mBackgroundColor = color;
+    }
+
     void AddScene(std::shared_ptr<Scene> scene, uint32_t id);
     void SwitchSceneTo(uint32_t sceneId, const std::map<std::string, Value> &args = std::map<std::string, Value>());
 
@@ -261,6 +264,8 @@ private:
 
     const uint32_t mMinimumWidth = 648;
     const uint32_t mMinimumHeight = 960;
+
+    SDL_Color mBackgroundColor{14, 23, 29, 255};
 
     Uint64 currentTick = 0;
     Uint64 lastTick = 0;

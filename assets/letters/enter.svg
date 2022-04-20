@@ -23,9 +23,9 @@
      fit-margin-left="0"
      fit-margin-right="0"
      fit-margin-bottom="0"
-     inkscape:zoom="5.3511111"
-     inkscape:cx="123.24543"
-     inkscape:cy="49.989618"
+     inkscape:zoom="3.7838069"
+     inkscape:cx="82.192355"
+     inkscape:cy="-6.4749604"
      inkscape:window-width="2493"
      inkscape:window-height="1332"
      inkscape:window-x="1345"
@@ -50,10 +50,9 @@
     </marker>
   </defs>
   <g
-     id="g1464"
-     transform="translate(10.805329)">
+     id="g865">
     <rect
-       x="-10.805329"
+       x="-3.2281494e-07"
        y="0"
        width="225"
        height="100"
@@ -62,9 +61,16 @@
        stroke-width="0px"
        fill="#585860"
        id="rect2" />
-    <path
-       style="fill:none;stroke:#ffffff;stroke-width:5.00001;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;marker-end:url(#TriangleOutL)"
-       d="M 152.51957,20.111154 V 57.767262 H 76.778421"
-       id="path943" />
+    <g
+       id="g859">
+      <path
+         style="fill:none;stroke:#ffffff;stroke-width:5.00001;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;marker-end:url(#TriangleOutL)"
+         d="M 163.3249,20.111154 V 57.767262 H 87.58375"
+         id="path943" />
+      <path
+         style="fill:#ffffff;stroke:#ffffff;stroke-width:5;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+         d="M 163.3249,20.111154 H 135.98151"
+         id="path866" />
+    </g>
   </g>
 </svg>

@@ -3,13 +3,8 @@
 #include "IconsFontAwesome5.h"
 #include <iostream>
 #include "motus-gui.h"
-
-enum Scenes {
-    SCENE_NOTHING = 0,
-    SCENE_TITLE,
-    SCENE_MOTUS,
-    SCENE_EXIT = 10000
-};
+#include "home-scene.h"
+#include "scenes.h"
 
 extern "C" int main(int argc, char *argv[])
 {
@@ -26,7 +21,11 @@ extern "C" int main(int argc, char *argv[])
         bool loop = true;
         auto motusScene = std::make_shared<MotusGui>(mGfx);
         mGfx.AddScene(motusScene, SCENE_MOTUS);
-        mGfx.SwitchSceneTo(SCENE_MOTUS); // First scene
+
+        auto homeScene = std::make_shared<HomeScene>(mGfx);
+        mGfx.AddScene(homeScene, SCENE_HOME);
+
+        mGfx.SwitchSceneTo(SCENE_HOME); // First scene
         mGfx.Warmup();
 
         motusScene->Initialize();

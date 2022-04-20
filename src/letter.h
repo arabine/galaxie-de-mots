@@ -9,10 +9,8 @@ class Letter : public Image
 public:
     Letter(GfxSystem &s, const std::string &fileName, float scale, std::function<void(void)> callback);
 
-    virtual void OnClick() override;
     virtual std::string UpdateSvg(const std::string &svg) override;
 
-    void SetActive(bool active);
     void SetEmpty();
     void SetLetter(char c);
     char GetLetter() const { return mChar; }
@@ -29,8 +27,6 @@ public:
     void SetPointsOpacity(float opacity);
 
 private:
-    std::function<void(void)> mCallback;
-    bool mIsActive = false;
     float mScale;
     std::string mLetterSvg;
     char mChar;

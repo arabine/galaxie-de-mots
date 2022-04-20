@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   version="1.1"
+   width="21.999994"
+   height="22"
+   viewBox="0 0 21.999994 22"
+   id="svg4"
+   sodipodi:docname="arrow-left.svg"
+   inkscape:version="1.1.1 (3bf5ae0d25, 2021-09-20)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <defs
+     id="defs8" />
+  <sodipodi:namedview
+     id="namedview6"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     showgrid="false"
+     fit-margin-top="0"
+     fit-margin-left="0"
+     fit-margin-right="0"
+     fit-margin-bottom="0"
+     inkscape:zoom="12.860505"
+     inkscape:cx="-16.13467"
+     inkscape:cy="7.6202298"
+     inkscape:window-width="2279"
+     inkscape:window-height="1281"
+     inkscape:window-x="1494"
+     inkscape:window-y="257"
+     inkscape:window-maximized="0"
+     inkscape:current-layer="svg4" />
+  <g
+     id="g2297"
+     transform="translate(-1.2813953,-0.4614296)">
+    <rect
+       style="opacity:0.998;fill:#e9b96e;fill-opacity:1;stroke:#c17d11;stroke-width:0.999995;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;paint-order:fill markers stroke"
+       id="rect2086"
+       width="21"
+       height="21.000006"
+       x="1.7813928"
+       y="0.96142709"
+       rx="0.93879431"
+       ry="0.93879431" />
+    <g
+       id="g2290"
+       transform="translate(-0.77538234,-0.65673505)">
+      <path
+         style="fill:#ffffff;stroke:#ffffff;stroke-width:1px;stroke-linecap:round;stroke-linejoin:round;stroke-opacity:1"
+         d="M 20.653363,12.118165 H 5.4601873"
+         id="path1519" />
+      <path
+         style="fill:none;stroke:#ffffff;stroke-width:1px;stroke-linecap:round;stroke-linejoin:round;stroke-opacity:1"
+         d="m 5.4601873,12.118165 5.7397837,5.739783"
+         id="path1622" />
+      <path
+         style="fill:none;stroke:#ffffff;stroke-width:1px;stroke-linecap:round;stroke-linejoin:round;stroke-opacity:1"
+         d="M 5.4601873,12.118165 11.199971,6.378382"
+         id="path2285" />
+    </g>
+  </g>
+</svg>

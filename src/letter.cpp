@@ -6,18 +6,10 @@
 
 Letter::Letter(GfxSystem &s, const std::string &fileName, float scale, std::function<void ()> callback)
     : Image(s, fileName, true)
-    , mCallback(callback)
     , mScale(scale)
 {
+    HandleOnClick(callback);
     SetSvgScale(scale);
-}
-
-void Letter::OnClick()
-{
-    if (mCallback && mIsActive)
-    {
-        mCallback();
-    }
 }
 
 std::string Letter::UpdateSvg(const std::string &svg)
@@ -29,11 +21,6 @@ std::string Letter::UpdateSvg(const std::string &svg)
     letterSvg = replaceStringAll(letterSvg, "{{BACKGROUND_OPACITY}}", std::to_string(mBackgroundOpacity));
     letterSvg = replaceStringAll(letterSvg, "{{POINTS_OPACITY}}", std::to_string(mPointsOpacity));
     return letterSvg;
-}
-
-void Letter::SetActive(bool active)
-{
-    mIsActive = active;
 }
 
 void Letter::SetLetter(char c)
