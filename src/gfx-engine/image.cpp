@@ -33,7 +33,7 @@ void Image::OnClick()
     }
 }
 
-bool Image::HasClicked(const SDL_Point &pos, const Vector2 &origin) const
+bool Image::IsCursorOver(const SDL_Point &pos, const Vector2 &origin) const
 {
     SDL_Rect rect = GetRect();
     rect.x += origin.x;
@@ -41,20 +41,46 @@ bool Image::HasClicked(const SDL_Point &pos, const Vector2 &origin) const
     return SDL_PointInRect(&pos, &rect);
 }
 
+
 void Image::ProcessEvent(const SDL_Event &event, const Vector2 &origin)
 {
     SDL_Point mousePos;
+    mousePos.x = event.button.x;
+    mousePos.y = event.button.y;
+
+    bool isOver = IsCursorOver(mousePos, origin) && mIsActive;
 
     if (event.type == SDL_MOUSEBUTTONUP)
     {
-        mousePos.x = event.button.x;
-        mousePos.y = event.button.y;
-
-        if (HasClicked(mousePos, origin))
+        if (isOver)
         {
             OnClick();
         }
     }
+    if (event.type == SDL_MOUSEMOTION)
+    {
+        if (isOver)
+        {
+            if (!mHighlight)
+            {
+                // Entered
+                mHighlight = true;
+                SetBlendMode(SDL_BLENDMODE_ADD);
+                SetColorMod({250, 250, 250, 255});
+            }
+        }
+        else
+        {
+            if (mHighlight)
+            {
+                // Exited
+                mHighlight = false;
+                SetBlendMode(SDL_BLENDMODE_BLEND);
+                SetColorMod({255, 255, 255, 255});
+            }
+        }
+    }
+
 }
 
 void Image::OnCreate(SDL_Renderer *renderer)

@@ -95,8 +95,8 @@ void Entity::SetClones(const std::vector<Vector2> &clones)
 }
 
 void Entity::Render(SDL_Renderer *renderer, const SDL_Rect &pos)
-{
-    SDL_SetTextureBlendMode(mTexture, SDL_BLENDMODE_BLEND);
-    SDL_SetTextureColorMod(mTexture, 255, 255, 255);
+{   
+    SDL_SetTextureBlendMode(mTexture, mBlend);
+    SDL_SetTextureColorMod(mTexture, mColorMod.r, mColorMod.g, mColorMod.b);
     SDL_RenderCopyEx(renderer, mTexture, NULL, &pos, GetAngle(), NULL, SDL_FLIP_NONE);
 }

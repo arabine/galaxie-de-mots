@@ -14,7 +14,7 @@ public:
     virtual void OnClick();
     virtual std::string UpdateSvg(const std::string &svg) { return svg; } // FIXME: avoid string duplication in memory
 
-    bool HasClicked(const SDL_Point &pos, const Vector2 &origin) const;
+    bool IsCursorOver(const SDL_Point &pos, const Vector2 &origin) const;
 
     std::string_view FileName() const
     {

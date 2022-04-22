@@ -82,6 +82,9 @@ public:
     bool IsVisible() const { return mVisible; }
     void SetVisible(bool visible) { mVisible = visible; }
 
+    void SetBlendMode(SDL_BlendMode newMode) { mBlend = newMode; }
+    void SetColorMod(const SDL_Color &color) { mColorMod = color; }
+
     int GetX() const
     {
         return mRect.x;
@@ -169,6 +172,9 @@ private:
     Vector2f mScale = Vector2f(1, 1);
 
     std::vector<Vector2> mClones;
+
+    SDL_BlendMode mBlend{SDL_BLENDMODE_BLEND};
+    SDL_Color mColorMod{255, 255, 255, 255};
 
     void Render(SDL_Renderer *renderer, const SDL_Rect &pos);
 };
