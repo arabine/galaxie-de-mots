@@ -5,6 +5,7 @@
 #include "motus-gui.h"
 #include "home-scene.h"
 #include "scenes.h"
+#include "application.h"
 
 extern "C" int main(int argc, char *argv[])
 {
@@ -13,6 +14,10 @@ extern "C" int main(int argc, char *argv[])
 
     GfxEngine mGfx;
     GfxEngine::Message msg;
+
+    Application app;
+
+    app.GetRandomWord(5);
 
     if (mGfx.Initialize("Galaxie de mots"))
     {

@@ -58,6 +58,12 @@ set(PROJECT_SOURCES
     ${ROOT_DIR}/src/keyboard.cpp
     ${ROOT_DIR}/src/common.h
     ${ROOT_DIR}/src/common.cpp
+    ${ROOT_DIR}/src/database.cpp
+    ${ROOT_DIR}/src/database.h
+    ${ROOT_DIR}/src/sqlite3.c
+    ${ROOT_DIR}/src/sqlite3.h
+    ${ROOT_DIR}/src/application.h
+    ${ROOT_DIR}/src/application.cpp
 )
 
 set(GALAXIE_INCLUDES

@@ -24,13 +24,7 @@
 #include "image.h"
 #include "xlog.h"
 
-class Value
-{
-public:
-
-private:
-    std::variant<std::string, double, std::int64_t> mValue;
-};
+typedef std::variant<std::string, double, std::int64_t, std::int32_t> Value;
 
 class GfxSystem
 {
