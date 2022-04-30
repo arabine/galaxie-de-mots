@@ -7,10 +7,56 @@
 #include "scenes.h"
 #include "application.h"
 
+class EventStub : public Motus::IGameEvent
+{
+public:
+    virtual void AppendLetter(char c) {
+
+    }
+    virtual void RemoveLast() {
+
+    }
+    virtual void Validate(const std::string &codage) {
+
+    }
+    virtual void Message(const std::string &message) {
+
+    }
+    virtual void NewGame() {
+
+    }
+};
+
+EventStub eventStub;
+Motus motus(eventStub);
+
+void UnitTest()
+{
+    motus.Initialize();
+    motus.SetCurrentWord("GRUME");
+
+    std::string code = motus.TestWord("MAMAN");
+
+    std::cout << "Resultat: " << code << std::endl;
+
+    if (code == "10000")
+    {
+        std::cout << "SUCCESS\n" << std::endl;
+    }
+    else
+    {
+        std::cout << "BOUH :( :( :(\n" << std::endl;
+    }
+}
+
+
 extern "C" int main(int argc, char *argv[])
 {
     (void) argc;
     (void) argv;
+
+//    UnitTest();
+//    return 0;
 
     GfxEngine mGfx;
     GfxEngine::Message msg;

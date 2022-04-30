@@ -24,6 +24,11 @@ public:
 
     void Initialize();
 
+    void SetCurrentWord(const std::string &word)
+    {
+        mCurrentWord = word;
+    }
+
     /**
      * @brief TestWord
      * @param word le mot à tester

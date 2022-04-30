@@ -12,6 +12,7 @@ public:
         , mKeyEvent(keyEvent)
     {
         SetSvgScale(DEFAULT_SCALE);
+        SetActive(true);
     }
 
     virtual void OnClick()
@@ -32,6 +33,7 @@ public:
         , mKeyEvent(keyEvent)
     {
         SetSvgScale(DEFAULT_SCALE);
+        SetActive(true);
     }
 
     virtual void OnClick()

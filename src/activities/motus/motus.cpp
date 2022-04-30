@@ -107,11 +107,12 @@ std::string Motus::TestWord(const std::string &word) const
     {
         if (code[i] != '2')
         {
-            if (wordToGuess.find(word[i]) != std::string::npos )
+            size_t pos = wordToGuess.find(word[i]);
+            if (pos != std::string::npos )
             {
                 // La lettre existe quelque part ailleurs dans le mot
                 code[i] = '1';
-                wordToGuess[i] = ' ';
+                wordToGuess[pos] = ' ';
             }
         }
     }
