@@ -66,7 +66,7 @@ void MotusGui::Validate(const std::string &codage)
 
 void MotusGui::NewGame()
 {
-    LOG_DEBUG("Word to guess: " + mMotus.GetWordToGuess());
+    //LOG_DEBUG("Word to guess: " + mMotus.GetWordToGuess());
     if (mGrid)
     {
         mGrid->Initialize();

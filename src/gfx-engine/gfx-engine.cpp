@@ -16,11 +16,13 @@ void GfxEngine::SwitchSceneTo(uint32_t sceneId, const std::map<std::string, Valu
     mArgs = args;
 }
 
-Rect GfxSystem::GetWindowSize()
+uint32_t GfxSystem::GetScreenW()
 {
-    Rect rect;
-    SDL_GetWindowSize(mWindow, &rect.w, &rect.h);
-    return rect;
+    return mScreenWidth;
+}
+uint32_t GfxSystem::GetScreenH()
+{
+    return mScreenHeight;
 }
 
 bool GfxEngine::Initialize(const std::string &title)
@@ -54,10 +56,18 @@ bool GfxEngine::Initialize(const std::string &title)
     ImGui::CreateContext();
     ImGuiIO& io = ImGui::GetIO();
 
+    int w, h;
+    SDL_GetWindowSize(mWindow, &w, &h);
+
+    mScreenWidth = static_cast<uint32_t>(w);
+    mScreenHeight = static_cast<uint32_t>(h);
+    mRatioW = w / mWidth;
+    mRatioH = h / mHeight;
+
     io.ConfigFlags |= ImGuiConfigFlags_DockingEnable;
     size_t font_data_size = 0;
     void* font_data = SDL_LoadFile("fonts/roboto.ttf", &font_data_size);
-    mNormalFont = io.Fonts->AddFontFromMemoryTTF(font_data, static_cast<int>(font_data_size), 20.0f);
+    mNormalFont = io.Fonts->AddFontFromMemoryTTF(font_data, static_cast<int>(font_data_size), 20.0f * mRatioH);
 
     // Merge font with normal font
     ImFontConfig config;

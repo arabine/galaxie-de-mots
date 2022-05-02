@@ -11,6 +11,7 @@ class MotusGrid : public Group
 
 public:
     MotusGrid(GfxSystem &s, Motus &motus);
+    virtual ~MotusGrid() {}
 
     void Initialize();
     void DeleteLast();

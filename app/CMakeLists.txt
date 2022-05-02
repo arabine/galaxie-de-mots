@@ -4,7 +4,7 @@
 
 cmake_minimum_required(VERSION 3.10)
 
-set(CMAKE_CXX_STANDARD 14)
+set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_VERBOSE_MAKEFILE ON)
 
@@ -17,12 +17,50 @@ set(ROOT_DIR ${CMAKE_CURRENT_SOURCE_DIR}/..)
 #=========================================================================================================================
 set(PROJECT_SOURCES
     ${ROOT_DIR}/src/main.cpp
-    ${ROOT_DIR}/src/gfx-engine.cpp
-    ${ROOT_DIR}/src/gfx-engine.h
-    ${ROOT_DIR}/src/motus.h
-    ${ROOT_DIR}/src/motus.cpp
-    ${ROOT_DIR}/src/motus-gui.h
-    ${ROOT_DIR}/src/motus-gui.cpp
+
+    # ----------------  GFX ENGINE  ----------------
+    ${ROOT_DIR}/src/gfx-engine/stb_image.h
+    ${ROOT_DIR}/src/gfx-engine/SDL2_gfxPrimitives.c
+    ${ROOT_DIR}/src/gfx-engine/SDL2_gfxPrimitives.h
+    ${ROOT_DIR}/src/gfx-engine/SDL2_rotozoom.c
+    ${ROOT_DIR}/src/gfx-engine/SDL2_rotozoom.h
+    ${ROOT_DIR}/src/gfx-engine/gfx-engine.cpp
+    ${ROOT_DIR}/src/gfx-engine/gfx-engine.h
+    ${ROOT_DIR}/src/gfx-engine/entity.h
+    ${ROOT_DIR}/src/gfx-engine/entity.cpp
+    ${ROOT_DIR}/src/gfx-engine/image.h
+    ${ROOT_DIR}/src/gfx-engine/image.cpp
+
+    # ----------------  MOTUS GAME  ----------------
+    ${ROOT_DIR}/src/activities/motus/motus.h
+    ${ROOT_DIR}/src/activities/motus/motus.cpp
+    ${ROOT_DIR}/src/activities/motus/motus-gui.h
+    ${ROOT_DIR}/src/activities/motus/motus-gui.cpp
+    ${ROOT_DIR}/src/activities/motus/motus-grid.h
+    ${ROOT_DIR}/src/activities/motus/motus-grid.cpp
+
+    # ----------------  TOPPING GAME  ----------------
+    ${ROOT_DIR}/src/activities/topping/topping-scene.h
+    ${ROOT_DIR}/src/activities/topping/topping-scene.cpp
+
+    # ----------------  HOME SCENE  ----------------
+    ${ROOT_DIR}/src/home-scene.h
+    ${ROOT_DIR}/src/home-scene.cpp
+
+    # ----------------  COMMON  ----------------
+    ${ROOT_DIR}/src/letter.h
+    ${ROOT_DIR}/src/letter.cpp
+    ${ROOT_DIR}/src/keyboard.h
+    ${ROOT_DIR}/src/keyboard.cpp
+    ${ROOT_DIR}/src/common.h
+    ${ROOT_DIR}/src/common.cpp
+    ${ROOT_DIR}/src/database.cpp
+    ${ROOT_DIR}/src/database.h
+    ${ROOT_DIR}/src/sqlite3.c
+    ${ROOT_DIR}/src/sqlite3.h
+    ${ROOT_DIR}/src/application.h
+    ${ROOT_DIR}/src/application.cpp
+    ${ROOT_DIR}/src/i_application.h
 )
 
 #=========================================================================================================================
@@ -69,10 +107,10 @@ option(BUILD_SHARED_LIBS "Build using shared libraries" ON)
 add_library(${PROJECT_NAME} ${PROJECT_SOURCES})
 # add_dependencies(${PROJECT_NAME} sdl2_project)
 
-target_include_directories(${PROJECT_NAME} PUBLIC ${SDL2_HEADERS} ../assets/db ${IMGUI_HEADERS})
+target_include_directories(${PROJECT_NAME} PUBLIC ${SDL2_HEADERS} ../assets/db ${IMGUI_HEADERS} ${ROOT_DIR}/src/gfx-engine/ ${ROOT_DIR}/src/activities/motus ${ROOT_DIR}/src/activities/topping ${ROOT_DIR}/src ${ROOT_DIR}/libs/nanosvg/src)
 target_link_directories(${PROJECT_NAME} PUBLIC  ${CMAKE_LIBRARY_OUTPUT_DIRECTORY})
 
-target_link_libraries(${PROJECT_NAME} PUBLIC dl GLESv1_CM GLESv2 OpenSLES log android SDL2)
+target_link_libraries(${PROJECT_NAME} PUBLIC dl GLESv1_CM GLESv2 OpenSLES SDL2 android log)
 
 target_compile_options(${PROJECT_NAME} PUBLIC -Wall -Wextra -Wdocumentation -Wdocumentation-unknown-command -Wmissing-prototypes -Wunreachable-code-break -Wunneeded-internal-declaration -Wmissing-variable-declarations 
  -Wfloat-conversion -Wshorten-64-to-32 -Wunreachable-code-return -Wshift-sign-overflow -Wstrict-prototypes -Wkeyword-macro -Wno-unused-parameter -Wno-sign-compare)

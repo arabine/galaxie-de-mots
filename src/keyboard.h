@@ -20,6 +20,7 @@ public:
     };
 
     Keyboard(GfxSystem &s, IKeyEvent &keyEvent);
+    virtual ~Keyboard() {}
 
     virtual void ProcessEvent(const SDL_Event &event) override;
 

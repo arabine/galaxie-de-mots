@@ -2,7 +2,7 @@
 #include "keyboard.h"
 #include "letter.h"
 
-static const double DEFAULT_SCALE = 0.4;
+static const float DEFAULT_SCALE = 0.4;
 
 class Enter : public Image
 {
@@ -103,7 +103,7 @@ Keyboard::Keyboard(GfxSystem &s, IKeyEvent &keyEvent)
         }
     }
 
-    SetOrigin(50, GetSystem().GetWindowSize().h - 200);
+    SetOrigin(50, GetSystem().GetScreenH() - 200);
 }
 
 void Keyboard::Initialize()

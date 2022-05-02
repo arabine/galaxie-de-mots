@@ -2,7 +2,7 @@
 #define GFX_ENGINE_H
 
 // SDL
-#include <SDL2/SDL.h>
+#include <SDL.h>
 
 // Dear ImGui
 #include "imgui_impl_sdl.h"
@@ -29,11 +29,28 @@ typedef std::variant<std::string, double, std::int64_t, std::int32_t> Value;
 class GfxSystem
 {
 public:
-    Rect GetWindowSize();
+    uint32_t GetScreenW();
+    uint32_t GetScreenH();
+
+    float GetRatioW() const { return mRatioW; }
+    float GetRatioH() const { return mRatioH; }
+
+    uint32_t W(uint32_t w) const { return w * mRatioW; }
+    uint32_t H(uint32_t h) const { return h * mRatioH; }
 
 protected:
     SDL_Window *mWindow = nullptr;
     SDL_Renderer *mRenderer = nullptr;
+    float mRatioW{1.0};
+    float mRatioH{1.0};
+
+    // Taille de base
+    uint32_t mWidth = 648;
+    uint32_t mHeight = 960;
+
+    // Taille réelle
+    uint32_t mScreenWidth{648};
+    uint32_t mScreenHeight{960};
 };
 
 
@@ -127,7 +144,7 @@ public:
     Scene(GfxSystem &s)
         : Group(s)
     {
-        uint32_t mGroupIds = 0;
+
     }
 
     // Called when scene initially created. Called once.
@@ -253,9 +270,6 @@ public:
     // Platform independant file loading
     static bool LoadFile(const char *filename, std::string &fileData);
 private:
-    uint32_t mWidth = 648;
-    uint32_t mHeight = 960;
-
     const uint32_t mMinimumWidth = 648;
     const uint32_t mMinimumHeight = 960;
 

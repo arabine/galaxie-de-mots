@@ -7,6 +7,8 @@ class HomeScene : public Scene
 {
 public:
     HomeScene(GfxSystem &s);
+    virtual ~HomeScene() {}
+
     virtual void Draw(SDL_Renderer *renderer) override;
 private:
 

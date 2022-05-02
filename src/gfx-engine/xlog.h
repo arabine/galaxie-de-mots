@@ -12,7 +12,8 @@
 
 #else
 
-#ifdef __ANDROID__
+
+#if defined(ANDROID) || defined(__ANDROID__)
 
 #include <android/log.h>
 

@@ -32,8 +32,6 @@ void HomeScene::Draw(SDL_Renderer *renderer)
 
 void HomeScene::DrawWelcomeWindow()
 {
-    static bool started = false;
-
     ImGuiWindowFlags window_flags = ImGuiWindowFlags_NoDecoration |
             ImGuiWindowFlags_AlwaysAutoResize |
             ImGuiWindowFlags_NoSavedSettings |
@@ -44,13 +42,13 @@ void HomeScene::DrawWelcomeWindow()
     ImGui::SetNextWindowBgAlpha(1.0f); // Transparent background
     ImGui::SetNextWindowPos(ImVec2(10, 10), ImGuiCond_Always);
     //        ImGui::SetWindowFontScale(2.0);
-    ImGui::SetNextWindowSize(ImVec2(GetSystem().GetWindowSize().w - 20, 150));
+    ImGui::SetNextWindowSize(ImVec2(GetSystem().GetScreenW() - 20, GetSystem().H(150)));
 
     ImGui::GetStyle().FrameBorderSize = 2;
     if (ImGui::Begin("Info", NULL, window_flags))
     {
         ImGui::TextWrapped("Bienvenue sur Galaxie De Mots. Vous trouverez ici un ensemble de jeux classiques pour vous entraîner.");
-        ImGui::TextWrapped("Ce jeu est gratuit, sans publicité et est un Logiciel Libre.");
+        ImGui::TextWrapped("Ce jeu est  est un Logiciel Libre ; il est gratuit et sans publicité.");
         ImGui::TextWrapped("Le code source est disponible ici : https://github.com/arabine/galaxie-de-mots");
         ImGui::TextWrapped("Contactez moi pour partagez vos idées de jeux à ajouter.");
 

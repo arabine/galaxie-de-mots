@@ -38,12 +38,12 @@ public:
     }
 };
 
-EventStub eventStub;
-AppStub appStub;
+static EventStub eventStub;
+static AppStub appStub;
 
-Motus motus(eventStub, appStub);
+static Motus motus(eventStub, appStub);
 
-void UnitTest()
+static void UnitTest()
 {
     motus.Initialize();
     motus.SetCurrentWord("GRUME");
