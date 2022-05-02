@@ -64,6 +64,7 @@ set(PROJECT_SOURCES
     ${ROOT_DIR}/src/sqlite3.h
     ${ROOT_DIR}/src/application.h
     ${ROOT_DIR}/src/application.cpp
+    ${ROOT_DIR}/src/i_application.h
 )
 
 set(GALAXIE_INCLUDES

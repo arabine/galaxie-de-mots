@@ -5,11 +5,12 @@
 #include "gfx-engine.h"
 #include "keyboard.h"
 #include "motus-grid.h"
+#include "i_application.h"
 
 class MotusGui : public Scene, public Motus::IGameEvent, public Keyboard::IKeyEvent
 {
 public:
-    MotusGui(GfxSystem &s);
+    MotusGui(GfxSystem &s, IApplication &app);
 
     void Initialize();
 

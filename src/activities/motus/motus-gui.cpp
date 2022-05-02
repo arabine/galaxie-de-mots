@@ -4,9 +4,9 @@
 #include <chrono>
 
 
-MotusGui::MotusGui(GfxSystem &s)
+MotusGui::MotusGui(GfxSystem &s, IApplication &app)
     : Scene(s)
-    , mMotus(*this)
+    , mMotus(*this, app)
 {
     mKeyboard = std::make_shared<Keyboard>(GetSystem(), *this);
     AddGroup(mKeyboard);

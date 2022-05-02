@@ -27,8 +27,21 @@ public:
     }
 };
 
+class AppStub : public IApplication
+{
+public:
+    virtual std::string GetRandomWord(int nbLetters) override {
+        return "GRUME";
+    }
+    virtual bool IsWordExists(const std::string &word) override {
+        return true;
+    }
+};
+
 EventStub eventStub;
-Motus motus(eventStub);
+AppStub appStub;
+
+Motus motus(eventStub, appStub);
 
 void UnitTest()
 {
@@ -63,14 +76,12 @@ extern "C" int main(int argc, char *argv[])
 
     Application app;
 
-    app.GetRandomWord(5);
-
     if (mGfx.Initialize("Galaxie de mots"))
     {
         std::cout << "[INIT] Success" << std::endl;
 
         bool loop = true;
-        auto motusScene = std::make_shared<MotusGui>(mGfx);
+        auto motusScene = std::make_shared<MotusGui>(mGfx, app);
         mGfx.AddScene(motusScene, SCENE_MOTUS);
 
         auto homeScene = std::make_shared<HomeScene>(mGfx);

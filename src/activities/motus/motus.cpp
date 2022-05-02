@@ -1,57 +1,15 @@
 #include "motus.h"
-#include <random>
 
-struct Lexique {
-    const char* word;
-    double occurence;
-};
-
-#include "lexique_5_letters.inc"
-
-static const uint32_t nbWords5Letters = sizeof(lexique_5_letters) / sizeof(Lexique);
-
-
-// Returns random integer in closed range [low, high].
-class UniformRandomInt
-{
-    std::random_device _rd{};
-    std::mt19937 _gen{_rd()};
-    std::uniform_int_distribution<int> _dist;
-
-    public:
-        UniformRandomInt() {
-            set(1, 10);
-        }
-        UniformRandomInt(int low, int high) {
-            set(low, high);
-        }
-
-        // Set the distribution parameters low and high.
-        void set(int low, int high) {
-            std::uniform_int_distribution<int>::param_type param(low, high);
-            _dist.param(param);
-        }
-
-        // Get random integer.
-        int get() {
-            return _dist(_gen);
-        }
-};
-
-
-
-
-Motus::Motus(IGameEvent &event)
+Motus::Motus(IGameEvent &event, IApplication &app)
     : mEvent(event)
+    , mApp(app)
 {
-    mCurrentWord = "TIERS";
+    mCurrentWord = "SABLE";
 }
 
 std::string Motus::GetNewWordToGuess()
 {
-    UniformRandomInt rng(0, nbWords5Letters - 1);
-    int index = rng.get();
-    return lexique_5_letters[index].word;
+    return mApp.GetRandomWord(mNbLettes);
 }
 
 void Motus::Initialize()
@@ -210,18 +168,10 @@ bool Motus::IsSubmitValid() const
     // le mot doit exister au dictionnaire
     if (valid)
     {
-        bool found = false;
-        for (int i = 0; i < nbWords5Letters; i++)
+        valid = mApp.IsWordExists(w);
+
+        if (!valid)
         {
-            if (lexique_5_letters[i].word == w)
-            {
-                found = true;
-                break;
-            }
-        }
-        if (!found)
-        {
-            valid = false;
             mEvent.Message("Le mot " + w + " n'existe pas dans le dictionnaire");
         }
     }

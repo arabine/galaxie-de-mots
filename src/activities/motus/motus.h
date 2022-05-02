@@ -6,6 +6,8 @@
 #include <random>
 #include <functional>
 
+#include "i_application.h"
+
 class Motus
 {
 public:
@@ -20,7 +22,7 @@ public:
         virtual void NewGame() = 0;
     };
 
-    Motus(IGameEvent &event);
+    Motus(IGameEvent &event, IApplication &app);
 
     void Initialize();
 
@@ -59,6 +61,9 @@ public:
 
 private:
     IGameEvent &mEvent;
+    IApplication &mApp;
+
+    uint32_t mNbLettes{5};
     std::string mCurrentWord;
     uint32_t mCurrentTryIndex;
     uint32_t mCurrentLetterCounter;

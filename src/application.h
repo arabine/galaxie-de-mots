@@ -2,13 +2,15 @@
 #define APPLICATION_H
 
 #include "database.h"
+#include "i_application.h"
 
-class Application
+class Application : public IApplication
 {
 public:
     Application();
 
-    std::string GetRandomWord(int nbLetters);
+    virtual std::string GetRandomWord(int nbLetters) override;
+    virtual bool IsWordExists(const std::string &word) override;
 
 private:
     DataBase mDb;

@@ -9,10 +9,15 @@ import datetime
 from os.path import basename
 import sqlite3
 import csv
+import unicodedata
 
 lexique = {}
 dem = {}
 
+# -----------------  Supprime les accents dans toutes les langues (pas testé *toutes* les langues)
+def remove_accent_chars_regex(x: str):
+    u = unicodedata.normalize('NFD', x)
+    return u.encode('ascii', 'ignore').decode('utf-8')
 
 # -----------------  FONCTION QUI VERIFIE UN MOT VALIDE (les mots composés sont interdits)
 invalid_chars = ["'", " ", "-"]
@@ -73,12 +78,14 @@ with open('Lexique383.tsv', newline='') as csvfile:
 # -----------------  CREATION DES TABLES ET REMPLISSAGE DE LA DB
 db = sqlite3.connect('lexique.db')
 db.execute('''DROP TABLE IF EXISTS lexique''')
-db.execute('''CREATE TABLE IF NOT EXISTS lexique (mot TEXT, frequence REAL, lettres INTEGER, sens TEXT, categorie TEXT)''')
+db.execute('''CREATE TABLE IF NOT EXISTS lexique (mot TEXT, motupp TEXT, frequence REAL, lettres INTEGER, sens TEXT, categorie TEXT)''')
 
+# motupp est le mot sans accent et en majuscule
 
 for key in lexique:
     obj = lexique[key]
-    db.execute("INSERT INTO lexique VALUES(?, ?, ?, ?, ?)", (key, obj["frequence"], obj["lettres"], obj["sens"], obj["categorie"]))
+    motupp = remove_accent_chars_regex(key)
+    db.execute("INSERT INTO lexique VALUES(?, ?, ?, ?, ?, ?)", (key, motupp.upper(), obj["frequence"], obj["lettres"], obj["sens"], obj["categorie"]))
     
 db.commit()
 
