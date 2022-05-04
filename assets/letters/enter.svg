@@ -5,7 +5,7 @@
    version="1.1"
    id="svg12"
    sodipodi:docname="enter.svg"
-   inkscape:version="1.1.1 (3bf5ae0d25, 2021-09-20)"
+   inkscape:version="1.1.2 (0a00cf5339, 2022-02-04)"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns="http://www.w3.org/2000/svg"
@@ -23,17 +23,24 @@
      fit-margin-left="0"
      fit-margin-right="0"
      fit-margin-bottom="0"
-     inkscape:zoom="3.7838069"
-     inkscape:cx="82.192355"
-     inkscape:cy="-6.4749604"
+     inkscape:zoom="2.8244498"
+     inkscape:cx="-77.360201"
+     inkscape:cy="-4.4256408"
      inkscape:window-width="2493"
      inkscape:window-height="1332"
-     inkscape:window-x="1345"
-     inkscape:window-y="289"
+     inkscape:window-x="1236"
+     inkscape:window-y="678"
      inkscape:window-maximized="0"
      inkscape:current-layer="svg12" />
   <defs
      id="defs9">
+    <inkscape:perspective
+       sodipodi:type="inkscape:persp3d"
+       inkscape:vp_x="0 : 50 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_z="225 : 50 : 1"
+       inkscape:persp3d-origin="112.5 : 33.333333 : 1"
+       id="perspective1193" />
     <marker
        style="overflow:visible"
        id="TriangleOutL"
@@ -49,28 +56,35 @@
          id="path1332" />
     </marker>
   </defs>
+  <rect
+     x="-3.2281494e-07"
+     y="0"
+     width="225"
+     height="100"
+     ry="5"
+     rx="5"
+     stroke-width="0px"
+     fill="#585860"
+     id="rect2" />
   <g
-     id="g865">
-    <rect
-       x="-3.2281494e-07"
-       y="0"
-       width="225"
-       height="100"
-       ry="5"
-       rx="5"
-       stroke-width="0px"
-       fill="#585860"
-       id="rect2" />
-    <g
-       id="g859">
-      <path
-         style="fill:none;stroke:#ffffff;stroke-width:5.00001;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;marker-end:url(#TriangleOutL)"
-         d="M 163.3249,20.111154 V 57.767262 H 87.58375"
-         id="path943" />
-      <path
-         style="fill:#ffffff;stroke:#ffffff;stroke-width:5;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
-         d="M 163.3249,20.111154 H 135.98151"
-         id="path866" />
-    </g>
+     id="g2704"
+     transform="translate(5.8130027,4.7120367)">
+    <path
+       style="fill:#ffffff;stroke:#ffffff;stroke-width:5;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="M 163.3249,20.111154 H 135.98151"
+       id="path866" />
+    <path
+       style="fill:#ffffff;stroke:#ffffff;stroke-width:4.99999;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="M 159.73466,47.454544 H 93.123557"
+       id="path866-3" />
+    <path
+       style="fill:#ffffff;stroke:#ffffff;stroke-width:5;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="m 163.3249,20.111154 v 27.34339"
+       id="path866-6" />
+    <path
+       id="path2477"
+       style="opacity:0.998;fill:#ffffff;stroke:#ffffff;stroke-width:4.6;stroke-linecap:round;stroke-linejoin:round;paint-order:fill markers stroke"
+       inkscape:transform-center-x="6.7002638"
+       d="M 90.050451,24.244148 V 47.454544 70.664941 L 69.949658,59.059743 49.848864,47.454544 69.949657,35.849346 Z" />
   </g>
 </svg>

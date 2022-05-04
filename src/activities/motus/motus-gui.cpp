@@ -126,9 +126,9 @@ void MotusGui::DrawInfoWindow()
             ImGuiWindowFlags_NoMove;
 
     ImGui::SetNextWindowBgAlpha(1.0f); // Transparent background
-    ImGui::SetNextWindowPos(ImVec2(50, 50), ImGuiCond_Always);
+    ImGui::SetNextWindowPos(ImVec2(10, 10), ImGuiCond_Always);
     //        ImGui::SetWindowFontScale(2.0);
-    ImGui::SetNextWindowSize(ImVec2(400, 100));
+    ImGui::SetNextWindowSize(ImVec2(GetSystem().GetScreenW() - 10, 0));
 
     ImGui::GetStyle().FrameBorderSize = 2;
     if (ImGui::Begin("Info", NULL, window_flags))

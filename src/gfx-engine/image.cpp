@@ -92,7 +92,9 @@ void Image::OnCreate(SDL_Renderer *renderer)
         if (GfxEngine::LoadFile(mFileName.c_str(), mSvg))
         {
             std::string svg = UpdateSvg(mSvg);
-            SetTexture(Image::RenderSVG(renderer, svg.data(), mSvgScale));
+
+            float scale = mSvgScale * GetSystem().Ratio();
+            SetTexture(Image::RenderSVG(renderer, svg.data(), scale));
         }
         else
         {

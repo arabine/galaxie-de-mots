@@ -35,6 +35,8 @@ public:
     float GetRatioW() const { return mRatioW; }
     float GetRatioH() const { return mRatioH; }
 
+    float Ratio() const  { return mRatio; }
+
     uint32_t W(uint32_t w) const { return w * mRatioW; }
     uint32_t H(uint32_t h) const { return h * mRatioH; }
 
@@ -43,6 +45,8 @@ protected:
     SDL_Renderer *mRenderer = nullptr;
     float mRatioW{1.0};
     float mRatioH{1.0};
+
+    float mRatio{1.0};
 
     // Taille de base
     uint32_t mWidth = 648;
@@ -129,11 +133,17 @@ public:
 
     GfxSystem &GetSystem() { return mSystem; }
 
+    void StartGrid() { mGrid.clear(); }
+    void NewLine() {   }
+    void AddToLine(std::shared_ptr<Entity>) { }
+    void EndLine() {}
+
 private:
     GfxSystem &mSystem;
     uint32_t mEntityIds = 0;
     Vector2 mOrigin;
     std::list<std::shared_ptr<Entity>> mEntities;
+    std::vector<std::list<std::shared_ptr<Entity>>> mGrid;
 };
 
 

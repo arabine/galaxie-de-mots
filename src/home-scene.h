@@ -10,11 +10,15 @@ public:
     virtual ~HomeScene() {}
 
     virtual void Draw(SDL_Renderer *renderer) override;
+
+    virtual void Update(double deltaTime) override;
+
 private:
 
     std::shared_ptr<Image> mTileMotus;
     std::shared_ptr<Image> mTileTopping;
 
+    float mWelcomeSize{0.0};
 
     void DrawWelcomeWindow();
 };

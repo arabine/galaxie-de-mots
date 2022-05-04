@@ -64,10 +64,12 @@ bool GfxEngine::Initialize(const std::string &title)
     mRatioW = w / mWidth;
     mRatioH = h / mHeight;
 
+    mRatio = sqrt(mRatioW* mRatioW + mRatioH* mRatioH); // pow(GetSystem().GetRatioH(), .8) * pow(GetSystem().GetRatioW(), 0.2);
+
     io.ConfigFlags |= ImGuiConfigFlags_DockingEnable;
     size_t font_data_size = 0;
     void* font_data = SDL_LoadFile("fonts/roboto.ttf", &font_data_size);
-    mNormalFont = io.Fonts->AddFontFromMemoryTTF(font_data, static_cast<int>(font_data_size), 20.0f * mRatioH);
+    mNormalFont = io.Fonts->AddFontFromMemoryTTF(font_data, static_cast<int>(font_data_size), 20.0f * mRatio);
 
     // Merge font with normal font
     ImFontConfig config;
@@ -80,7 +82,7 @@ bool GfxEngine::Initialize(const std::string &title)
     io.Fonts->AddFontFromMemoryTTF(font_data, static_cast<int>(font_data_size), 16.0f, &config, icon_ranges);
 
     font_data = SDL_LoadFile("fonts/roboto.ttf", &font_data_size);
-    mBigFont = io.Fonts->AddFontFromMemoryTTF(font_data, static_cast<int>(font_data_size), 50);
+    mBigFont = io.Fonts->AddFontFromMemoryTTF(font_data, static_cast<int>(font_data_size), 50 * mRatioH);
 
 
     io.Fonts->Build();

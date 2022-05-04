@@ -20,8 +20,9 @@ public:
     };
 
     Keyboard(GfxSystem &s, IKeyEvent &keyEvent);
-    virtual ~Keyboard() {}
+    virtual ~Keyboard();
 
+    virtual void OnCreate(SDL_Renderer *renderer) override;
     virtual void ProcessEvent(const SDL_Event &event) override;
 
     void SetUsedLetters(const std::string &word, std::string codage);
@@ -31,6 +32,7 @@ private:
     IKeyEvent &mKeyEvent;
 
     std::map<char, char> mCodage;
+    std::vector<std::list<std::shared_ptr<Entity>>> mLines;
     std::list<std::shared_ptr<Letter>> mLetters;
 };
 

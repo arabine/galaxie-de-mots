@@ -4,6 +4,11 @@
 
 static const float DEFAULT_SCALE = 0.4;
 
+static const char keyboard[] = { 'a', 'z', 'e', 'r', 't', 'y','u', 'i', 'o', 'p', '\n',
+                                 'q', 's', 'd', 'f', 'g', 'h', 'j', 'k', 'l', 'm', '\n',
+                                 '?', 'w', 'x', 'c', 'v', 'b', 'n', '<', '\n',
+                               };
+
 class Enter : public Image
 {
 public:
@@ -50,39 +55,33 @@ Keyboard::Keyboard(GfxSystem &s, IKeyEvent &keyEvent)
     : Group(s)
     , mKeyEvent(keyEvent)
 {
-    static const char keyboard[] = { 'a', 'z', 'e', 'r', 't', 'y','u', 'i', 'o', 'p', '\n',
-                                     'q', 's', 'd', 'f', 'g', 'h', 'j', 'k', 'l', 'm', '\n',
-                                     '?', 'w', 'x', 'c', 'v', 'b', 'n', '<',
-                                   };
-    int y = 0;
-    int x = 0;
-    int offset = 50;
+
+    // Construction des touches du clavier en mémoire
+    int line = 0;
+
+    std::list<std::shared_ptr<Entity>> obj;
 
     for (int i = 0; i < sizeof(keyboard); i++)
     {
         if (keyboard[i] == '\n')
         {
             // new line
-            y += offset;
-            x = 0;
+            mLines.push_back(obj);
+            obj.clear();
         }
         else if (keyboard[i] == '?')
         {
             auto l = std::make_shared<Enter>(GetSystem(), mKeyEvent);
             l->SetVisible(true);
-            l->SetPos(x, y);
             AddEntity(l);
-
-            x += 2 * offset;
+            obj.push_back(l);
         }
         else if (keyboard[i] == '<')
         {
             auto l = std::make_shared<Backspace>(GetSystem(), mKeyEvent);
             l->SetVisible(true);
-            l->SetPos(x, y);
             AddEntity(l);
-
-            x += 2 * offset;
+            obj.push_back(l);
         }
         else
         {
@@ -94,16 +93,71 @@ Keyboard::Keyboard(GfxSystem &s, IKeyEvent &keyEvent)
             l->SetLetter(std::toupper(key));
             l->SetVisible(true);
             l->SetActive(true);
-            l->SetPos(x, y);
             AddEntity(l);
 
+            obj.push_back(l);
             mLetters.push_back(l);
-
-            x += offset;
         }
     }
+}
 
-    SetOrigin(50, GetSystem().GetScreenH() - 200);
+Keyboard::~Keyboard()
+{
+
+}
+
+void Keyboard::OnCreate(SDL_Renderer *renderer)
+{
+    Group::OnCreate(renderer);
+
+    // Les objects sont créés avec un renderer et une texture, on peut donc les positionner à l'écran
+    // ligne par ligne
+
+    int y = 0;
+    int x = 0;
+    int x_max = 0;
+    int y_max = 0;
+
+    for (int i = 0; i < mLines.size(); i++)
+    {
+        x = 0;
+        y_max = 0;
+
+        // Première boucle pour déterminer la largeur totale de tous les objets
+        // Ainsi que la hauteur max de la ligne
+        for (auto &l : mLines[i])
+        {
+            x += l->GetRect().w;
+            if (l->GetRect().h > y_max)
+            {
+                y_max = l->GetRect().h;
+            }
+
+            if (x > x_max)
+            {
+                x_max = x;
+            }
+        }
+
+        std::cout << "XMAX: " << x_max << std::endl;
+
+        int offset = (GetSystem().GetScreenW() - x_max) / mLines[i].size();
+
+        // Deuxième boucle pour placer les objets
+        int start_x = offset;
+        for (auto &l : mLines[i])
+        {
+            l->SetPos(start_x, y);
+
+            start_x += offset + l->GetRect().w;
+        }
+
+
+        // new line
+        y += y_max + 10;
+
+    }
+    SetOrigin(0, GetSystem().GetScreenH() - y);
 }
 
 void Keyboard::Initialize()
