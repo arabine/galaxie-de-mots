@@ -37,7 +37,10 @@ bool GfxEngine::Initialize(const std::string &title)
 
     SDL_WindowFlags window_flags = (SDL_WindowFlags)(
         SDL_WINDOW_OPENGL
-        | SDL_WINDOW_RESIZABLE
+
+#ifdef ANDROID
+        | SDL_WINDOW_FULLSCREEN
+#endif
         | SDL_WINDOW_ALLOW_HIGHDPI
         );
     mWindow = SDL_CreateWindow(

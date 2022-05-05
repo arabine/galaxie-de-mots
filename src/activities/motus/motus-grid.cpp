@@ -25,8 +25,6 @@ MotusGrid::MotusGrid(GfxSystem &s, Motus &motus)
         }
     }
 
-    SetOrigin(0, 0);
-
     Initialize();
 }
 
@@ -36,6 +34,12 @@ void MotusGrid::Initialize()
     {
         DeleteEntity(c->GetId());
     }
+
+    for (auto &l : mEmptyTile)
+    {
+        l->SetVisible(true);
+    }
+
     mGrid.clear();
     mLetterPos = 0;
 }
@@ -99,7 +103,7 @@ void MotusGrid::Validate(const std::string &codage)
             mGrid[i]->SetBackgroundOpacity(1.0);
             mGrid[i]->Rebuild();
             // Disable empty tile
-            mEmptyTile[mLetterPos]->SetVisible(false);
+            mEmptyTile[i]->SetVisible(false);
 
             idx++;
         }

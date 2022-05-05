@@ -15,6 +15,7 @@ public:
     void Initialize();
 
     virtual void Draw(SDL_Renderer *renderer) override;
+    virtual void OnCreate(SDL_Renderer *renderer) override;
 
 private:
     Motus mMotus;

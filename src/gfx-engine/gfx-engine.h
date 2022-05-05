@@ -120,6 +120,11 @@ public:
         });
     }
 
+    Vector2 GetOrigin() const
+    {
+        return mOrigin;
+    }
+
     void SetOrigin(int x, int y)
     {
         mOrigin.x = x;

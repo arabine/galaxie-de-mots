@@ -15,6 +15,8 @@ MotusGui::MotusGui(GfxSystem &s, IApplication &app)
     AddGroup(mGrid);
 }
 
+
+
 void MotusGui::Draw(SDL_Renderer *renderer)
 {
     Scene::Draw(renderer);
@@ -23,6 +25,14 @@ void MotusGui::Draw(SDL_Renderer *renderer)
     {
         DrawInfoWindow();
     }
+}
+
+void MotusGui::OnCreate(SDL_Renderer *renderer)
+{
+    Scene::OnCreate(renderer);
+
+    Vector2 ori = mKeyboard->GetOrigin();
+    mGrid->SetOrigin(0, ori.y - mGrid->GetGridH());
 }
 
 void MotusGui::Initialize()
