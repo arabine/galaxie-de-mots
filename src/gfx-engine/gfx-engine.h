@@ -71,12 +71,7 @@ public:
     }
 
     // Called when scene initially created. Called once.
-    virtual void OnCreate(SDL_Renderer *renderer) {
-        for (auto & e : mEntities)
-        {
-            e->OnCreate(renderer);
-        }
-    }
+    virtual void OnCreate(SDL_Renderer *renderer);
     // Called when scene destroyed. Called at most once (if a scene
     // is not removed from the game, this will never be called).
     virtual void OnDestroy() {}
@@ -133,10 +128,17 @@ public:
 
     GfxSystem &GetSystem() { return mSystem; }
 
-    void StartGrid() { mGrid.clear(); }
-    void NewLine() {   }
-    void AddToLine(std::shared_ptr<Entity>) { }
-    void EndLine() {}
+    void NewGrid() { mGrid.clear(); }
+    void NewLine() { mGrid.push_back(std::list<std::shared_ptr<Entity>>());  }
+    void AddToLine(std::shared_ptr<Entity> entity) {
+        if (mGrid.size() > 0)
+        {
+            mGrid[mGrid.size() - 1].push_back(entity);
+        }
+    }
+
+    uint32_t GetGridW() const { return mGridW; }
+    uint32_t GetGridH() const { return mGridH; }
 
 private:
     GfxSystem &mSystem;
@@ -144,6 +146,9 @@ private:
     Vector2 mOrigin;
     std::list<std::shared_ptr<Entity>> mEntities;
     std::vector<std::list<std::shared_ptr<Entity>>> mGrid;
+
+    uint32_t mGridW{0};
+    uint32_t mGridH{0};
 };
 
 
@@ -279,7 +284,22 @@ public:
 
     // Platform independant file loading
     static bool LoadFile(const char *filename, std::string &fileData);
+
+
+    static bool HasTexture(const std::string &name);
+    static SDL_Texture *GetTexture(const std::string &name);
+    static void StoreTexture(const std::string &name, SDL_Texture *tex);
+    static void DestroyTexture(const std::string &name);
+
 private:
+    struct Texture {
+        SDL_Texture *tex{nullptr};
+        uint32_t count{1};
+    };
+
+    // key: name
+    static std::map<std::string, Texture> mTextures;
+
     const uint32_t mMinimumWidth = 648;
     const uint32_t mMinimumHeight = 960;
 

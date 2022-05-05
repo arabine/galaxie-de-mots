@@ -6,6 +6,7 @@
 #include <string>
 #include <random>
 
+
 // Returns random integer in closed range [low, high]. Example:
 // UniformRandomInt rng(0, nbWords5Letters - 1);
 // int index = rng.get();

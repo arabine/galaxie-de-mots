@@ -9,37 +9,29 @@ MotusGrid::MotusGrid(GfxSystem &s, Motus &motus)
     : Group(s)
     , mMotus(motus)
 {
-    SetOrigin(100, 200);
+    NewGrid();
 
-    mEmptyTile = std::make_shared<Letter>(GetSystem(), "letters/empty_tile.svg", TILE_SIZE, [] {});
-    mEmptyTile->SetActive(false);
-    mEmptyTile->SetVisible(true);
-    AddEntity(mEmptyTile);
-
-    int x = 0;
-    int y = 0;
     for (int i = 0; i < mMotus.GetNbLines(); i++)
     {
+        NewLine();
         for (int j = 0; j < mMotus.GetNbLetters(); j++)
         {
-            mClones.push_back(Vector2(x, y, true));
-            x += 90;
+            auto t = std::make_shared<Letter>(GetSystem(), "letters/empty_tile.svg", TILE_SIZE, [] {});
+            t->SetActive(false);
+            t->SetVisible(true);
+            AddEntity(t);
+            mEmptyTile.push_back(t);
+            AddToLine(t);
         }
-        y += 90;
-        x = 0;
     }
+
+    SetOrigin(0, 0);
 
     Initialize();
 }
 
 void MotusGrid::Initialize()
 {
-    for (int i = 0; i < mClones.size(); i++)
-    {
-        mClones[i].enable = true;
-    }
-    mEmptyTile->SetClones(mClones);
-
     for (const auto &c : mGrid)
     {
         DeleteEntity(c->GetId());
@@ -55,8 +47,8 @@ void MotusGrid::DeleteLast()
         mLetterPos--;
 
         // Display (enable) empty tile at this position
-        mClones[mLetterPos].enable = true;
-        mEmptyTile->SetClones(mClones);
+        mEmptyTile[mLetterPos]->SetVisible(true);
+
         uint32_t idToDelete = mGrid.back()->GetId();
         mGrid.pop_back();
         DeleteEntity(idToDelete);
@@ -65,14 +57,15 @@ void MotusGrid::DeleteLast()
 
 void MotusGrid::AppendLetter(char c)
 {
-    if (mLetterPos < mClones.size())
+    if (mLetterPos < mMotus.GridSize())
     {
         // On va maintenant créer une tile de lettre
         auto t = std::make_shared<Letter>(GetSystem(), std::string("letters/letter_") + c + std::string(".svg"), TILE_SIZE, [] {});
         t->SetActive(false);
         t->SetVisible(true);
         t->SetBackgroundOpacity(0.0);
-        t->SetPos(mClones[mLetterPos].x, mClones[mLetterPos].y); // on place la tile à la même place que la tile vide
+
+        t->SetPos(mEmptyTile[mLetterPos]->GetX(), mEmptyTile[mLetterPos]->GetY()); // on place la tile à la même place que la tile vide
         AddEntity(t);
         mGrid.push_back(t);
 
@@ -106,8 +99,7 @@ void MotusGrid::Validate(const std::string &codage)
             mGrid[i]->SetBackgroundOpacity(1.0);
             mGrid[i]->Rebuild();
             // Disable empty tile
-            mClones[i].enable = false;
-            mEmptyTile->SetClones(mClones);
+            mEmptyTile[mLetterPos]->SetVisible(false);
 
             idx++;
         }

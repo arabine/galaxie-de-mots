@@ -36,7 +36,6 @@ struct Vector2
     Vector2(int p_x, int p_y, bool e)
         : x(p_x)
         , y(p_y)
-        , enable(e)
     {}
 
     void print()
@@ -45,7 +44,6 @@ struct Vector2
     }
 
     int x, y;
-    bool enable{false};
 };
 
 
@@ -154,8 +152,6 @@ public:
 
     void Rebuild() { mCreated = false; }
 
-    void SetClones(const std::vector<Vector2> &clones);
-
 private:
     GfxSystem &mSystem; // keep it first please
 
@@ -170,8 +166,6 @@ private:
     SDL_Rect mRect;
     float mAngle = 0;
     Vector2f mScale = Vector2f(1, 1);
-
-    std::vector<Vector2> mClones;
 
     SDL_BlendMode mBlend{SDL_BLENDMODE_BLEND};
     SDL_Color mColorMod{255, 255, 255, 255};

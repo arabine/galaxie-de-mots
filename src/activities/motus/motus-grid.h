@@ -20,8 +20,8 @@ public:
 
 private:
     Motus &mMotus;
-    std::shared_ptr<Letter> mEmptyTile;
-    std::vector<Vector2> mClones;
+    std::vector<std::shared_ptr<Letter>> mEmptyTile;
+
     int mLetterPos;
     std::vector<std::shared_ptr<Letter>> mGrid;
 };

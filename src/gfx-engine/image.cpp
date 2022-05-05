@@ -11,7 +11,15 @@ Image::Image(GfxSystem &system, const std::string &path, bool isSvg)
 
 Image::~Image()
 {
+    GfxEngine::DestroyTexture(TextureName());
+}
 
+std::string Image::TextureName() const
+{
+    // On ajoute le scale car plusieurs texture avec le même fichier peuvent être créées
+    // mais avec des scales différents
+    // ça ne change rien pour les images RAW (png, jpg...)
+    return mFileName + std::to_string(mSvgScale);
 }
 
 void Image::SetActive(bool active)
@@ -87,24 +95,38 @@ void Image::OnCreate(SDL_Renderer *renderer)
 {
     Entity::OnCreate(renderer);
 
-    if (mIsSvg)
-    {
-        if (GfxEngine::LoadFile(mFileName.c_str(), mSvg))
-        {
-            std::string svg = UpdateSvg(mSvg);
+    SDL_Texture *tex = nullptr;
 
-            float scale = mSvgScale * GetSystem().Ratio();
-            SetTexture(Image::RenderSVG(renderer, svg.data(), scale));
-        }
-        else
-        {
-            LOG_ERROR("[IMAGE] Cannot load SVG file");
-        }
+    if (GfxEngine::HasTexture(mFileName))
+    {
+        tex = GfxEngine::GetTexture(mFileName);
     }
     else
     {
-        SetTexture(LoadImage(renderer, mFileName.c_str()));
+        if (mIsSvg)
+        {
+            if (GfxEngine::LoadFile(mFileName.c_str(), mSvg))
+            {
+                std::string svg = UpdateSvg(mSvg);
+
+                float scale = mSvgScale * GetSystem().Ratio();
+                tex = Image::RenderSVG(renderer, svg.data(), scale);
+            }
+            else
+            {
+                LOG_ERROR("[IMAGE] Cannot load SVG file");
+            }
+        }
+        else
+        {
+            tex = LoadImage(renderer, mFileName.c_str());
+        }
+
+        // Texture created, store it into our texture library
+        GfxEngine::StoreTexture(TextureName(), tex);
     }
+
+    SetTexture(tex);
 }
 
 

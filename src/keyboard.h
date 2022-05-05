@@ -32,7 +32,6 @@ private:
     IKeyEvent &mKeyEvent;
 
     std::map<char, char> mCodage;
-    std::vector<std::list<std::shared_ptr<Entity>>> mLines;
     std::list<std::shared_ptr<Letter>> mLetters;
 };
 

@@ -12,12 +12,7 @@ Entity::Entity(GfxSystem &s)
 
 Entity::~Entity()
 {
-    if (mTexture != nullptr)
-    {
-        SDL_DestroyTexture(mTexture);
-        mTexture = nullptr;
-        LOG_DEBUG("Destroyed entity and texture");
-    }
+    mTexture = nullptr;
 }
 
 void Entity::OnCreate(SDL_Renderer *renderer)
@@ -42,43 +37,17 @@ void Entity::Draw(SDL_Renderer *renderer, int x_offset, int y_offset)
 
     if (IsVisible() && (mTexture != nullptr))
     {
-        if (mClones.size() == 0)
-        {
-            SDL_Rect r = GetRect();
-            r.w *= GetScale().x;
-            r.h *= GetScale().y;
-            r.x = GetX() + x_offset;
-            r.y = GetY() + y_offset;
-            Render(renderer, r);
-        }
-        else
-        {
-            for (const auto & v : mClones)
-            {
-                if (v.enable)
-                {
-                    SDL_Rect r = GetRect();
-                    r.w *= GetScale().x;
-                    r.h *= GetScale().y;
-                    r.x = v.x + x_offset;
-                    r.y = v.y + y_offset;
-                    Render(renderer, r);
-                }
-            }
-        }
-
+        SDL_Rect r = GetRect();
+        r.w *= GetScale().x;
+        r.h *= GetScale().y;
+        r.x = GetX() + x_offset;
+        r.y = GetY() + y_offset;
+        Render(renderer, r);
     }
 }
 
 void Entity::SetTexture(SDL_Texture *texture)
 {
-    // Before anything, delete old texture
-    if (mTexture != nullptr)
-    {
-        SDL_DestroyTexture(mTexture);
-        mTexture = nullptr;
-    }
-
     mTexture = texture;
     int w = 0;
     int h = 0;
@@ -87,11 +56,6 @@ void Entity::SetTexture(SDL_Texture *texture)
     {
         SetSize(w, h);
     }
-}
-
-void Entity::SetClones(const std::vector<Vector2> &clones)
-{
-    mClones = clones;
 }
 
 void Entity::Render(SDL_Renderer *renderer, const SDL_Rect &pos)

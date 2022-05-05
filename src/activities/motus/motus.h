@@ -49,6 +49,8 @@ public:
     std::string GetWordToGuess() const { return mCurrentWord; }
     std::string GetLastWord() const;
 
+    uint32_t GridSize() const { return GetNbLines() * GetNbLetters(); }
+
     uint32_t GetNbLines() const;
     uint32_t GetNbLetters() const;
 

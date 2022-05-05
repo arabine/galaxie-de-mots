@@ -46,6 +46,7 @@ private:
     float mSvgScale{1.0};
     std::function<void(void)> mCallback;
     bool mIsActive = false;
+    std::string TextureName() const;
 };
 
 
