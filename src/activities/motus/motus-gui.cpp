@@ -2,7 +2,7 @@
 #include "gfx-engine.h"
 #include "IconsFontAwesome5.h"
 #include <chrono>
-
+#include "scenes.h"
 
 MotusGui::MotusGui(GfxSystem &s, IApplication &app)
     : Scene(s)
@@ -13,6 +13,17 @@ MotusGui::MotusGui(GfxSystem &s, IApplication &app)
 
     mGrid = std::make_shared<MotusGrid>(GetSystem(), mMotus);
     AddGroup(mGrid);
+
+    auto quitButton = std::make_shared<Image>(GetSystem(), "icons/arrow-left.svg", true);
+    quitButton->SetVisible(true);
+    quitButton->SetSvgScale(1.0);
+    quitButton->SetActive(true);
+    quitButton->SetPos(10, 10);
+    quitButton->HandleOnClick([this](){
+        SwitchToScene(SCENE_HOME);
+    });
+
+    AddEntity(quitButton);
 }
 
 

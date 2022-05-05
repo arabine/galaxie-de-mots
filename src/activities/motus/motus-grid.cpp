@@ -3,7 +3,7 @@
 
 
 
-static const double TILE_SIZE = 0.8;
+static const double TILE_SIZE = 0.6;
 
 MotusGrid::MotusGrid(GfxSystem &s, Motus &motus)
     : Group(s)

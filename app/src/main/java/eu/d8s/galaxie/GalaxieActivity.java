@@ -1,14 +1,41 @@
  
 package eu.d8s.galaxie;
 
-import org.libsdl.app.SDLActivity; 
+import org.libsdl.app.SDLActivity;
 
+import java.io.File;
+import java.io.IOException;
+import android.os.Bundle;
+import android.util.Log;
 /* 
  * A sample wrapper class that just calls SDLActivity 
  */ 
 
 public class GalaxieActivity extends SDLActivity
 {
+    private final static String TAG = "GalaxieActivity";
+    DatabaseHelper dbHelper = null;
+
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+// /data/data/com.me.myapp/databases/
+        String db = "/data/data/" + getContext().getPackageName() + "/databases";
+
+        File dbDir = new File(db);
+        if (!dbDir.exists())
+        {
+            Log.e(TAG, "Created path: " + db);
+            dbDir.mkdirs();
+        }
+
+        dbHelper = new DatabaseHelper(this, db);
+        try {
+            dbHelper.prepareDatabase();
+        } catch (IOException e) {
+            Log.e(TAG, e.getMessage());
+        }
+    }
 
 
  /**

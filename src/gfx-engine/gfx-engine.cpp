@@ -395,7 +395,7 @@ void Group::OnCreate(SDL_Renderer *renderer) {
             }
         }
 
-        int offset = (GetSystem().GetScreenW() - x_max) / mGrid[i].size();
+        int offset = (GetSystem().GetScreenW() - x_max) / (mGrid[i].size() + 1);
 
         // Deuxième boucle pour placer les objets
         int start_x = offset;

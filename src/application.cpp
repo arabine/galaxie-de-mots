@@ -2,7 +2,14 @@
 
 Application::Application()
 {
-    mDb.Open("db/lexique.db");
+
+#ifdef ANDROID
+    std::string path = "/data/data/eu.d8s.galaxie/databases/lexique.db";
+#else
+    std::string path = "db/lexique.db";
+#endif
+
+    mDb.Open(path);
 }
 
 std::string Application::GetRandomWord(int nbLetters)

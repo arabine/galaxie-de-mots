@@ -7,7 +7,7 @@
 #include <iostream>
 #include <string>
 #include <sstream>
-
+#include "xlog.h"
 #include "database.h"
 
 /*****************************************************************************/
@@ -34,10 +34,15 @@ void DataBase::Close()
 bool DataBase::Open(const std::string &fileName)
 {
     bool valid = false;
+
     int rc = sqlite3_open(fileName.c_str(), &mDb);
     if (rc == 0)
     {
         valid = true;
+    }
+    else
+    {
+        LOG_ERROR("Impossible d'ouvrir la BDD");
     }
     return valid;
 }
