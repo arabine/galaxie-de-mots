@@ -18,11 +18,16 @@ public:
     virtual void OnCreate(SDL_Renderer *renderer) override;
 
 private:
+    IApplication &mApp;
+
     Motus mMotus;
     std::shared_ptr<Keyboard> mKeyboard;
     std::shared_ptr<MotusGrid> mGrid;
 
     std::string mMessage;
+
+    std::string mSens;
+    std::string mCategorie;
 
     Timer<std::chrono::milliseconds, std::chrono::steady_clock> mTimer;
 

@@ -6,6 +6,7 @@
 
 MotusGui::MotusGui(GfxSystem &s, IApplication &app)
     : Scene(s)
+    , mApp(app)
     , mMotus(*this, app)
 {
     mKeyboard = std::make_shared<Keyboard>(GetSystem(), *this);
@@ -97,6 +98,8 @@ void MotusGui::NewGame()
     {
         mKeyboard->Initialize();
     }
+
+    mApp.GetDefinition(mMotus.GetWordToGuess(), mSens, mCategorie);
 }
 
 
@@ -147,9 +150,12 @@ void MotusGui::DrawInfoWindow()
             ImGuiWindowFlags_NoMove;
 
     ImGui::SetNextWindowBgAlpha(1.0f); // Transparent background
-    ImGui::SetNextWindowPos(ImVec2(10, 10), ImGuiCond_Always);
+
+    ImGuiIO& io = ImGui::GetIO();
+
+    ImGui::SetNextWindowPos(ImVec2(10, io.DisplaySize.y * 0.5f), ImGuiCond_Always);
     //        ImGui::SetWindowFontScale(2.0);
-    ImGui::SetNextWindowSize(ImVec2(GetSystem().GetScreenW() - 10, 0));
+    ImGui::SetNextWindowSize(ImVec2(GetSystem().GetScreenW() - 20, 0));
 
     ImGui::GetStyle().FrameBorderSize = 2;
     if (ImGui::Begin("Info", NULL, window_flags))
@@ -162,7 +168,9 @@ void MotusGui::DrawInfoWindow()
                 ImGui::SetKeyboardFocusHere();
             }
 
-            if (ImGui::Button("Rejouer ?"))
+            ImGui::Text("Définition : (%s) %s", mCategorie.c_str(), mSens.c_str());
+
+            if (ImGui::Button("Rejouer ?", ImVec2(200, 60)))
             {
                 started = false;
                 mMessage.clear();

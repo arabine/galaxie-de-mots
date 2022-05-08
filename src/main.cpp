@@ -36,6 +36,11 @@ public:
     virtual bool IsWordExists(const std::string &word) override {
         return true;
     }
+    virtual bool GetDefinition(const std::string &mot, std::string &sens, std::string &categorie) override
+    {
+        return true;
+    }
+
 };
 
 static EventStub eventStub;

@@ -45,6 +45,42 @@ std::string Application::GetRandomWord(int nbLetters)
     return word;
 }
 
+bool Application::GetDefinition(const std::string &mot, std::string &sens, std::string &categorie)
+{
+    bool success = false;
+
+    std::vector<std::vector<Value> > results;
+    std::string res = mDb.Query("SELECT sens, categorie FROM lexique WHERE motupp='" + mot + "';", results);
+
+    if (res.size() == 0)
+    {
+        // pas d'erreur
+        if (results.size() >= 1)
+        {
+            if (results[0].size() >= 2)
+            {
+                try
+                {
+                     sens = std::get<std::string>(results[0][0]);
+                     categorie = std::get<std::string>(results[0][1]);
+                     success = true;
+                }
+                catch (const std::bad_variant_access& ex)
+                {
+                    std::cout << ex.what() << '\n' << std::endl;
+                }
+            }
+        }
+    }
+    else
+    {
+        std::cout << "[APP] " << res << std::endl;
+    }
+
+    return success;
+}
+
+
 bool Application::IsWordExists(const std::string &word)
 {
     bool exists = false;

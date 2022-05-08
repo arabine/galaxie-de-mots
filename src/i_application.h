@@ -12,6 +12,7 @@ public:
 
     virtual std::string GetRandomWord(int nbLetters) = 0;
     virtual bool IsWordExists(const std::string &word) = 0;
+    virtual bool GetDefinition(const std::string &mot, std::string &sens, std::string &categorie) = 0;
 
 };
 
