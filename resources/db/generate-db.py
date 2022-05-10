@@ -33,7 +33,11 @@ demLines = demFile.readlines()
 for line in demLines:
     j = json.loads(line)
     o = {}
-    dem[j["M"]] = j["SENS"]
+    mot = j["M"]
+    if (mot in dem):
+        dem[mot] = dem[mot] + ", " + j["SENS"]
+    else:
+        dem[mot] = j["SENS"]
 
 
 # -----------------  LEXIQUE : chargement en mémoire

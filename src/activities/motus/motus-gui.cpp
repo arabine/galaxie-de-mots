@@ -15,16 +15,16 @@ MotusGui::MotusGui(GfxSystem &s, IApplication &app)
     mGrid = std::make_shared<MotusGrid>(GetSystem(), mMotus);
     AddGroup(mGrid);
 
-    auto quitButton = std::make_shared<Image>(GetSystem(), "icons/arrow-left.svg", true);
-    quitButton->SetVisible(true);
-    quitButton->SetSvgScale(1.0);
-    quitButton->SetActive(true);
-    quitButton->SetPos(10, 10);
-    quitButton->HandleOnClick([this](){
+    mQuitButton = std::make_shared<Image>(GetSystem(), "icons/arrow-left.svg", true);
+    mQuitButton->SetVisible(true);
+    mQuitButton->SetSvgScale(1.0);
+    mQuitButton->SetActive(true);
+    mQuitButton->SetPos(10, 10);
+    mQuitButton->HandleOnClick([this](){
         SwitchToScene(SCENE_HOME);
     });
 
-    AddEntity(quitButton);
+    AddEntity(mQuitButton);
 }
 
 
@@ -43,8 +43,7 @@ void MotusGui::OnCreate(SDL_Renderer *renderer)
 {
     Scene::OnCreate(renderer);
 
-    Vector2 ori = mKeyboard->GetOrigin();
-    mGrid->SetOrigin(0, ori.y - mGrid->GetGridH());
+    mGrid->SetOrigin(0, mQuitButton->GetY() + mQuitButton->GetRect().h + 20);
 }
 
 void MotusGui::Initialize()
@@ -163,14 +162,10 @@ void MotusGui::DrawInfoWindow()
         ImGui::Text("%s", mMessage.c_str());
         if (mMotus.IsEnd())
         {
-            if (!ImGui::IsAnyItemActive())
-            {
-                ImGui::SetKeyboardFocusHere();
-            }
+            ImGui::Text("%s: (%s) %s", mMotus.GetWordToGuess().c_str(), mCategorie.c_str(), mSens.c_str());
 
-            ImGui::Text("Définition : (%s) %s", mCategorie.c_str(), mSens.c_str());
-
-            if (ImGui::Button("Rejouer ?", ImVec2(200, 60)))
+            if (ImGui::Button("Rejouer ?", ImVec2(200, 60)) ||
+                ImGui::IsKeyPressed(ImGuiKey_Enter))
             {
                 started = false;
                 mMessage.clear();

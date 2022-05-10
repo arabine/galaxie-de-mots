@@ -23,6 +23,7 @@ private:
     Motus mMotus;
     std::shared_ptr<Keyboard> mKeyboard;
     std::shared_ptr<MotusGrid> mGrid;
+    std::shared_ptr<Image> mQuitButton;
 
     std::string mMessage;
 

@@ -9,7 +9,10 @@ Application::Application()
     std::string path = "db/lexique.db";
 #endif
 
-    mDb.Open(path);
+    if (!mDb.Open(path))
+    {
+        std::cout << "[APP] Cannot open database." << std::endl;
+    }
 }
 
 std::string Application::GetRandomWord(int nbLetters)
