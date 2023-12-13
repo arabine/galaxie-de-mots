@@ -28,11 +28,15 @@ Process :
 Comment je build pour Android
 ------------------------------
 
+Il faut préciser l'emplacement du SDK:
+
+export ANDROID_SDK_ROOT=/mnt/work/android-sdk
+
 À la racine :
 
-- gradle assembleDebug ou assembleRelease selon la cible désirée ; n'effectue que la construction et la génération du paquet APK
-- gradle installDebug ou installRelease : construit et installe sur la cible (vrai téléphone ou émulateur)
-- gradlew bundle pour générer le fichier AAB
+- ./gradlew assembleDebug ou assembleRelease selon la cible désirée ; n'effectue que la construction et la génération du paquet APK
+- ./gradlew installDebug ou installRelease : construit et installe sur la cible (vrai téléphone ou émulateur)
+- ./gradlew bundle pour générer le fichier AAB
 
 Comment je build pour mon autre OS propriétaire
 ------------------------------------------------
