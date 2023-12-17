@@ -1,7 +1,7 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 30
+    compileSdkVersion 33
     buildToolsVersion "30.0.3"
     ndkVersion "21.4.7075529"
 
@@ -24,12 +24,12 @@ android {
     defaultConfig {
         applicationId "eu.d8s.galaxie"
         minSdkVersion 18
-        targetSdkVersion 30
+        targetSdkVersion 33
         versionCode 1
         versionName "1.0.0"
         externalNativeBuild {
             cmake {
-                arguments "-DANDROID_NATIVE_API_LEVEL=30", "-DANDROID_STL=c++_shared", "-DANDROID=true", "-DANDROID_TOOLCHAIN=clang"
+                arguments "-DANDROID_NATIVE_API_LEVEL=33", "-DANDROID_STL=c++_shared", "-DANDROID=true", "-DANDROID_TOOLCHAIN=clang"
                 cppFlags "-std=c++11 -frtti -fexceptions"
                 abiFilters "arm64-v8a" //, "x86_64", "x86"
             }
@@ -67,4 +67,7 @@ static def buildTime() {
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation 'com.github.mik3y:usb-serial-for-android:3.7.0'
+    implementation 'androidx.appcompat:appcompat:1.6.1'
 }
+    

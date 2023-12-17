@@ -13,6 +13,7 @@
 #include <vector>
 #include <iostream>
 #include <list>
+#include <deque>
 #include <memory>
 #include <map>
 #include <algorithm>
@@ -35,10 +36,10 @@ public:
     float GetRatioW() const { return mRatioW; }
     float GetRatioH() const { return mRatioH; }
 
-    float Ratio() const  { return mRatio; }
+    float Ratio() const { return mRatio; }
 
-    uint32_t W(uint32_t w) const { return w * mRatioW; }
-    uint32_t H(uint32_t h) const { return h * mRatioH; }
+    uint32_t W(uint32_t w) const { return static_cast<uint32_t>(w * mRatioW); }
+    uint32_t H(uint32_t h) const { return static_cast<uint32_t>(h * mRatioH); }
 
 protected:
     SDL_Window *mWindow = nullptr;
@@ -56,7 +57,6 @@ protected:
     uint32_t mScreenWidth{648};
     uint32_t mScreenHeight{960};
 };
-
 
 class Group
 {
@@ -79,7 +79,7 @@ public:
     // The below functions can be overridden as necessary in our scenes.
     virtual void ProcessEvent(const SDL_Event &event)
     {
-        for (auto & e : mEntities)
+        for (auto &e : mEntities)
         {
             e->ProcessEvent(event, mOrigin);
         }
@@ -87,7 +87,7 @@ public:
 
     virtual void Update(double deltaTime)
     {
-        for (auto & e : mEntities)
+        for (auto &e : mEntities)
         {
             e->Update(deltaTime);
         }
@@ -95,13 +95,14 @@ public:
 
     virtual void Draw(SDL_Renderer *renderer)
     {
-        for (auto & e : mEntities)
+        for (auto &e : mEntities)
         {
             e->Draw(renderer, mOrigin.x, mOrigin.y);
         }
     };
 
-    uint32_t AddEntity(std::shared_ptr<Entity> entity) {
+    uint32_t AddEntity(std::shared_ptr<Entity> entity)
+    {
         uint32_t id = mEntityIds;
         entity->SetId(id);
         mEntities.push_back(entity);
@@ -109,15 +110,17 @@ public:
         return id;
     }
 
-    void DeleteEntity(uint32_t id) {
-        mEntities.remove_if([id](const std::shared_ptr<Entity> &e){ return e->GetId() == id; });
+    void DeleteEntity(uint32_t id)
+    {
+        mEntities.remove_if([id](const std::shared_ptr<Entity> &e)
+                            { return e->GetId() == id; });
     }
 
     // Sort according to Z value of each entity
-    void Sort() {
-        mEntities.sort([](const std::shared_ptr<Entity> &a, const std::shared_ptr<Entity> &b) {
-            return a->GetZ() < b->GetZ();
-        });
+    void Sort()
+    {
+        mEntities.sort([](const std::shared_ptr<Entity> &a, const std::shared_ptr<Entity> &b)
+                       { return a->GetZ() < b->GetZ(); });
     }
 
     Vector2 GetOrigin() const
@@ -134,8 +137,9 @@ public:
     GfxSystem &GetSystem() { return mSystem; }
 
     void NewGrid() { mGrid.clear(); }
-    void NewLine() { mGrid.push_back(std::list<std::shared_ptr<Entity>>());  }
-    void AddToLine(std::shared_ptr<Entity> entity) {
+    void NewLine() { mGrid.push_back(std::list<std::shared_ptr<Entity>>()); }
+    void AddToLine(std::shared_ptr<Entity> entity)
+    {
         if (mGrid.size() > 0)
         {
             mGrid[mGrid.size() - 1].push_back(entity);
@@ -156,55 +160,57 @@ private:
     uint32_t mGridH{0};
 };
 
-
 class Scene : public Group
 {
 public:
+    typedef std::pair<std::string, Value> Message;
+    typedef std::deque<Message> MessageQueue;
 
     Scene(GfxSystem &s)
         : Group(s)
     {
-
     }
 
     // Called when scene initially created. Called once.
-    virtual void OnCreate(SDL_Renderer *renderer) {
+    virtual void OnCreate(SDL_Renderer *renderer)
+    {
         Group::OnCreate(renderer);
 
-        for (auto & g : mGroups)
+        for (auto &g : mGroups)
         {
             g->OnCreate(renderer);
         }
     }
     // Called when scene destroyed. Called at most once (if a scene
     // is not removed from the game, this will never be called).
-    virtual void OnDestroy() {
+    virtual void OnDestroy()
+    {
         Group::OnDestroy();
 
-        for (auto & g : mGroups)
+        for (auto &g : mGroups)
         {
             g->OnDestroy();
         }
     }
 
-    // Called whenever a scene is transitioned into. Can be 
+    // Called whenever a scene is transitioned into. Can be
     // called many times in a typical game cycle.
     virtual void OnActivate(SDL_Renderer *renderer, const std::map<std::string, Value> &args = std::map<std::string, Value>())
     {
         mSwitchToScene = 0;
-        (void) renderer;
+        (void)renderer;
         mArgs = args;
     }
-    // Called whenever a transition out of a scene occurs. 
+    // Called whenever a transition out of a scene occurs.
     // Can be called many times in a typical game cycle.
-    virtual void OnDeactivate() {};
+    virtual void OnDeactivate(){};
 
     // The below functions can be overridden as necessary in our scenes.
     virtual void ProcessEvent(const SDL_Event &event)
     {
         Group::ProcessEvent(event);
 
-        for (auto & g : mGroups)
+        for (auto &g : mGroups)
         {
             g->ProcessEvent(event);
         }
@@ -214,29 +220,33 @@ public:
     {
         Group::Draw(renderer);
 
-        for (auto & g : mGroups)
+        for (auto &g : mGroups)
         {
             g->Draw(renderer);
         }
     };
 
-    virtual void OnMessage(const std::map<std::string, Value> &message){
-        (void) message;
+    virtual void OnMessage(MessageQueue &message)
+    {
+        (void)message;
     }
 
-    void SwitchToScene(uint32_t newScene, const std::map<std::string, Value> &args = std::map<std::string, Value>()) {
+    void SwitchToScene(uint32_t newScene, const std::map<std::string, Value> &args = std::map<std::string, Value>())
+    {
         mSwitchToScene = newScene;
         mArgs = args;
     }
 
-    uint32_t AddGroup(std::shared_ptr<Group> group) {
+    uint32_t AddGroup(std::shared_ptr<Group> group)
+    {
         uint32_t id = mGroupIds;
         mGroups.push_back(group);
         mGroupIds++;
         return id;
     }
 
-    uint32_t GetNextScene() {
+    uint32_t GetNextScene()
+    {
         return mSwitchToScene;
     }
 
@@ -253,34 +263,29 @@ private:
     std::vector<std::shared_ptr<Group>> mGroups;
 };
 
-
-
 class GfxEngine : public GfxSystem
 {
 public:
-    typedef std::map<std::string, Value> Message;
-
     GfxEngine()
     {
-
     }
 
     ~GfxEngine()
     {
-
     }
 
     bool Initialize(const std::string &title);
 
     void Warmup();
-    uint32_t Process(const Message &msg);
+    uint32_t Process();
 
     void Close();
 
     void PushBigFont() { ImGui::PushFont(mBigFont); }
     void PopBigFont() { ImGui::PopFont(); }
 
-    void SetBackgroundColor(const SDL_Color &color) {
+    void SetBackgroundColor(const SDL_Color &color)
+    {
         mBackgroundColor = color;
     }
 
@@ -290,14 +295,14 @@ public:
     // Platform independant file loading
     static bool LoadFile(const char *filename, std::string &fileData);
 
-
     static bool HasTexture(const std::string &name);
     static SDL_Texture *GetTexture(const std::string &name);
     static void StoreTexture(const std::string &name, SDL_Texture *tex);
     static void DestroyTexture(const std::string &name);
 
 private:
-    struct Texture {
+    struct Texture
+    {
         SDL_Texture *tex{nullptr};
         uint32_t count{1};
     };
@@ -314,8 +319,8 @@ private:
     Uint64 lastTick = 0;
     double deltaTime = 0;
 
-    ImFont* mNormalFont = nullptr;
-    ImFont* mBigFont = nullptr;
+    ImFont *mNormalFont = nullptr;
+    ImFont *mBigFont = nullptr;
 
     // Key: id
     std::map<uint32_t, std::shared_ptr<Scene>> mScenes;

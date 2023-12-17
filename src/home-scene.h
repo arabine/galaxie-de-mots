@@ -13,7 +13,10 @@ public:
 
     virtual void Update(double deltaTime) override;
 
+    virtual void OnMessage(MessageQueue &message) override;
+
 private:
+    std::string m_debugTxt;
 
     std::shared_ptr<Image> mTileMotus;
     std::shared_ptr<Image> mTileTopping;

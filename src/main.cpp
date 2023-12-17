@@ -6,41 +6,43 @@
 #include "home-scene.h"
 #include "scenes.h"
 #include "application.h"
+#include "thread_queue.h"
 
 class EventStub : public Motus::IGameEvent
 {
 public:
-    virtual void AppendLetter(char c) {
-
+    virtual void AppendLetter(char c)
+    {
     }
-    virtual void RemoveLast() {
-
+    virtual void RemoveLast()
+    {
     }
-    virtual void Validate(const std::string &codage) {
-
+    virtual void Validate(const std::string &codage)
+    {
     }
-    virtual void Message(const std::string &message) {
-
+    virtual void Message(const std::string &message)
+    {
     }
-    virtual void NewGame() {
-
+    virtual void NewGame()
+    {
     }
 };
 
 class AppStub : public IApplication
 {
 public:
-    virtual std::string GetRandomWord(int nbLetters) override {
+    virtual std::string GetRandomWord(int nbLetters) override
+    {
         return "GRUME";
     }
-    virtual bool IsWordExists(const std::string &word) override {
+    virtual bool IsWordExists(const std::string &word) override
+    {
         return true;
     }
     virtual bool GetDefinition(const std::string &mot, std::string &sens, std::string &categorie) override
     {
         return true;
     }
-
 };
 
 static EventStub eventStub;
@@ -59,25 +61,44 @@ static void UnitTest()
 
     if (code == "10000")
     {
-        std::cout << "SUCCESS\n" << std::endl;
+        std::cout << "SUCCESS\n"
+                  << std::endl;
     }
     else
     {
-        std::cout << "BOUH :( :( :(\n" << std::endl;
+        std::cout << "BOUH :( :( :(\n"
+                  << std::endl;
     }
 }
 
+#include <jni.h>
+
+static ThreadQueue<std::string> gQueue;
+
+extern "C"
+{
+    void Java_eu_d8s_galaxie_GalaxieActivity_printFromJava(JNIEnv *env, jobject obj, jstring txt)
+    {
+        (void)(env);
+        (void)(obj);
+
+        std::string txtStr = env->GetStringUTFChars(txt, nullptr);
+
+        std::cout << "Got infos from device: " << txt << std::endl;
+        gQueue.Push(txtStr);
+    }
+}
 
 extern "C" int main(int argc, char *argv[])
 {
-    (void) argc;
-    (void) argv;
+    (void)argc;
+    (void)argv;
 
-//    UnitTest();
-//    return 0;
+    //    UnitTest();
+    //    return 0;
 
     GfxEngine mGfx;
-    GfxEngine::Message msg;
+    Scene::MessageQueue msg;
 
     Application app;
 
@@ -97,11 +118,16 @@ extern "C" int main(int argc, char *argv[])
 
         motusScene->Initialize();
 
+        std::string messageTxt;
         while (loop)
         {
-            // On traite les entrées (clavier/souris) et on affiche le jeu
-            msg.clear();
-            if (mGfx.Process(msg) == SCENE_EXIT)
+            if (gQueue.TryPop(messageTxt))
+            {
+                msg.push_back(std::make_pair<std::string, Value>("debug", messageTxt));
+                homeScene->OnMessage(msg);
+            }
+
+            if (mGfx.Process() == SCENE_EXIT)
             {
                 loop = false;
             }
